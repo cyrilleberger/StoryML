@@ -4,3 +4,4 @@ SlideLayout 1.0 SlideLayout.qml
 SlideStyle 1.0 SlideStyle.qml
 TextBox 1.0 TextBox.qml
 TextStyle 1.0 TextStyle.qml
+Figure 1.0 Figure.qml
