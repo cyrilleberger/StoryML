@@ -14,7 +14,7 @@ SlideLayout
 
     color: slide.style_instance.title.color
     font: slide.style_instance.title.font
-    text: "[Title]"
+    text: slide.title
 
     verticalAlignment: Text.AlignVCenter
     horizontalAlignment: Text.AlignHCenter
@@ -23,7 +23,7 @@ SlideLayout
     id: contentText
     color: slide.style_instance.text.color
     font: slide.style_instance.text.font
-    text: "[content]"
+    text: slide.content
 
     x: root.margin
     anchors.top: titleText.bottom

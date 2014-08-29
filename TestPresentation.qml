@@ -13,8 +13,11 @@ Presentation {
       title.color: "red"
       text.color: "white"
     }
+    title: "Slide title"
+    content: "Text of the slide"
   }
   Slide {
-
+    title: "Next slide"
+    content: "next content"
   }
 }

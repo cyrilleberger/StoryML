@@ -10,6 +10,8 @@ Item
 
 //  property SlideLayout __layout: layoutLoader.item
   property SlideStyle  style_instance:  styleLoader.item
+  property string title
+  property variant content
 
   anchors.fill: parent
   visible: false
