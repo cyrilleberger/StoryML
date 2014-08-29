@@ -12,6 +12,7 @@ Presentation {
       backgroundColor: "#191919"
       title.color: "red"
       text.color: "white"
+      footer.color: "orange"
     }
     title: "Slide title"
     content: "Text of the slide"
@@ -19,5 +20,9 @@ Presentation {
   Slide {
     title: "Next slide"
     content: "next content"
+    Component.onCompleted:
+    {
+      style_instance.showTotalCount = false
+    }
   }
 }

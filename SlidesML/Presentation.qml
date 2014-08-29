@@ -25,6 +25,7 @@ Item {
       if (r.isSlideItem)
       {
         slides.push(r);
+        r.slideNumber = slides.length
       }
     }
 

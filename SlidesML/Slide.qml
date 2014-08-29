@@ -7,6 +7,7 @@ Item
   readonly property bool isSlideItem: true
   property Component layout: parent.defaultLayout
   property Component  style:  parent.defaultStyle
+  property int slideNumber
 
 //  property SlideLayout __layout: layoutLoader.item
   property SlideStyle  style_instance:  styleLoader.item
