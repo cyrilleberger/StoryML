@@ -10,6 +10,7 @@ Item {
 
   property variant slides: []
   property int currentSlide
+  property int __inputSlideIndex
 
   width: 1024
   height: 880
@@ -46,6 +47,7 @@ Item {
 
   function moveToSlide(slide_number)
   {
+    if(slide_number == root.currentSlide) return;
     root.slides[root.currentSlide].visible = false;
     root.currentSlide = slide_number
   }
@@ -62,6 +64,36 @@ Item {
   Keys.onSpacePressed: next()
   Keys.onRightPressed: next()
   Keys.onLeftPressed: previous()
+  Keys.onReturnPressed: { moveToSlide(__inputSlideIndex - 1); __inputSlideIndex = 0 }
+  Keys.onPressed: {
+    if(event.key == Qt.Key_Q && event.modifiers == Qt.ControlModifier)
+    {
+      Qt.quit()
+    } else if(event.key >= Qt.Key_0 && event.key <= Qt.Key_9)
+    {
+      __inputSlideIndex = 10 * __inputSlideIndex + (event.key - Qt.Key_0)
+    } else if(event.key == Qt.Key_Backspace)
+    {
+      __inputSlideIndex /= 10
+    }
+  }
+  Rectangle {
+    x: 2
+    y: 2
+    width: slideInput.contentWidth + 2
+    height: slideInput.contentHeight + 2
+    color: "white"
+    visible: __inputSlideIndex > 0
+    radius: 2
+    z: 1000
+    Text {
+      id: slideInput
+      x: 1
+      y: 1
+      text: __inputSlideIndex
+    }
+  }
+
   MouseArea {
       id: mouseArea
       anchors.fill: parent
