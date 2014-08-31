@@ -14,7 +14,8 @@ Item
   property string title
   property variant content
 
-  anchors.fill: parent
+  width:  800
+  height: 600
   visible: false
 
   Loader {

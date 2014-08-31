@@ -12,9 +12,11 @@ Item {
   property int currentSlide
   property int __inputSlideIndex
 
-  width: 1024
-  height: 880
+  width: 800
+  height: 600
   focus: true
+  property real slideScale: Math.min(width / 800, height / 600)
+  onFocusChanged: console.log(focus)
 
   Component.onCompleted:
   {
@@ -27,6 +29,10 @@ Item {
       {
         slides.push(r);
         r.slideNumber = slides.length
+        r.scale = Qt.binding(function() { return slideScale} )
+        r.x = Qt.binding(function() { return 0.5 * (width - slideScale * 800) })
+        r.y = Qt.binding(function() { return 0.5 * (height - slideScale * 600) })
+        r.transformOrigin = Item.TopLeft
       }
     }
 
@@ -77,6 +83,12 @@ Item {
       __inputSlideIndex /= 10
     }
   }
+  Rectangle {
+    z: -10000
+    color: "black"
+    anchors.fill: parent
+  }
+
   Rectangle {
     x: 2
     y: 2
