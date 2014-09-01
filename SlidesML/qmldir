@@ -6,3 +6,4 @@ ContentBox 1.0 ContentBox.qml
 ContentLine 1.0 ContentLine.qml
 TextLine 1.0 TextLine.qml
 TextStyle 1.0 TextStyle.qml
+TextLineStyle 1.0 TextLineStyle.qml

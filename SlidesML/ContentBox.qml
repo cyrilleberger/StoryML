@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import SlidesML 1.0
 
 Column
 {
@@ -14,6 +15,7 @@ Column
     }
 
     var items = [];
+    var previousObject = null
 
     for(var i = 0; i < _content.length; ++i)
     {
@@ -22,7 +24,30 @@ Column
       if(typeof c == 'string')
       {
         object = Qt.createQmlObject("import SlidesML 1.0; import QtQuick 2.0; TextLine {  }", root, "ContentBox's dynamic TextLine" )
-        object.text = c;
+        var start = 0;
+        var indentation = 0
+
+        while(true)
+        {
+          if(c[start] == ' ')
+          {
+            indentation += 1
+          } else if(c[start] == '#')
+          {
+            indentation += 1
+            object.bulletType = 2
+          } else if(c[start] == '*')
+          {
+            indentation += 1
+            object.bulletType = 1
+          } else {
+            break;
+          }
+          start += 1;
+        }
+
+        object.indentation = (start == 0) ? 0 : (indentation - 1)
+        object.text = c.substring(start, c.length);
       } else if(c instanceof Array) {
         object = Qt.createQmlObject("import SlidesML 1.0; import QtQuick 2.0; Rectangle {color: 'red'; width: 104; height: 49 Text { text: 'Array is not yet implemented'}}", root, "ContentBox's dynamic item" )
       } else if(c instanceof Object) {
@@ -47,9 +72,20 @@ Column
       }
 
       object.width = Qt.binding(function() { return root.width; })
-      object.style = Qt.binding(function() { return root.style; })
       object.fontScale = Qt.binding(function() { return root.__fontScale; })
+      if(object.indentation == 0)
+      {
+        object.style = Qt.binding(function() { return root.style.level0; })
+      } else if(object.indentation == 1)
+      {
+        object.style = Qt.binding(function() { return root.style.level1; })
+      } else
+      {
+        object.style = Qt.binding(function() { return root.style.level2; })
+      }
+      object.previousLine = previousObject
       items.push(object)
+      previousObject = object
     }
 
     return items;
