@@ -2,5 +2,7 @@ Presentation 1.0 Presentation.qml
 Slide 1.0 Slide.qml
 SlideLayout 1.0 SlideLayout.qml
 SlideStyle 1.0 SlideStyle.qml
-TextBox 1.0 TextBox.qml
+ContentBox 1.0 ContentBox.qml
+ContentLine 1.0 ContentLine.qml
+TextLine 1.0 TextLine.qml
 TextStyle 1.0 TextStyle.qml

@@ -12,7 +12,19 @@ Item
 //  property SlideLayout __layout: layoutLoader.item
   property SlideStyle  style_instance:  styleLoader.item
   property string title
-  property variant content
+
+  function object_to_list(_obj)
+  {
+    var list = []
+    for(var k in _obj)
+    {
+      list.push(_obj[k])
+    }
+    return list
+  }
+
+  property variant content: object_to_list(contentLines)
+  property list<ContentLine> contentLines
 
   width:  800
   height: 600

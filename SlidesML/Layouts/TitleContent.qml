@@ -19,17 +19,17 @@ SlideLayout
     verticalAlignment: Text.AlignVCenter
     horizontalAlignment: Text.AlignHCenter
   }
-  Text {
-    id: contentText
-    color: slide.style_instance.text.color
-    font: slide.style_instance.text.font
-    text: slide.content
-
+  ContentBox
+  {
     x: root.margin
+    width: root.width - 2 * root.margin
+
     anchors.top: titleText.bottom
     anchors.topMargin: root.margin
-    width: root.width - 2 * root.margin
     anchors.bottom: root.bottom
     anchors.bottomMargin: root.margin
+
+    content: slide.content
+    style: slide.style_instance
   }
 }

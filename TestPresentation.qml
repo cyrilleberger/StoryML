@@ -25,4 +25,17 @@ Presentation {
       style_instance.showTotalCount = false
     }
   }
+  Slide {
+    title: "Content lines"
+    contentLines: [ TextLine { text: "Einstein is a genius." }, TextLine { text: "Can you believe it ?" } ]
+  }
+  Slide {
+    title: "Yet another slide"
+    content: ["Ah", "doh", "*boh", "**booh", "##llaaaa", "*hum", "ah", " lag", { type: 'TextLine', text: "this is a textline" } ]
+  }
+  Slide {
+    title: "Animation"
+    property ContentLine workaround: TextLine { text: "workaround" }
+    content: ["<1->Ah", "<2>doh", "<2-3>*boh", "<-3>**booh", "<4->##llaaaa", "<2>*hum", workaround, "<-3>ah", "<-5> lag", "<-2> Rah is Einstein for calculus", { type: 'TextLine', text: "TextLine", begin: 2, end: 3 } ]
+  }
 }
