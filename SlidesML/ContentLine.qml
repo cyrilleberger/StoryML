@@ -9,8 +9,9 @@ Row
   readonly property int numberBullet: 2
 
   readonly property bool isContentLine: true
-  property int begin: 0
-  property int end: 90071992
+  property int animationFrame: 0
+  property int animationFirst: 0
+  property int animationLast: 90071992
   property real fontScale: 1
   property TextLineStyle style: TextLineStyle {}
   property Item previousLine
@@ -18,6 +19,16 @@ Row
   property int indentation: 0
   property int bulletType: noBullet
   property int __bulletNumberCache: 1
+
+  property bool children_visible: (animationFrame >= animationFirst && animationFrame <= animationLast)
+
+  onChildrenChanged:
+  {
+    for(var i = 0; i < root.children.length; ++i)
+    {
+      root.children[i].visible = Qt.binding(function() { return root.children_visible; } )
+    }
+  }
 
   onPreviousLineChanged: computeBulletNumber()
 

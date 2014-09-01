@@ -9,6 +9,9 @@ Item
   property Component  style:  parent.defaultStyle
   property int slideNumber
 
+  property int animationFrame: 0
+  property int animationLast: 1
+
 //  property SlideLayout __layout: layoutLoader.item
   property SlideStyle  style_instance:  styleLoader.item
   property string title

@@ -36,7 +36,7 @@ Presentation {
   Slide {
     title: "Animation"
     property ContentLine workaround: TextLine { text: "workaround" }
-    content: ["<1->Ah", "<2>doh", "<2-3>*boh", "<-3>**booh", "<4->##llaaaa", "<2>*hum", workaround, "<-3>ah", "<-5> lag", "<-2> Rah is Einstein for calculus", { type: 'TextLine', text: "TextLine", begin: 2, end: 3 } ]
+    content: ["<1->Ah", "<2>doh", "<2-3>*boh", "<-3>**booh", "<4->##llaaaa", "<2>*hum", workaround, "<-3>ah", "<-5> lag", "<-2> Rah is Einstein for calculus", { type: 'TextLine', text: "TextLine", animationFirst: 2, animationLast: 3 } ]
   }
   Slide {
     title: "Numbered"

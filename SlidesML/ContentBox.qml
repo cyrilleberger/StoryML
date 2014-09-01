@@ -7,15 +7,36 @@ Column
   property variant content
   property SlideStyle style
 
-  function content2model(_content)
+  property int animationFrame
+  property int animationLast: 0
+
+  property variant __workaround_childrenRect: childrenRect // this is a bit ridiculous, but if we don't do that, we don't get update on childrenRect
+  property real __fontScale: 1
+  property bool __updatingFontScale: false
+  onChildrenRectChanged: {
+    if(__updatingFontScale) return;
+    __updatingFontScale = true;
+    var newFontScale = Math.min(1, __fontScale * height / root.childrenRect.height);
+    if(Math.abs(newFontScale - __fontScale) > 0.01) // Limit the number of adjustment
+    {
+      __fontScale = newFontScale
+    }
+    __updatingFontScale = false;
+  }
+
+  property bool __updatingContent: false
+
+  onContentChanged:
   {
+    var _content = content
     if( !(_content instanceof Array))
     {
       _content = [_content]
     }
 
-    var items = [];
+    var items          = [];
     var previousObject = null
+    var animationLast  = 0
 
     for(var i = 0; i < _content.length; ++i)
     {
@@ -45,11 +66,11 @@ Column
           start += 1
           if(beginNumber.length > 0)
           {
-            object.begin = beginNumber
+            object.animationFirst = beginNumber
           }
           if(endNumber.length > 0)
           {
-            object.end = endNumber
+            object.animationLast = endNumber
           }
         }
 
@@ -101,6 +122,7 @@ Column
 
       object.width = Qt.binding(function() { return root.width; })
       object.fontScale = Qt.binding(function() { return root.__fontScale; })
+      object.animationFrame = Qt.binding(function() { return root.animationFrame; })
       if(object.indentation == 0)
       {
         object.style = Qt.binding(function() { return root.style.level0; })
@@ -114,28 +136,12 @@ Column
       object.previousLine = previousObject
       items.push(object)
       previousObject = object
+      if(object.animationLast > root.animationLast && object.animationLast < 90071992)
+      {
+        animationLast = object.animationLast
+      }
     }
-
-    return items;
-  }
-
-  property variant __workaround_childrenRect: childrenRect // this is a bit ridiculous, but if we don't do that, we don't get update on childrenRect
-  property real __fontScale: 1
-  property bool __updatingFontScale: false
-  onChildrenRectChanged: {
-    if(__updatingFontScale) return;
-    __updatingFontScale = true;
-    var newFontScale = Math.min(1, __fontScale * height / root.childrenRect.height);
-    if(Math.abs(newFontScale - __fontScale) > 0.01) // Limit the number of adjustment
-    {
-      __fontScale = newFontScale
-    }
-    __updatingFontScale = false;
-  }
-
-
-  Component.onCompleted:
-  {
-    children = Qt.binding(function () { return content2model(root.content) })
+    root.animationLast = animationLast
+    root.children      = items;
   }
 }

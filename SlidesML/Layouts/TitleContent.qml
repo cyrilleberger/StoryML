@@ -31,5 +31,7 @@ SlideLayout
 
     content: slide.content
     style: slide.style_instance
+
+    animationFrame: slide.animationFrame
   }
 }

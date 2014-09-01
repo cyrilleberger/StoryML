@@ -9,7 +9,8 @@ Item {
   property Component defaultStyle: Qt.createComponent("Styles/Simple.qml")
 
   property variant slides: []
-  property int currentSlide
+  property int currentSlideIndex
+  property Slide currentSlide: slides[currentSlideIndex]
   property int __inputSlideIndex
 
   width: 800
@@ -40,31 +41,43 @@ Item {
 
     if (root.slides.length > 0)
     {
-        root.currentSlide = 0;
-        root.slides[root.currentSlide].visible = true;
+        root.currentSlideIndex = 0;
+        root.slides[root.currentSlideIndex].visible = true;
     }
   }
-  onCurrentSlideChanged:
+  onCurrentSlideIndexChanged:
   {
-    if(root.currentSlide < 0) root.currentSlide = 0
-    if(root.currentSlide >= root.slides.length) root.currentSlide = root.slides.length - 1
-    root.slides[root.currentSlide].visible = true
+    if(root.currentSlideIndex < 0) root.currentSlideIndex = 0
+    if(root.currentSlideIndex >= root.slides.length) root.currentSlideIndex = root.slides.length - 1
+    root.slides[root.currentSlideIndex].visible = true
+    root.slides[root.currentSlideIndex].animationFrame = 0
   }
 
   function moveToSlide(slide_number)
   {
-    if(slide_number == root.currentSlide) return;
-    root.slides[root.currentSlide].visible = false;
-    root.currentSlide = slide_number
+    if(slide_number == root.currentSlideIndex) return;
+    root.slides[root.currentSlideIndex].visible = false;
+    root.currentSlideIndex = slide_number
   }
 
   function next()
   {
-    moveToSlide(root.currentSlide + 1)
+    if(currentSlide.animationFrame < currentSlide.animationLast)
+    {
+      currentSlide.animationFrame += 1
+    } else {
+      moveToSlide(root.currentSlideIndex + 1)
+    }
   }
   function previous()
   {
-    moveToSlide(root.currentSlide - 1)
+    if(currentSlide.animationFrame > 0)
+    {
+      currentSlide.animationFrame -= 1
+    } else {
+      moveToSlide(root.currentSlideIndex - 1)
+      root.currentSlideIndex.animationFrame = root.currentSlideIndex.animationLast
+    }
   }
 
   Keys.onSpacePressed: next()
