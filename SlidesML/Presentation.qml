@@ -107,7 +107,7 @@ Item {
   Keys.onSpacePressed: next()
   Keys.onRightPressed: next()
   Keys.onLeftPressed: previous()
-  Keys.onReturnPressed: { root.currentSlide = __inputSlideIndex - 1; __inputSlideIndex = 0 }
+  Keys.onReturnPressed: { root.currentSlideIndex = __inputSlideIndex - 1; __inputSlideIndex = 0 }
   Keys.onPressed: {
     if(event.key == Qt.Key_Q && event.modifiers == Qt.ControlModifier)
     {
