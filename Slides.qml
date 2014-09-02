@@ -75,7 +75,6 @@ ApplicationWindow
   Component.onCompleted:
   {
     var arg = Qt.application.arguments[Qt.application.arguments.length - 2]
-    arg = "TestPresentation.qml"
     if(endsWith(arg, ".qml") || endsWith(arg, ".slidesml"))
     {
       presentation = Qt.createComponent(arg)

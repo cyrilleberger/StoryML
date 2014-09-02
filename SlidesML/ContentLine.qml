@@ -9,9 +9,7 @@ Row
   readonly property int numberBullet: 2
 
   readonly property bool isContentLine: true
-  property int animationFrame: 0
-  property int animationFirst: 0
-  property int animationLast: 90071992
+  property SlideAnimation animation: SlideAnimation { parentItem: root }
   property real fontScale: 1
   property TextLineStyle style: TextLineStyle {}
   property Item previousLine
@@ -20,7 +18,7 @@ Row
   property int bulletType: noBullet
   property int __bulletNumberCache: 1
 
-  property bool children_visible: (animationFrame >= animationFirst && animationFrame <= animationLast)
+  property bool children_visible: (animation.frame >= animation.first && animation.frame <= animation.last)
 
   onChildrenChanged:
   {

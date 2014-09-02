@@ -17,7 +17,6 @@ Item {
   height: 600
   focus: true
   property real slideScale: Math.min(width / 800, height / 600)
-  onFocusChanged: console.log(focus)
 
   Component.onCompleted:
   {
@@ -50,7 +49,7 @@ Item {
     if(root.currentSlideIndex < 0) root.currentSlideIndex = 0
     if(root.currentSlideIndex >= root.slides.length) root.currentSlideIndex = root.slides.length - 1
     root.slides[root.currentSlideIndex].visible = true
-    root.slides[root.currentSlideIndex].animationFrame = 0
+    root.currentSlide.animation.moveToFirst()
   }
 
   function moveToSlide(slide_number)
@@ -62,21 +61,17 @@ Item {
 
   function next()
   {
-    if(currentSlide.animationFrame < currentSlide.animationLast)
+    if(!currentSlide.animation.next())
     {
-      currentSlide.animationFrame += 1
-    } else {
       moveToSlide(root.currentSlideIndex + 1)
     }
   }
   function previous()
   {
-    if(currentSlide.animationFrame > 0)
+    if(!currentSlide.animation.previous())
     {
-      currentSlide.animationFrame -= 1
-    } else {
       moveToSlide(root.currentSlideIndex - 1)
-      root.currentSlideIndex.animationFrame = root.currentSlideIndex.animationLast
+      root.currentSlide.animation.moveToLast()
     }
   }
 

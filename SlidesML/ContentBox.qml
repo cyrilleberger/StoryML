@@ -7,8 +7,7 @@ Column
   property variant content
   property SlideStyle style
 
-  property int animationFrame
-  property int animationLast: 0
+  property SlideAnimation animation: SlideAnimation { parentItem: root }
 
   property variant __workaround_childrenRect: childrenRect // this is a bit ridiculous, but if we don't do that, we don't get update on childrenRect
   property real __fontScale: 1
@@ -37,7 +36,6 @@ Column
     var items          = [];
     var previousObject = null
     var animationLast  = 0
-
     for(var i = 0; i < _content.length; ++i)
     {
       var c = _content[i]
@@ -66,11 +64,11 @@ Column
           start += 1
           if(beginNumber.length > 0)
           {
-            object.animationFirst = beginNumber
+            object.animation.first = beginNumber
           }
           if(endNumber.length > 0)
           {
-            object.animationLast = endNumber
+            object.animation.last = endNumber
           }
         }
 
@@ -110,7 +108,14 @@ Column
           {
             if(k != 'type')
             {
-              object[k] = c[k]
+              var splited = k.split('.')
+              var subobj = object
+              for(var j = 0; j < splited.length - 1; j += 1)
+              {
+                subobj = subobj[splited[j]]
+              }
+
+              subobj[splited[splited.length - 1]] = c[k]
             }
           }
 
@@ -122,7 +127,7 @@ Column
 
       object.width = Qt.binding(function() { return root.width; })
       object.fontScale = Qt.binding(function() { return root.__fontScale; })
-      object.animationFrame = Qt.binding(function() { return root.animationFrame; })
+      object.animation.frame = Qt.binding(function() { return root.animation.frame; })
       if(object.indentation == 0)
       {
         object.style = Qt.binding(function() { return root.style.level0; })
@@ -136,12 +141,12 @@ Column
       object.previousLine = previousObject
       items.push(object)
       previousObject = object
-      if(object.animationLast > root.animationLast && object.animationLast < 90071992)
+      if(object.animation.last > root.animation.last && object.animation.last < 90071992)
       {
-        animationLast = object.animationLast
+        animationLast = object.animation.last
       }
     }
-    root.animationLast = animationLast
+    root.animation.last = animationLast
     root.children      = items;
   }
 }

@@ -12,7 +12,6 @@ Window
     sourceComponent: root.presentation
     anchors.fill: parent
     focus: true
-    onVisibleChanged: console.log(visible, presentationLoader.focus)
     Keys.onPressed:
     {
       if((event.modifiers == (Qt.ControlModifier | Qt.ShiftModifier)) && event.key == Qt.Key_F)
