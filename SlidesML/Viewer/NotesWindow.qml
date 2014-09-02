@@ -7,22 +7,52 @@ Window
   id: root
   property Component presentation
   property Presentation presentation_instance
+
   Rectangle
   {
     id: sideBar
     width: 0.2 * parent.width
     height: parent.height
     color: "black"
-    Loader
+    Column
     {
-      id: presentationPreview
-      sourceComponent: root.presentation
       width: parent.width
-      height: 600 * (width / 800)
-      onItemChanged:
+
+      Text
       {
-        item.animationEnabled   = false
-        item.currentSlideIndex = Qt.binding(function() { return presentation_instance ? presentation_instance.currentSlideIndex + 1 : 0 } )
+        color: "white"
+        text: "Current slide:"
+      }
+      Loader
+      {
+        id: presentationCurrent
+        sourceComponent: root.presentation
+        width: parent.width
+        height: 600 * (width / 800)
+        onItemChanged:
+        {
+          item.videosEnabled      = false
+          item.currentSlideIndexBinding  = Qt.binding(function() { return presentation_instance ? presentation_instance.currentSlideIndex : 0 } )
+          item.animationFrameBinding     = Qt.binding(function() { return presentation_instance ? presentation_instance.animationFrame : 0 } )
+        }
+      }
+      Text
+      {
+        color: "white"
+        text: "Next slide:"
+      }
+      Loader
+      {
+        id: presentationNext
+        sourceComponent: root.presentation
+        width: parent.width
+        height: 600 * (width / 800)
+        onItemChanged:
+        {
+          item.animationEnabled  = false
+          item.videosEnabled     = false
+          item.currentSlideIndexBinding = Qt.binding(function() { return presentation_instance ? presentation_instance.currentSlideIndex + 1 : 0 } )
+        }
       }
     }
     Text
@@ -50,5 +80,6 @@ Window
     anchors.right: parent.right
     anchors.bottom: parent.bottom
     text: presentation_instance ? presentation_instance.currentSlide.notes : ""
+    font.pixelSize: 30
   }
 }

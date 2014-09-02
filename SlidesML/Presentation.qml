@@ -9,12 +9,16 @@ Item {
   property Component defaultStyle: Qt.createComponent("Styles/Simple.qml")
 
   property variant slides: []
-  property int currentSlideIndex
-  property int __previousSlideIndex
+  property int currentSlideIndex: -1
+  property int currentSlideIndexBinding: -1
+  property int __previousSlideIndex: 0
   property Slide currentSlide: slides[currentSlideIndex]
   property Slide __previousSlide: slides[__previousSlideIndex]
   property int __inputSlideIndex
   property bool animationEnabled: true
+  property bool videosEnabled: true
+  property int animationFrame
+  property int animationFrameBinding
 
   width: 800
   height: 600
@@ -43,20 +47,31 @@ Item {
 
     if (root.slides.length > 0)
     {
-        root.currentSlideIndex = 0;
-        root.slides[root.currentSlideIndex].visible = true;
+      root.currentSlideIndex = 0;
+      root.slides[root.currentSlideIndex].visible = true;
     }
+  }
+  onAnimationFrameBindingChanged:
+  {
+    animationFrame = animationFrameBinding
+    if(animationFrame != currentSlide.animation.frame)
+    {
+      currentSlide.animation.frame = animationFrame
+    }
+  }
+  onCurrentSlideIndexBindingChanged:
+  {
+    currentSlideIndex = currentSlideIndexBinding
   }
   onCurrentSlideIndexChanged:
   {
-    console.log(root.currentSlideIndex)
     if(root.currentSlideIndex < 0) root.currentSlideIndex = 0
     if(root.currentSlideIndex >= root.slides.length) root.currentSlideIndex = root.slides.length - 1
 
     if(root.currentSlideIndex != root.__previousSlideIndex)
     {
-      root.currentSlide = root.slides[root.currentSlideIndex]
       root.__previousSlide.visible = false;
+      root.currentSlide = root.slides[root.currentSlideIndex]
       root.currentSlide.visible    = true
       if(animationEnabled)
       {
@@ -66,6 +81,7 @@ Item {
       }
       root.__previousSlideIndex = root.currentSlideIndex
     }
+    animationFrame = currentSlide ? currentSlide.animation.frame : 0
   }
 
   function next()
@@ -73,6 +89,8 @@ Item {
     if(!animationEnabled || !currentSlide.animation.next())
     {
       currentSlideIndex = root.currentSlideIndex + 1
+    } else {
+      animationFrame = currentSlide.animation.frame
     }
   }
   function previous()
@@ -81,6 +99,8 @@ Item {
     {
       currentSlideIndex = root.currentSlideIndex - 1
       if(animationEnabled) root.currentSlide.animation.moveToLast()
+    } else {
+      animationFrame = currentSlide.animation.frame
     }
   }
 
