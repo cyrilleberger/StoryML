@@ -6,6 +6,7 @@ Window
   id: root
   property Component presentation
   signal presentationClosed
+  property alias presentation_instance: presentationLoader.item
   Loader
   {
     id: presentationLoader

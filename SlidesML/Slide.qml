@@ -8,6 +8,7 @@ Item
   property Component layout: parent.defaultLayout
   property Component  style:  parent.defaultStyle
   property int slideNumber
+  property string notes
 
   property SlideAnimation animation: SlideAnimation { parentItem: root }
 

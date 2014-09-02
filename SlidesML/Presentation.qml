@@ -10,8 +10,11 @@ Item {
 
   property variant slides: []
   property int currentSlideIndex
+  property int __previousSlideIndex
   property Slide currentSlide: slides[currentSlideIndex]
+  property Slide __previousSlide: slides[__previousSlideIndex]
   property int __inputSlideIndex
+  property bool animationEnabled: true
 
   width: 800
   height: 600
@@ -46,39 +49,45 @@ Item {
   }
   onCurrentSlideIndexChanged:
   {
+    console.log(root.currentSlideIndex)
     if(root.currentSlideIndex < 0) root.currentSlideIndex = 0
     if(root.currentSlideIndex >= root.slides.length) root.currentSlideIndex = root.slides.length - 1
-    root.slides[root.currentSlideIndex].visible = true
-    root.currentSlide.animation.moveToFirst()
-  }
 
-  function moveToSlide(slide_number)
-  {
-    if(slide_number == root.currentSlideIndex) return;
-    root.slides[root.currentSlideIndex].visible = false;
-    root.currentSlideIndex = slide_number
+    if(root.currentSlideIndex != root.__previousSlideIndex)
+    {
+      root.currentSlide = root.slides[root.currentSlideIndex]
+      root.__previousSlide.visible = false;
+      root.currentSlide.visible    = true
+      if(animationEnabled)
+      {
+        root.currentSlide.animation.moveToFirst()
+      } else {
+        root.currentSlide.animation.moveToLast()
+      }
+      root.__previousSlideIndex = root.currentSlideIndex
+    }
   }
 
   function next()
   {
-    if(!currentSlide.animation.next())
+    if(!animationEnabled || !currentSlide.animation.next())
     {
-      moveToSlide(root.currentSlideIndex + 1)
+      currentSlideIndex = root.currentSlideIndex + 1
     }
   }
   function previous()
   {
-    if(!currentSlide.animation.previous())
+    if(!animationEnabled || !currentSlide.animation.previous())
     {
-      moveToSlide(root.currentSlideIndex - 1)
-      root.currentSlide.animation.moveToLast()
+      currentSlideIndex = root.currentSlideIndex - 1
+      if(animationEnabled) root.currentSlide.animation.moveToLast()
     }
   }
 
   Keys.onSpacePressed: next()
   Keys.onRightPressed: next()
   Keys.onLeftPressed: previous()
-  Keys.onReturnPressed: { moveToSlide(__inputSlideIndex - 1); __inputSlideIndex = 0 }
+  Keys.onReturnPressed: { root.currentSlide = __inputSlideIndex - 1; __inputSlideIndex = 0 }
   Keys.onPressed: {
     if(event.key == Qt.Key_Q && event.modifiers == Qt.ControlModifier)
     {

@@ -65,6 +65,7 @@ ApplicationWindow
     id: notesWindow
     visible: false
     presentation: root.presentation
+    presentation_instance: presentationWindow.presentation_instance
   }
   function endsWith(str, pat)
   {

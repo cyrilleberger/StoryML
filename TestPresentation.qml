@@ -16,6 +16,7 @@ Presentation {
     }
     title: "Slide title"
     content: "Text of the slide"
+    notes: "Example of notes"
   }
   Slide {
     title: "Next slide"
