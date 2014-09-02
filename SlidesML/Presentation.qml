@@ -15,7 +15,7 @@ Item {
   property Slide currentSlide: slides[currentSlideIndex]
   property Slide __previousSlide: slides[__previousSlideIndex]
   property int __inputSlideIndex
-  property bool animationEnabled: true
+  property bool animationsEnabled: true
   property bool videosEnabled: true
   property int animationFrame
   property int animationFrameBinding
@@ -73,7 +73,7 @@ Item {
       root.__previousSlide.visible = false;
       root.currentSlide = root.slides[root.currentSlideIndex]
       root.currentSlide.visible    = true
-      if(animationEnabled)
+      if(animationsEnabled)
       {
         root.currentSlide.animation.moveToFirst()
       } else {
@@ -86,7 +86,7 @@ Item {
 
   function next()
   {
-    if(!animationEnabled || !currentSlide.animation.next())
+    if(!animationsEnabled || !currentSlide.animation.next())
     {
       currentSlideIndex = root.currentSlideIndex + 1
     } else {
@@ -95,10 +95,10 @@ Item {
   }
   function previous()
   {
-    if(!animationEnabled || !currentSlide.animation.previous())
+    if(!animationsEnabled || !currentSlide.animation.previous())
     {
       currentSlideIndex = root.currentSlideIndex - 1
-      if(animationEnabled) root.currentSlide.animation.moveToLast()
+      if(animationsEnabled) root.currentSlide.animation.moveToLast()
     } else {
       animationFrame = currentSlide.animation.frame
     }

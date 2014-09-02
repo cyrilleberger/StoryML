@@ -31,7 +31,7 @@ Window
         height: 600 * (width / 800)
         onItemChanged:
         {
-          item.videosEnabled      = false
+          item.videosEnabled             = false
           item.currentSlideIndexBinding  = Qt.binding(function() { return presentation_instance ? presentation_instance.currentSlideIndex : 0 } )
           item.animationFrameBinding     = Qt.binding(function() { return presentation_instance ? presentation_instance.animationFrame : 0 } )
         }
@@ -49,7 +49,7 @@ Window
         height: 600 * (width / 800)
         onItemChanged:
         {
-          item.animationEnabled  = false
+          item.animationsEnabled = false
           item.videosEnabled     = false
           item.currentSlideIndexBinding = Qt.binding(function() { return presentation_instance ? presentation_instance.currentSlideIndex + 1 : 0 } )
         }
