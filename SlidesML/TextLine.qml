@@ -1,15 +1,18 @@
 import SlidesML 1.0
 import QtQuick 2.0
+import SlidesML.Components 1.0
 
 ContentLine
 {
-  height: text_.height
+  id: root
   property alias text: text_.text
-  Text
+  ScalableText
   {
     id: text_
     color: parent.style.text.color
-    font: parent.style.text.font
+    baseFont: parent.style.text.font
+    fontScale: root.fontScale
+    wrapMode: Text.WordWrap
+    width: childrenAvailableWidth
   }
-  onFontScaleChanged: text_.font.pixelSize = style.text.font.pixelSize * fontScale
 }

@@ -20,9 +20,13 @@ Row
 
   property bool children_visible: (animation.frame >= animation.first && animation.frame <= animation.last)
 
+  property int indentationSize: style.text.font.pixelSize * fontScale
+  property int childrenAvailableWidth: width // - (bullet.width - indentation.width)
+
+
   onChildrenChanged:
   {
-    for(var i = 0; i < root.children.length; ++i)
+    for(var i = 1; i < root.children.length; ++i)
     {
       root.children[i].visible = Qt.binding(function() { return root.children_visible; } )
     }
@@ -56,21 +60,21 @@ Row
 
   Item {
     id: indentation
-    height: root.height
-    width: root.height * (root.indentation + 1 - (root.bulletType != noBullet))
+    height: root.indentationSize
+    width: root.indentationSize * (root.indentation + 1 - (root.bulletType != noBullet))
   }
   Item {
     id: bullet
     visible: root.bulletType != root.noBullet
-    height: root.height * visible
-    width: root.height * visible
+    height: root.indentationSize * visible
+    width: root.indentationSize * visible
     Rectangle
     {
       visible: root.bulletType == root.shapeBullet
       anchors.centerIn: parent
       color: root.style.bulletColor
-      height: root.style.bulletSize * parent.height
-      width: root.style.bulletSize * parent.width
+      height: root.style.bulletSize * indentationSize
+      width: root.style.bulletSize * indentationSize
       radius: 0.5 * width * root.style.bulletRadius
       border.width: root.style.bulletBorderWidth
       border.color: root.style.bulletBorderColor

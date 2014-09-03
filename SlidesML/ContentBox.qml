@@ -12,16 +12,31 @@ Column
   property variant __workaround_childrenRect: childrenRect // this is a bit ridiculous, but if we don't do that, we don't get update on childrenRect
   property real __fontScale: 1
   property bool __updatingFontScale: false
-  onChildrenRectChanged: {
+
+  function __updateFontScale()
+  {
     if(__updatingFontScale) return;
     __updatingFontScale = true;
     var newFontScale = Math.min(1, __fontScale * height / root.childrenRect.height);
-    if(Math.abs(newFontScale - __fontScale) > 0.01) // Limit the number of adjustment
+
+    var absdiff = Math.abs(newFontScale - __fontScale)
+    if(absdiff > 0.01) // Limit the number of adjustment
     {
+      if(__fontScale < newFontScale)
+      {
+        __fontScale += 0.1 * Math.abs(newFontScale - __fontScale)
+      } else {
+        __fontScale -= 0.1 * Math.abs(newFontScale - __fontScale)
+      }
+    } else if(absdiff > 0.0001) {
       __fontScale = newFontScale
     }
+
     __updatingFontScale = false;
+
   }
+
+  onChildrenRectChanged: __updateFontScale()
 
   property bool __updatingContent: false
 
