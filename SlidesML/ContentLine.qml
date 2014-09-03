@@ -21,15 +21,24 @@ Row
   property bool children_visible: (animation.frame >= animation.first && animation.frame <= animation.last)
 
   property int indentationSize: style.text.font.pixelSize * fontScale
-  property int childrenAvailableWidth: width // - (bullet.width - indentation.width)
+  property int childrenAvailableWidth: width - (bullet.width - indentation.width)
 
+  Timer
+  {
+    id: delayedVisibility
+    interval: 1000
+    onTriggered:
+    {
+      for(var i = 1; i < root.children.length; ++i)
+      {
+        root.children[i].visible = Qt.binding(function() { return root.children_visible; } )
+      }
+    }
+  }
 
   onChildrenChanged:
   {
-    for(var i = 1; i < root.children.length; ++i)
-    {
-      root.children[i].visible = Qt.binding(function() { return root.children_visible; } )
-    }
+    delayedVisibility.start()
   }
 
   onPreviousLineChanged: computeBulletNumber()

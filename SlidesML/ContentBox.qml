@@ -16,22 +16,23 @@ Column
   function __updateFontScale()
   {
     if(__updatingFontScale) return;
+    if(root.childrenRect.height < height && (height - root.childrenRect.height) < style.text.font.pixelSize) return;
     __updatingFontScale = true;
     var newFontScale = Math.min(1, __fontScale * height / root.childrenRect.height);
 
     var absdiff = Math.abs(newFontScale - __fontScale)
+
     if(absdiff > 0.01) // Limit the number of adjustment
     {
       if(__fontScale < newFontScale)
       {
-        __fontScale += 0.1 * Math.abs(newFontScale - __fontScale)
+        __fontScale += 0.1 * absdiff
       } else {
-        __fontScale -= 0.1 * Math.abs(newFontScale - __fontScale)
+        __fontScale -= 0.1 * absdiff
       }
     } else if(absdiff > 0.0001) {
       __fontScale = newFontScale
     }
-
     __updatingFontScale = false;
 
   }
