@@ -10,7 +10,7 @@ SlideLayout
     x: root.margin
     y: root.margin
     width: root.width - 2 * root.margin
-    height: 100
+    height: slide.style_instance.titleSize
 
     color: slide.style_instance.title.color
     font: slide.style_instance.title.font
@@ -27,7 +27,7 @@ SlideLayout
     anchors.top: titleText.bottom
     anchors.topMargin: root.margin
     anchors.bottom: root.bottom
-    anchors.bottomMargin: root.margin
+    anchors.bottomMargin: root.margin + slide.style_instance.footerSize
 
     content: slide.content
     style: slide.style_instance

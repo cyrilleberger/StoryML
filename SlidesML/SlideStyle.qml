@@ -9,6 +9,8 @@ Item
   property TextStyle title: TextStyle { font.pointSize: 50 }
   property TextStyle text: TextStyle { font.pointSize: 30 }
   property TextStyle footer: TextStyle { font.pointSize: 20 }
+  property real headerSize: 100
+  property real footerSize: 0
 
   property TextLineStyle level0: TextLineStyle { text: root.text; }
   property TextLineStyle level1: TextLineStyle { text: root.text; bulletSize: 0.15; bulletColor: "white"; bulletBorderColor: "black"}
