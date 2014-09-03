@@ -16,7 +16,7 @@ Column
   function __updateFontScale()
   {
     if(__updatingFontScale) return;
-    if(root.childrenRect.height < height && (height - root.childrenRect.height) < style.text.font.pixelSize) return;
+    if(style && root.childrenRect.height < height && (height - root.childrenRect.height) < style.text.font.pixelSize) return;
     __updatingFontScale = true;
     var newFontScale = Math.min(1, __fontScale * height / root.childrenRect.height);
 
