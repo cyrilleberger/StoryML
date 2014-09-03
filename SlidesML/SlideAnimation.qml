@@ -57,6 +57,7 @@ QtObject {
             new_last = Math.max(new_last, child.animation.last)
           }
         }
+        new_last = Math.max(new_last, child.animation.first)
       }
     }
     __autoSetLast = new_last
