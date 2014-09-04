@@ -108,6 +108,10 @@ Column
           }
           start += 1;
         }
+        if(c[start] == '\\' && c[start + 1] == '<')
+        {
+          start += 1;
+        }
 
         object.indentation = (start == 0) ? 0 : (indentation - 1)
         object.text = c.substring(start, c.length);
