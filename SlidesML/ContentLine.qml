@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import SlidesML 1.0
+import SlidesML.Components 1.0
 
 Row
 {
@@ -88,13 +89,14 @@ Row
       border.width: root.style.bulletBorderWidth
       border.color: root.style.bulletBorderColor
     }
-    Text
+    ScalableText
     {
       visible: root.bulletType == root.numberBullet
       anchors.centerIn: parent
       color: root.style.bulletColor
-      font: root.style.text.font
+      baseFont: root.style.text.font
       text: root.__bulletNumberCache
+      fontScale: root.style.bulletSize
     }
   }
 }

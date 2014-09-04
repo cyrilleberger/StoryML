@@ -7,5 +7,5 @@ Item {
   property color bulletBorderColor: "white"
   property real bulletBorderWidth: 1
   property real bulletRadius: 1
-  property real bulletSize: 0.25
+  property real bulletSize: 0.5
 }
