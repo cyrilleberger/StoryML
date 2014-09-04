@@ -1,11 +1,14 @@
 import QtQuick 2.0
 import SlidesML 1.0
+import SlidesML.Components 1.0
 
 SlideLayout
 {
   id: root
   property int margin: 30
-  Text {
+  property int marginBottom: 0
+
+  AutoscalableText {
     id: titleText
     x: root.margin
     y: root.margin
@@ -13,7 +16,7 @@ SlideLayout
     height: slide.style_instance.titleSize
 
     color: slide.style_instance.title.color
-    font: slide.style_instance.title.font
+    baseFont: slide.style_instance.title.font
     text: slide.title
 
     verticalAlignment: Text.AlignVCenter
@@ -22,12 +25,9 @@ SlideLayout
   ContentBox
   {
     x: root.margin
+    y: slide.style_instance.headerSize + root.margin
     width: root.width - 2 * root.margin
-
-    anchors.top: titleText.bottom
-    anchors.topMargin: root.margin
-    anchors.bottom: root.bottom
-    anchors.bottomMargin: root.margin + slide.style_instance.footerSize
+    height: root.height - 3 * root.margin - slide.style_instance.footerSize - root.marginBottom - slide.style_instance.headerSize
 
     content: slide.content
     style: slide.style_instance

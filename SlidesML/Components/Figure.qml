@@ -1,25 +1,15 @@
 import QtQuick 2.0
+import SlidesML.Components 1.0
 
 Column
 {
   id: figure
   property alias legend: legend_.text
-  Text
+  AutoscalableText
   {
     id: legend_
     color: parent.parent.style_instance.text.color
-    font: parent.parent.style_instance.text.font
-    function updateFontSize()
-    {
-      if(parent.width != 0 && parent)
-      {
-        font.pixelSize = font.pixelSize * parent.width / contentWidth
-      }
-    }
-    onFontChanged: updateFontSize()
-    onTextChanged: updateFontSize()
-    onWidthChanged: updateFontSize()
-    onContentWidthChanged: updateFontSize()
+    baseFont: parent.parent.style_instance.text.font
     width: parent.width
     horizontalAlignment: Text.AlignHCenter
   }
