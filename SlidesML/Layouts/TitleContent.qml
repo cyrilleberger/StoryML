@@ -7,6 +7,7 @@ SlideLayout
   id: root
   property int margin: 30
   property int marginBottom: 0
+  property int marginRight: 0
 
   AutoscalableText {
     id: titleText
@@ -26,7 +27,7 @@ SlideLayout
   {
     x: root.margin
     y: slide.style_instance.headerSize + root.margin
-    width: root.width - 2 * root.margin
+    width: root.width - 2 * root.margin - marginRight
     height: root.height - 3 * root.margin - slide.style_instance.footerSize - root.marginBottom - slide.style_instance.headerSize
 
     content: slide.content
