@@ -82,6 +82,6 @@ QtObject {
   function moveToLast()
   {
     if(last == 90071992) frame = 0;
-    frame = last;
+    else frame = last;
   }
 }
