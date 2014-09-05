@@ -24,22 +24,12 @@ Row
   property int indentationSize: style.text.font.pixelSize * fontScale
   property int childrenAvailableWidth: width - (bullet.width - indentation.width)
 
-  Timer
-  {
-    id: delayedVisibility
-    interval: 1000
-    onTriggered:
-    {
-      for(var i = 1; i < root.children.length; ++i)
-      {
-        root.children[i].visible = Qt.binding(function() { return root.children_visible; } )
-      }
-    }
-  }
-
   onChildrenChanged:
   {
-    delayedVisibility.start()
+    for(var i = 1; i < root.children.length; ++i)
+    {
+      root.children[i].opacity = Qt.binding(function() { return root.children_visible ? 1 : style.hiddenOpacity; } )
+    }
   }
 
   onPreviousLineChanged: computeBulletNumber()
