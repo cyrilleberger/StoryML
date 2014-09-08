@@ -16,5 +16,5 @@ Project {
         directory: "."
     }
     /* List of plugin directories passed to QML runtime */
-    importPaths: [ "." ]
+    importPaths: [ ".", "/home/cyrille/Work/liu/Teaching/AIP/ht2014/lectures/" ]
 }

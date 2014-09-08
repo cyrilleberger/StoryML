@@ -9,3 +9,5 @@ TextStyle 1.0 TextStyle.qml
 TextLineStyle 1.0 TextLineStyle.qml
 SlideAnimation 1.0 SlideAnimation.qml
 ImagesLine 1.0 ImagesLine.qml
+Utils 1.0 Utils.js
+SectionSlide 1.0 SectionSlide.qml

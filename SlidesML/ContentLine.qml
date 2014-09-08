@@ -19,8 +19,6 @@ Row
   property int bulletType: noBullet
   property int __bulletNumberCache: 1
 
-  property bool children_visible: (animation.frame >= animation.first && animation.frame <= animation.last)
-
   property int indentationSize: style.text.font.pixelSize * fontScale
   property int childrenAvailableWidth: width - (bullet.width - indentation.width)
 
@@ -28,7 +26,7 @@ Row
   {
     for(var i = 1; i < root.children.length; ++i)
     {
-      root.children[i].opacity = Qt.binding(function() { return root.children_visible ? 1 : style.hiddenOpacity; } )
+      root.children[i].opacity = Qt.binding(function() { return root.animation.inFrame ? 1 : style.hiddenOpacity; } )
     }
   }
 

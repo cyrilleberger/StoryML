@@ -2,6 +2,7 @@ import QtQuick 2.0
 
 QtObject {
   id: root
+  readonly property bool inFrame: (frame >= first && frame <= last)
   property int frame: 0
   property int first: 0
   property int last: 90071992
@@ -13,7 +14,7 @@ QtObject {
   Component.onCompleted:
   {
     updateLast();
-    parentItem.childrenChanged.connect(function() { if(root) { root.updateEnd() } })
+    parentItem.childrenChanged.connect(function() { if(root) { root.updateLast() } })
   }
 
   onLastChanged:

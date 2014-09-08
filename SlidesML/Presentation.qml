@@ -19,6 +19,7 @@ Item {
   property bool videosEnabled: true
   property int animationFrame
   property int animationFrameBinding
+  property var sections: []
 
   width: 800
   height: 600
@@ -28,6 +29,7 @@ Item {
   Component.onCompleted:
   {
     var slides = [];
+    var sections = [];
 
     for(var i = 0; i < root.children.length; ++i)
     {
@@ -40,10 +42,16 @@ Item {
         r.x = Qt.binding(function() { return 0.5 * (width - slideScale * 800) })
         r.y = Qt.binding(function() { return 0.5 * (height - slideScale * 600) })
         r.transformOrigin = Item.TopLeft
+
+        if(r.isSection)
+        {
+          sections.push(r.title)
+        }
       }
     }
 
-    root.slides = slides;
+    root.slides   = slides;
+    root.sections = sections;
 
     if (root.slides.length > 0)
     {
