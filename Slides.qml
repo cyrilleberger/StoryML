@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.0
+import QtQuick.Window 2.0
 import SlidesML.Viewer 1.0
 
 ApplicationWindow
@@ -11,6 +12,21 @@ ApplicationWindow
   width: 200
   height: 150
   property Component presentation
+
+  function __createPrintWindow()
+  {
+    var pw = null;
+    try {
+      pw = Qt.createQmlObject("import SlidesML.Viewer 1.0; PrintWindow {}", root)
+    } catch(except)
+    {
+
+    }
+    return pw;
+  }
+
+  property Window __printWindow: __createPrintWindow()
+
   toolBar:
     ToolBar
     {
@@ -34,6 +50,16 @@ ApplicationWindow
             presentationWindow.visible = true
           }
         }
+        ToolButton
+        {
+          iconName: "application-pdf"
+          enabled: presentation
+          visible: root.__printWindow
+          onClicked:
+          {
+            printOptions.visible = true
+          }
+        }
       }
     }
   FileDialog
@@ -48,6 +74,77 @@ ApplicationWindow
   onPresentationChanged:
     {
     }
+
+  Item
+  {
+    id: printOptions
+    visible: false
+    anchors.fill: parent
+
+    onVisibleChanged: {
+      printButton.enabled = true
+    }
+
+    GridLayout
+    {
+      columns: 2
+      Label {
+        text: "Filename:"
+      }
+      TextField
+      {
+        id: filename
+        text: "output.pdf"
+      }
+      Label {
+        text: "Rows:"
+      }
+      SpinBox
+      {
+        id: rows
+        value: 2
+        minimumValue: 1
+        maximumValue: 10
+      }
+      Label {
+        text: "Columns:"
+      }
+      SpinBox
+      {
+        id: columns
+        value: 3
+        minimumValue: 1
+        maximumValue: 10
+      }
+      Label {
+        text: "Margins:"
+      }
+      SpinBox
+      {
+        id: margins
+        value: 20
+        minimumValue: 0
+        maximumValue: 100
+      }
+      Button
+      {
+        id: printButton
+        text: "Print"
+        onClicked:
+        {
+          root.__printWindow.presentation             = root.presentation
+          root.__printWindow.printer.filename         = filename.text
+          root.__printWindow.printer.miniPage.columns = columns.value
+          root.__printWindow.printer.miniPage.rows    = rows.value
+          root.__printWindow.printer.miniPage.margins = margins.value
+          root.__printWindow.startPrinting()
+          printButton.enabled = false
+        }
+      }
+    }
+
+
+  }
 
   PresentationWindow
   {
