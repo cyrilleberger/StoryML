@@ -33,7 +33,7 @@ Window {
     interval: 1000
     onTriggered: {
       printer.printWindow()
-      printer.startNewPage()
+      printer.newPage()
       if(presentationCurrent.item.currentSlideIndex === presentationCurrent.item.slides.length - 1)
       {
         root.visible = false
@@ -48,7 +48,7 @@ Window {
   function startPrinting()
   {
     visible = true
-    printer.startPrinting()
+    printer.beginPrinting()
     printTimer.start()
   }
 }
