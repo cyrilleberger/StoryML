@@ -112,7 +112,7 @@ ApplicationWindow
       SpinBox
       {
         id: columns
-        value: 3
+        value: 2
         minimumValue: 1
         maximumValue: 10
       }
