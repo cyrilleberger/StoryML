@@ -33,13 +33,13 @@ Window {
     interval: 1000
     onTriggered: {
       printer.printWindow()
-      printer.newPage()
       if(presentationCurrent.item.currentSlideIndex === presentationCurrent.item.slides.length - 1)
       {
         root.visible = false
         printTimer.stop()
         printer.endPrinting()
       } else {
+        printer.newPage()
         ++presentationCurrent.item.currentSlideIndex;
       }
     }
