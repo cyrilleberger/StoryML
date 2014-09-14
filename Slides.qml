@@ -117,11 +117,11 @@ ApplicationWindow
         maximumValue: 10
       }
       Label {
-        text: "Margins:"
+        text: "Margin:"
       }
       SpinBox
       {
-        id: margins
+        id: margin
         value: 20
         minimumValue: 0
         maximumValue: 100
@@ -136,7 +136,7 @@ ApplicationWindow
           root.__printWindow.printer.filename         = filename.text
           root.__printWindow.printer.miniPage.columns = columns.value
           root.__printWindow.printer.miniPage.rows    = rows.value
-          root.__printWindow.printer.miniPage.margins = margins.value
+          root.__printWindow.printer.miniPage.margin  = margin.value
           root.__printWindow.startPrinting()
           printButton.enabled = false
         }
