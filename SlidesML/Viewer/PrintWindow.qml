@@ -51,4 +51,11 @@ Window {
     printer.beginPrinting()
     printTimer.start()
   }
+  function setEfficientMode(v)
+  {
+    if(v)
+    {
+      printer.mode = Printer.EFFICIENT
+    }
+  }
 }

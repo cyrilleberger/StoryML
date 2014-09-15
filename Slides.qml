@@ -126,6 +126,13 @@ ApplicationWindow
         minimumValue: 0
         maximumValue: 100
       }
+      CheckBox
+      {
+        id: efficient
+        text: "Efficient Mode"
+        checked: false
+      }
+
       Button
       {
         id: printButton
@@ -137,6 +144,8 @@ ApplicationWindow
           root.__printWindow.printer.miniPage.columns = columns.value
           root.__printWindow.printer.miniPage.rows    = rows.value
           root.__printWindow.printer.miniPage.margin  = margin.value
+          root.__printWindow.setEfficientMode(efficient.checked)
+
           root.__printWindow.startPrinting()
           printButton.enabled = false
         }
