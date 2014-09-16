@@ -135,7 +135,7 @@ Column
         object.indentation = (start == start_after_animation) ? 0 : (indentation - 1)
         object.text = c.substring(start, c.length);
       } else if(c instanceof Array) {
-        object = Qt.createQmlObject("import SlidesML 1.0; import QtQuick 2.0; Rectangle {color: 'red'; width: 104; height: 49 Text { text: 'Array is not yet implemented'}}", root, "ContentBox's dynamic item" )
+        object = Qt.createQmlObject("import SlidesML 1.0; import QtQuick 2.0; Rectangle {color: 'red'; width: 104; height: 49; Text { text: 'Array is not yet implemented'}}", root, "ContentBox's dynamic item" )
       } else if(c instanceof Object) {
         if(c.isContentLine)
         {
