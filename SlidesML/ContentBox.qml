@@ -79,18 +79,18 @@ Column
         object = Qt.createQmlObject("import SlidesML 1.0; import QtQuick 2.0; TextLine {  }", root, "ContentBox's dynamic TextLine" )
         var start = 0;
 
-        if(c[start] == '<')
+        if(c[start] === '<')
         {
           start += 1;
           var beginNumber = ""
           var endNumber = ""
-          while(c[start] != '-' && c[start] != '>' && start < c.length)
+          while(c[start] !== '-' && c[start] !== '>' && start < c.length)
           {
             beginNumber += c[start]
             start += 1;
           }
-          if(c[start] == '-') start += 1
-          while(c[start] != '-' && c[start] != '>' && start < c.length)
+          if(c[start] === '-') start += 1
+          while(c[start] !== '-' && c[start] !== '>' && start < c.length)
           {
             endNumber += c[start]
             start += 1;
@@ -109,12 +109,15 @@ Column
         var indentation = 0
         var start_after_animation = start
 
+        while(c[start] === ' ' && start < c.length)
+        {
+          indentation += 1
+          start += 1;
+        }
+
         while(true)
         {
-          if(c[start] == ' ')
-          {
-            indentation += 1
-          } else if(c[start] == '#')
+          if(c[start] == '#')
           {
             indentation += 1
             object.bulletType = 2
