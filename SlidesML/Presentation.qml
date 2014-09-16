@@ -48,6 +48,7 @@ Item {
   {
     var slides = [];
     var sections = [];
+    var currentSub = [];
 
     for(var i = 0; i < root.children.length; ++i)
     {
@@ -63,11 +64,24 @@ Item {
 
         if(r.isSection)
         {
+          if(currentSub.length > 0)
+          {
+            sections.push(currentSub)
+            currentSub = []
+          }
           sections.push(r.title)
+        }
+        if(r.isSubsection)
+        {
+          currentSub.push(r.title)
         }
       }
     }
-
+    if(currentSub.length > 0)
+    {
+      sections.push(currentSub)
+      currentSub = []
+    }
     root.slides   = slides;
     root.sections = sections;
 

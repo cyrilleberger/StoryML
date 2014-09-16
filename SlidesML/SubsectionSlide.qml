@@ -1,9 +1,9 @@
 /* Copyright (c) 2014, Cyrille Berger <cberger@cberger.net>
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -16,29 +16,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE
  */
 
-function __ifyList(list, type, basetype)
-{
-  var new_list = []
-  for(var i = 0; i < list.length; ++i)
-  {
-    var obj = list[i]
+import SlidesML 1.0
+import SlidesML.Layouts 1.0
 
-    if( (obj instanceof Array))
-    {
-      new_list = new_list.concat( __ifyList(obj, type + basetype, basetype) )
-    } else {
-      new_list.push(type + list[i])
-    }
-  }
-  return new_list;
-}
-
-function numberifyList(list)
-{
-  return __ifyList(list, "#", "#")
-}
-
-function itemifyList(list)
-{
-  return __ifyList(list, "*", "*")
+Slide {
+  layout: Title {}
+  readonly property bool isSubsection: true
 }
