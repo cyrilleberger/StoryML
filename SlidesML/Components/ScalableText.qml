@@ -20,8 +20,14 @@ import QtQuick 2.0
 
 Text {
   id: root
-  property font baseFont: root.font
+  property font baseFont: __createBaseFont()
   property real fontScale: 1
+
+  function __createBaseFont()
+  {
+    root.baseFont = root.font // Hack to force a deep copy of root.font in root.baseFont and avoid binding loops when updateFont is called
+    return root.baseFont
+  }
 
   function updateFont()
   {
