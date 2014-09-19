@@ -29,7 +29,7 @@ Window
   Rectangle
   {
     id: sideBar
-    width: 0.2 * parent.width
+    width: 0.3 * parent.width
     height: parent.height
     color: "black"
     Column
