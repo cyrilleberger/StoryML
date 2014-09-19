@@ -25,6 +25,8 @@ Item {
 
   property Component defaultLayout: Qt.createComponent("Layouts/TitleContent.qml")
   property Component defaultStyle: Qt.createComponent("Styles/Simple.qml")
+  property Component defaultSectionStyle: defaultStyle
+  property Component defaultSubsectionStyle: defaultSectionStyle
 
   property variant slides: []
   property int currentSlideIndex: -1

@@ -21,5 +21,6 @@ import SlidesML.Layouts 1.0
 
 Slide {
   layout: Title {}
+  style:  parent.defaultSectionStyle
   readonly property bool isSection: true
 }
