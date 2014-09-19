@@ -12,6 +12,7 @@ Window {
     window: root
     orientation: Printer.Landscape
   }
+  signal printFinished()
 
   Loader
   {
@@ -38,6 +39,7 @@ Window {
         root.visible = false
         printTimer.stop()
         printer.endPrinting()
+        root.printFinished()
       } else {
         printer.newPage()
         ++presentationCurrent.item.currentSlideIndex;

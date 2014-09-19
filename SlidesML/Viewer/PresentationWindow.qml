@@ -45,9 +45,4 @@ Window
       }
     }
   }
-  onVisibleChanged:
-  {
-    presentationLoader.item.focus = true
-    presentationLoader.item.forceActiveFocus()
-  }
 }

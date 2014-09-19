@@ -20,7 +20,7 @@ import QtQuick 2.0
 import QtQuick.Window 2.0
 import SlidesML 1.0
 
-Window
+Item
 {
   id: root
   property Component presentation
@@ -91,13 +91,18 @@ Window
       font.pixelSize: 20
     }
   }
-  Text
+  Rectangle
   {
     anchors.top: parent.top
     anchors.left:sideBar.right
     anchors.right: parent.right
     anchors.bottom: parent.bottom
-    text: presentation_instance ? presentation_instance.currentSlide.notes : ""
-    font.pixelSize: 30
+    color: "white"
+    Text
+    {
+      anchors.fill: parent
+      text: presentation_instance ? presentation_instance.currentSlide.notes : ""
+      font.pixelSize: 30
+    }
   }
 }

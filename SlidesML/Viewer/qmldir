@@ -1,3 +1,3 @@
-NotesWindow 1.0 NotesWindow.qml
+NotesView 1.0 NotesView.qml
 PresentationWindow 1.0 PresentationWindow.qml
 PrintWindow 1.0 PrintWindow.qml
