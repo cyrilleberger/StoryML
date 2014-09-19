@@ -22,6 +22,7 @@ import QtQuick.Window 2.0
 Window
 {
   id: root
+  title: "Presentation View"
   property Component presentation
   signal presentationClosed
   property alias presentation_instance: presentationLoader.item

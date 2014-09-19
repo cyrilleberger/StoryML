@@ -8,7 +8,7 @@ import SlidesML.Viewer 1.0
 ApplicationWindow
 {
   id: root
-  title: "Slides"
+  title: "SlidesML Player"
   width: 800
   height: 600
   property Component presentation
@@ -16,6 +16,7 @@ ApplicationWindow
   FileDialog
   {
     id: openFileDialog
+    title: "Open Presentation"
     nameFilters: [ "SlidesML Presentation (*.slidesml *.qml)" ]
     onAccepted:
       {
