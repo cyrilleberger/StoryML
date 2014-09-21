@@ -44,6 +44,29 @@ ApplicationWindow
         }
         ToolButton
         {
+          iconName: "document-save"
+          onClicked:
+          {
+            console.log(presentationFileIO.url.toString().length, presentationFileIO.url)
+            if(presentationFileIO.url.toString().length > 0)
+            {
+              presentationFileIO.content = editor.text
+              presentationFileIO.writeFile()
+            } else {
+              saveFileDialog.open()
+            }
+          }
+        }
+        ToolButton
+        {
+          iconName: "document-save-as"
+          onClicked:
+          {
+            saveFileDialog.open()
+          }
+        }
+        ToolButton
+        {
           iconName: "media-playback-start"
           enabled: editorItem.validPresentation
           onClicked:
@@ -75,6 +98,17 @@ ApplicationWindow
       {
         presentationFileIO.readFile(fileUrl)
         editor.text = presentationFileIO.content
+      }
+  }
+  FileDialog
+  {
+    id: saveFileDialog
+    selectExisting: false
+    nameFilters: [ "SlidesML Presentation (*.slidesml *.qml)" ]
+    onAccepted:
+      {
+        presentationFileIO.content = editor.text
+        presentationFileIO.writeFile(fileUrl)
       }
   }
   FileIO
