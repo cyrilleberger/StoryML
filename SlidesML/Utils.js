@@ -42,3 +42,9 @@ function itemifyList(list)
 {
   return __ifyList(list, "*", "*")
 }
+
+function endsWith(str, pat)
+{
+  var pos = str.length - pat.length
+  return str.indexOf(pat, pos) == pos
+}

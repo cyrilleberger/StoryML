@@ -3,6 +3,7 @@ import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.0
 import QtQuick.Window 2.0
+import SlidesML 1.0
 import SlidesML.Viewer 1.0
 
 ApplicationWindow
@@ -43,16 +44,11 @@ ApplicationWindow
     presentation: root.presentation
     presentation_instance: presentationWindow.presentation_instance
   }
-  function endsWith(str, pat)
-  {
-    var pos = str.length - pat.length
-    return str.indexOf(pat, pos) == pos
-  }
 
   Component.onCompleted:
   {
     var arg = Qt.application.arguments[Qt.application.arguments.length - 2]
-    if(endsWith(arg, ".qml") || endsWith(arg, ".slidesml"))
+    if(Utils.endsWith(arg, ".qml") || Utils.endsWith(arg, ".slidesml"))
     {
       presentation = Qt.createComponent(arg)
     } else {
