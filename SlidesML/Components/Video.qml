@@ -21,9 +21,9 @@ import QtMultimedia 5.0
 
 Item
 {
-  property alias source: player.source
-  property alias sourceRect: videoOutput.sourceRect
-  property alias muted: player.muted
+  property alias source:      player.source
+  property alias sourceRect:  videoOutput.sourceRect
+  property alias muted:       player.muted
   MediaPlayer
   {
     id: player
@@ -37,6 +37,7 @@ Item
     id: videoOutput
     source: player
     anchors.fill: parent
+    fillMode: VideoOutput.PreserveAspectFit
     onVisibleChanged:
     {
       if(visible)
