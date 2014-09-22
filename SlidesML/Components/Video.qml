@@ -30,6 +30,8 @@ Item
     autoPlay: false
     loops: MediaPlayer.Infinite
   }
+  width: sourceRect.width
+  height: sourceRect.height
   VideoOutput
   {
     id: videoOutput
