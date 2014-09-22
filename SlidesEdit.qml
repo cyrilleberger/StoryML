@@ -72,7 +72,7 @@ ApplicationWindow
           onClicked:
           {
             var presentation                = Qt.createComponent(temporaryPresentationFileIO.url)
-            notesWindow.presentation        = presentation
+            notesView.presentation          = presentation
             presentationWindow.presentation = presentation
             notesWindow.visible             = true
             presentationWindow.visible      = true
@@ -208,7 +208,7 @@ ApplicationWindow
   {
     id: editorItem
     anchors.fill: parent
-    property int __currentIndex
+    property int __currentIndexMaxValue
     property var __preview_items: [preview_1, preview_2]
     property bool validPresentation: __preview_items[1].item
     property int __errorLineNumber: -1
@@ -216,15 +216,16 @@ ApplicationWindow
     {
       id: preview_1
       width: 300
-      height: parent.height - errorRectangle.height
+      height: 200
+      clip: true
       asynchronous: true
       onStatusChanged:
       {
         if(status == Loader.Ready)
         {
           errorText.visible = false
-          preview_1.item.currentSlideIndex = editorItem.__currentIndex
-          editorItem.__currentIndex = Qt.binding(function () { return preview_1.item.currentSlideIndex })
+          preview_1.item.currentSlideIndex = Qt.binding(function () { return currentIndexSpinBox.value })
+          editorItem.__currentIndexMaxValue = preview_1.item.slides.length
           preview_1.z = 1
           preview_2.z = 0
           editorItem.__preview_items = [ preview_2, preview_1 ]
@@ -233,24 +234,21 @@ ApplicationWindow
           errorText.showComponentError(preview_1.sourceComponent)
         }
       }
-      onSourceChanged:
-      {
-        editorItem.__currentIndex = editorItem.__currentIndex
-      }
     }
     Loader
     {
       id: preview_2
       width: 300
-      height: parent.height - errorRectangle.height
+      height: 200
+      clip: true
       asynchronous: true
       onStatusChanged:
       {
         if(status == Loader.Ready)
         {
           errorText.visible = false
-          preview_2.item.currentSlideIndex = editorItem.__currentIndex
-          editorItem.__currentIndex = Qt.binding(function () { return preview_2.item.currentSlideIndex })
+          preview_2.item.currentSlideIndex = Qt.binding(function () { return currentIndexSpinBox.value })
+          editorItem.__currentIndexMaxValue = preview_2.item.slides.length
           preview_2.z = 1
           preview_1.z = 0
           editorItem.__preview_items = [ preview_1, preview_2 ]
@@ -259,11 +257,38 @@ ApplicationWindow
           errorText.showComponentError(preview_2.sourceComponent)
         }
       }
-      onSourceChanged:
+    }
+    Row
+    {
+      anchors.top: preview_1.bottom
+      SpinBox
       {
-        editorItem.__currentIndex = editorItem.__currentIndex
+        id: currentIndexSpinBox
+        maximumValue: editorItem.__currentIndexMaxValue
+
+        property bool __disableValueChanged: false
+        onValueChanged: {
+          if(__disableValueChanged) return;
+          currentIndexSlider.__disableValueChanged = true;
+          currentIndexSlider.value = value;
+          currentIndexSlider.__disableValueChanged = false;
+        }
+      }
+      Slider
+      {
+        id: currentIndexSlider
+
+        maximumValue: editorItem.__currentIndexMaxValue
+        property bool __disableValueChanged: false
+        onValueChanged: {
+          if(__disableValueChanged) return;
+          currentIndexSpinBox.__disableValueChanged = true;
+          currentIndexSpinBox.value = value;
+          currentIndexSpinBox.__disableValueChanged = false;
+        }
       }
     }
+
     Rectangle {
       id: errorRectangle
       width: preview_1.width
@@ -306,11 +331,14 @@ ApplicationWindow
       text: ""
       onTextChanged:
       {
-        temporaryFile.regenerate()
-        temporaryPresentationFileIO.content = editor.text
-        temporaryPresentationFileIO.writeFile()
-        editorItem.__preview_items[0].source = temporaryPresentationFileIO.url
-        editorItem.__preview_items[0].z = -1
+        if(editorItem.__preview_items[0].status != Loader.Loading)
+        {
+          temporaryFile.regenerate()
+          temporaryPresentationFileIO.content = editor.text
+          temporaryPresentationFileIO.writeFile()
+          editorItem.__preview_items[0].source = temporaryPresentationFileIO.url
+          editorItem.__preview_items[0].z = -1
+        }
       }
     }
   }
