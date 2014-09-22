@@ -29,6 +29,25 @@ ApplicationWindow
 
   property Window __printWindow: __createPrintWindow()
 
+  Action {
+      id: saveAction
+      text: "&Save"
+      shortcut: "Ctrl+S"
+      iconName: "document-save"
+      onTriggered:
+      {
+        if(presentationFileIO.url.toString().length > 0)
+        {
+          presentationFileIO.content = editor.text
+          presentationFileIO.writeFile()
+        } else {
+          saveFileDialog.open()
+        }
+      }
+
+      tooltip: "Save the presentation"
+  }
+
   toolBar:
     ToolBar
     {
@@ -36,6 +55,7 @@ ApplicationWindow
       {
         ToolButton
         {
+          text: "Open"
           iconName: "document-open"
           onClicked:
           {
@@ -44,21 +64,11 @@ ApplicationWindow
         }
         ToolButton
         {
-          iconName: "document-save"
-          onClicked:
-          {
-            console.log(presentationFileIO.url.toString().length, presentationFileIO.url)
-            if(presentationFileIO.url.toString().length > 0)
-            {
-              presentationFileIO.content = editor.text
-              presentationFileIO.writeFile()
-            } else {
-              saveFileDialog.open()
-            }
-          }
+          action: saveAction
         }
         ToolButton
         {
+          text: "Save as"
           iconName: "document-save-as"
           onClicked:
           {
@@ -67,6 +77,7 @@ ApplicationWindow
         }
         ToolButton
         {
+          text: "Start presentation"
           iconName: "media-playback-start"
           enabled: editorItem.validPresentation
           onClicked:
@@ -80,6 +91,7 @@ ApplicationWindow
         }
         ToolButton
         {
+          text: "Export to PDF"
           iconName: "application-pdf"
           enabled: editorItem.validPresentation
           visible: root.__printWindow
