@@ -124,7 +124,8 @@ ApplicationWindow
     onAccepted:
       {
         presentationFileIO.readFile(fileUrl)
-        editor.text = presentationFileIO.content
+        editor.text   = presentationFileIO.content
+        root.modified = false
       }
   }
   FileDialog
