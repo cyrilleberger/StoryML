@@ -13,7 +13,7 @@ ApplicationWindow
   title: "SlidesML Edit - " + __display_filename(presentationFileIO.url) + (modified ? "*" : "")
   width: 800
   height: 600
-  property url presentationUrl: temporaryPresentationFileIO.url
+  property url presentationUrl: temporaryFile.fileName
 
   function __createPrintWindow()
   {
@@ -97,7 +97,7 @@ ApplicationWindow
           enabled: editorItem.validPresentation
           onClicked:
           {
-            var presentation                = Qt.createComponent(temporaryPresentationFileIO.url)
+            var presentation                = Qt.createComponent(temporaryFile.fileName)
             notesView.presentation          = presentation
             presentationWindow.presentation = presentation
             notesWindow.visible             = true
@@ -141,11 +141,6 @@ ApplicationWindow
   FileIO
   {
     id: presentationFileIO
-  }
-  FileIO
-  {
-    id: temporaryPresentationFileIO
-    url: temporaryFile.fileName
   }
   TemporaryFile
   {
@@ -342,7 +337,7 @@ ApplicationWindow
         }
         function showComponentError(component)
         {
-          var eS            = component.errorString().replace(new RegExp(temporaryPresentationFileIO.url, "gm"), "Line")
+          var eS            = component.errorString().replace(new RegExp(temporaryFile.fileName, "gm"), "Line")
           editorItem.__errorLineNumber = eS.match(/^Line:(.*?) /)[1]; // TODO array
           errorText.text    = eS.replace(/Line:/g, "")
           errorText.visible = true
@@ -362,9 +357,8 @@ ApplicationWindow
         if(editorItem.__preview_items[0].status != Loader.Loading)
         {
           temporaryFile.regenerate()
-          temporaryPresentationFileIO.content = editor.text
-          temporaryPresentationFileIO.writeFile()
-          editorItem.__preview_items[0].source = temporaryPresentationFileIO.url
+          temporaryFile.writeContent(editor.text)
+          editorItem.__preview_items[0].source = temporaryFile.fileName
           editorItem.__preview_items[0].z = -1
         }
       }
