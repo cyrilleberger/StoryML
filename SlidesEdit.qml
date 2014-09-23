@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.0
-import QtQuick.Dialogs 1.0
+import QtQuick.Dialogs 1.1
 import QtQuick.Window 2.0
 import SlidesML 1.0
 import SlidesML.Viewer 1.0
@@ -10,7 +10,7 @@ import org.slidesml.textedit 1.0
 ApplicationWindow
 {
   id: root
-  title: "SlidesML Edit"
+  title: "SlidesML Edit - " + __display_filename(presentationFileIO.url) + (modified ? "*" : "")
   width: 800
   height: 600
   property url presentationUrl: temporaryPresentationFileIO.url
@@ -29,21 +29,36 @@ ApplicationWindow
 
   property Window __printWindow: __createPrintWindow()
 
+  property bool modified: false
+
+  function save()
+  {
+    if(presentationFileIO.url.toString().length > 0)
+    {
+      presentationFileIO.content = editor.text
+      presentationFileIO.writeFile()
+      modified = false
+    } else {
+      saveFileDialog.open()
+    }
+  }
+  function __display_filename(_url)
+  {
+    var str = _url.toString()
+    if(str.length === 0)
+    {
+      return "New Presentation"
+    }
+    var pathArray = str.split('/')
+    return pathArray[pathArray.length - 1]
+  }
+
   Action {
       id: saveAction
       text: "&Save"
       shortcut: "Ctrl+S"
       iconName: "document-save"
-      onTriggered:
-      {
-        if(presentationFileIO.url.toString().length > 0)
-        {
-          presentationFileIO.content = editor.text
-          presentationFileIO.writeFile()
-        } else {
-          saveFileDialog.open()
-        }
-      }
+      onTriggered: root.save()
 
       tooltip: "Save the presentation"
   }
@@ -343,6 +358,7 @@ ApplicationWindow
       text: ""
       onTextChanged:
       {
+        root.modified = true
         if(editorItem.__preview_items[0].status != Loader.Loading)
         {
           temporaryFile.regenerate()
@@ -354,8 +370,6 @@ ApplicationWindow
       }
     }
   }
-
-
   PresentationWindow
   {
     id: presentationWindow
@@ -388,5 +402,17 @@ ApplicationWindow
     {
       presentation = Qt.createComponent(arg)
     }
+  }
+  MessageDialog
+  {
+    id: shouldSaveFile
+    icon: StandardIcon.Question
+    text: "File '" + __display_filename(presentationFileIO.url) + "' modified. Do you want to save it?"
+    standardButtons: StandardButton.Yes | StandardButton.No
+    onYes: root.save()
+  }
+  onClosing:
+  {
+    if(root.modified) shouldSaveFile.open()
   }
 }
