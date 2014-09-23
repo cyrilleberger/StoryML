@@ -113,6 +113,7 @@ ApplicationWindow
           onClicked:
           {
             printOptions.visible = true
+            editorItem.visible   = false
           }
         }
       }
@@ -146,7 +147,8 @@ ApplicationWindow
   TemporaryFile
   {
     id: temporaryFile
-    fileTemplate: presentationFileIO.url + "_XXXXXX.qml";
+    property int counter: 0
+    fileTemplate: presentationFileIO.url + "_" + counter + "_" + "_XXXXXX.qml";
   }
 
   Item
@@ -213,7 +215,7 @@ ApplicationWindow
         text: "Print"
         onClicked:
         {
-          root.__printWindow.presentation             = root.presentation
+          root.__printWindow.presentation             = Qt.createComponent(temporaryFile.fileName)
           root.__printWindow.printer.filename         = filename.text
           root.__printWindow.printer.miniPage.columns = columns.value
           root.__printWindow.printer.miniPage.rows    = rows.value
@@ -221,13 +223,15 @@ ApplicationWindow
           root.__printWindow.setEfficientMode(efficient.checked)
 
           root.__printWindow.startPrinting()
-          printButton.enabled = false
+          printButton.enabled  = false
+          printOptions.visible = false
+          editorItem.visible   = true
         }
       }
     }
   }
 
-  Item
+  SplitView
   {
     id: editorItem
     anchors.fill: parent
@@ -235,113 +239,124 @@ ApplicationWindow
     property var __preview_items: [preview_1, preview_2]
     property bool validPresentation: __preview_items[1].item
     property int __errorLineNumber: -1
-    Loader
+    Item
     {
-      id: preview_1
+      id: sideBar
       width: 300
-      height: 200
-      clip: true
-      asynchronous: true
-      onStatusChanged:
+      height: editorItem.height
+      Item
       {
-        if(status == Loader.Ready)
+        id: preview
+        width: sideBar.width
+        height: (600 * width) / 800
+        Loader
         {
-          errorText.visible = false
-          preview_1.item.currentSlideIndex = Qt.binding(function () { return currentIndexSpinBox.value })
-          editorItem.__currentIndexMaxValue = preview_1.item.slides.length
-          preview_1.z = 1
-          preview_2.z = 0
-          editorItem.__preview_items = [ preview_2, preview_1 ]
-        } else if(status == Loader.Error)
-        {
-          errorText.showComponentError(preview_1.sourceComponent)
-        }
-      }
-    }
-    Loader
-    {
-      id: preview_2
-      width: 300
-      height: 200
-      clip: true
-      asynchronous: true
-      onStatusChanged:
-      {
-        if(status == Loader.Ready)
-        {
-          errorText.visible = false
-          preview_2.item.currentSlideIndex = Qt.binding(function () { return currentIndexSpinBox.value })
-          editorItem.__currentIndexMaxValue = preview_2.item.slides.length
-          preview_2.z = 1
-          preview_1.z = 0
-          editorItem.__preview_items = [ preview_1, preview_2 ]
-        } else if(status == Loader.Error)
-        {
-          errorText.showComponentError(preview_2.sourceComponent)
-        }
-      }
-    }
-    Row
-    {
-      anchors.top: preview_1.bottom
-      SpinBox
-      {
-        id: currentIndexSpinBox
-        maximumValue: editorItem.__currentIndexMaxValue
-
-        property bool __disableValueChanged: false
-        onValueChanged: {
-          if(__disableValueChanged) return;
-          currentIndexSlider.__disableValueChanged = true;
-          currentIndexSlider.value = value;
-          currentIndexSlider.__disableValueChanged = false;
-        }
-      }
-      Slider
-      {
-        id: currentIndexSlider
-
-        maximumValue: editorItem.__currentIndexMaxValue
-        property bool __disableValueChanged: false
-        onValueChanged: {
-          if(__disableValueChanged) return;
-          currentIndexSpinBox.__disableValueChanged = true;
-          currentIndexSpinBox.value = value;
-          currentIndexSpinBox.__disableValueChanged = false;
-        }
-      }
-    }
-
-    Rectangle {
-      id: errorRectangle
-      width: preview_1.width
-      height: 50
-      color: "white"
-      anchors.bottom: parent.bottom
-      Text
-      {
-        id: errorText
-        visible: false
-        anchors.fill: parent
-        color: "red"
-
-        function setError(ex)
-        {
-          var text = ""
-          for(var k in ex['qmlErrors'])
+          id: preview_1
+          clip: true
+          asynchronous: true
+          anchors.fill: parent
+          onStatusChanged:
           {
-            var err         = ex['qmlErrors'][k]
-            text           += err['lineNumber'] + "," + err['columnNumber'] + ":" + err['message']
+            if(status == Loader.Ready)
+            {
+              errorText.visible = false
+              preview_1.item.currentSlideIndex = Qt.binding(function () { return currentIndexSpinBox.value })
+              editorItem.__currentIndexMaxValue = preview_1.item.slides.length
+              preview_1.z = 1
+              preview_2.z = 0
+              editorItem.__preview_items = [ preview_2, preview_1 ]
+            } else if(status == Loader.Error)
+            {
+              errorText.showComponentError(preview_1.sourceComponent, preview_1.source)
+            }
           }
-          errorText.text    = text
-          errorText.visible = true
         }
-        function showComponentError(component)
+        Loader
         {
-          var eS            = component.errorString().replace(new RegExp(temporaryFile.fileName, "gm"), "Line")
-          editorItem.__errorLineNumber = eS.match(/^Line:(.*?) /)[1]; // TODO array
-          errorText.text    = eS.replace(/Line:/g, "")
-          errorText.visible = true
+          id: preview_2
+          anchors.fill: parent
+          clip: true
+          asynchronous: true
+          onStatusChanged:
+          {
+            if(status == Loader.Ready)
+            {
+              errorText.visible = false
+              preview_2.item.currentSlideIndex = Qt.binding(function () { return currentIndexSpinBox.value })
+              editorItem.__currentIndexMaxValue = preview_2.item.slides.length
+              preview_2.z = 1
+              preview_1.z = 0
+              editorItem.__preview_items = [ preview_1, preview_2 ]
+            } else if(status == Loader.Error)
+            {
+              errorText.showComponentError(preview_2.sourceComponent, preview_2.source)
+            }
+          }
+        }
+      }
+      Row
+      {
+        anchors.top: preview.bottom
+        width: sideBar.width
+        SpinBox
+        {
+          id: currentIndexSpinBox
+          maximumValue: editorItem.__currentIndexMaxValue
+
+          property bool __disableValueChanged: false
+          onValueChanged: {
+            if(__disableValueChanged) return;
+            currentIndexSlider.__disableValueChanged = true;
+            currentIndexSlider.value = value;
+            currentIndexSlider.__disableValueChanged = false;
+          }
+        }
+        Slider
+        {
+          id: currentIndexSlider
+
+          maximumValue: editorItem.__currentIndexMaxValue
+          property bool __disableValueChanged: false
+          onValueChanged: {
+            if(__disableValueChanged) return;
+            currentIndexSpinBox.__disableValueChanged = true;
+            currentIndexSpinBox.value = value;
+            currentIndexSpinBox.__disableValueChanged = false;
+          }
+        }
+      }
+
+      Rectangle {
+        id: errorRectangle
+        width: sideBar.width
+        height: 50
+        color: "white"
+        anchors.bottom: parent.bottom
+        Text
+        {
+          id: errorText
+          visible: false
+          anchors.fill: parent
+          color: "red"
+
+          function setError(ex)
+          {
+            var text = ""
+            for(var k in ex['qmlErrors'])
+            {
+              var err         = ex['qmlErrors'][k]
+              text           += err['lineNumber'] + "," + err['columnNumber'] + ":" + err['message']
+            }
+            errorText.text    = text
+            errorText.visible = true
+          }
+          function showComponentError(component, url)
+          {
+            var eS            = component.errorString().replace(new RegExp(url, "gm"), "Line")
+            editorItem.__errorLineNumber = eS.match(/^Line:(.*?) /)[1]; // TODO array
+            errorText.text    = eS.replace(/Line:/g, "")
+            errorText.visible = true
+          }
         }
       }
     }
@@ -349,15 +364,15 @@ ApplicationWindow
     {
       id: editor
       height: parent.height
-      anchors.left: preview_1.right
+      anchors.left: sideBar.right
       anchors.right: parent.right
       text: ""
       onTextChanged:
       {
         root.modified = true
-        if(editorItem.__preview_items[0].status != Loader.Loading)
+        if(preview_1.status != Loader.Loading && preview_2.status != Loader.Loading)
         {
-          temporaryFile.regenerate()
+          temporaryFile.counter += 1
           temporaryFile.writeContent(editor.text)
           editorItem.__preview_items[0].source = temporaryFile.fileName
           editorItem.__preview_items[0].z = -1
