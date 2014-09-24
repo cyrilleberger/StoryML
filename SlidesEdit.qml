@@ -239,6 +239,19 @@ ApplicationWindow
     property var __preview_items: [preview_1, preview_2]
     property bool validPresentation: __preview_items[1].item
     property int __errorLineNumber: -1
+    property bool __uptodate: true
+    function __updateIfNeeded()
+    {
+      if(!__uptodate && preview_1.status != Loader.Loading && preview_2.status != Loader.Loading)
+      {
+        __uptodate = true
+        temporaryFile.counter += 1
+        temporaryFile.writeContent(editor.text)
+        editorItem.__preview_items[0].source = temporaryFile.fileName
+        editorItem.__preview_items[0].z = -1
+      }
+    }
+
     Item
     {
       id: sideBar
@@ -265,6 +278,7 @@ ApplicationWindow
               preview_1.z = 1
               preview_2.z = 0
               editorItem.__preview_items = [ preview_2, preview_1 ]
+              editorItem.__updateIfNeeded()
             } else if(status == Loader.Error)
             {
               errorText.showComponentError(preview_1.sourceComponent, preview_1.source)
@@ -287,6 +301,7 @@ ApplicationWindow
               preview_2.z = 1
               preview_1.z = 0
               editorItem.__preview_items = [ preview_1, preview_2 ]
+              editorItem.__updateIfNeeded()
             } else if(status == Loader.Error)
             {
               errorText.showComponentError(preview_2.sourceComponent, preview_2.source)
@@ -366,17 +381,20 @@ ApplicationWindow
       height: parent.height
       anchors.left: sideBar.right
       anchors.right: parent.right
-      text: ""
+      text: "import QtQuick 2.0
+import SlidesML 1.0
+
+Presentation {
+  Slide
+  {
+  }
+}
+"
       onTextChanged:
       {
-        root.modified = true
-        if(preview_1.status != Loader.Loading && preview_2.status != Loader.Loading)
-        {
-          temporaryFile.counter += 1
-          temporaryFile.writeContent(editor.text)
-          editorItem.__preview_items[0].source = temporaryFile.fileName
-          editorItem.__preview_items[0].z = -1
-        }
+        root.modified         = true
+        editorItem.__uptodate = false
+        editorItem.__updateIfNeeded()
       }
     }
   }
