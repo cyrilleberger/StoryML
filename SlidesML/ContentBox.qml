@@ -96,13 +96,19 @@ Column
             start += 1;
           }
           start += 1
-          if(beginNumber.length > 0)
+          try
           {
-            object.animation.first = beginNumber
-          }
-          if(endNumber.length > 0)
+            if(beginNumber.length > 0)
+            {
+              object.animation.first = beginNumber
+            }
+            if(endNumber.length > 0)
+            {
+              object.animation.last = endNumber
+            }
+          } catch(except)
           {
-            object.animation.last = endNumber
+            console.log(except)
           }
         }
 
@@ -115,13 +121,13 @@ Column
           start += 1;
         }
 
-        while(true)
+        while(start < c.length)
         {
-          if(c[start] == '#')
+          if(c[start] === '#')
           {
             indentation += 1
             object.bulletType = 2
-          } else if(c[start] == '*')
+          } else if(c[start] === '*')
           {
             indentation += 1
             object.bulletType = 1
@@ -130,7 +136,7 @@ Column
           }
           start += 1;
         }
-        if(c[start] == '\\' && c[start + 1] == '<')
+        if(c[start] === '\\' && c[start + 1] === '<')
         {
           start += 1;
         }
