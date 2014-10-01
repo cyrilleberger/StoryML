@@ -19,8 +19,9 @@
 import QtQuick 2.0
 import QtQuick.Window 2.0
 import SlidesML 1.0
+import QtQuick.Controls 1.0
 
-Item
+SplitView
 {
   id: root
   property Component presentation
@@ -73,30 +74,33 @@ Item
         }
       }
     }
-    Text
+    Rectangle
     {
-      id: clock
       anchors.bottom: parent.bottom
-      color: "white"
-      Timer
+      width: clock.contentWidth
+      height: clock.contentHeight
+      color: "black"
+      Text
       {
-        interval: 100; running: true; repeat: true;
-        onTriggered: clock.timeChanged()
+        anchors.fill: parent
+        id: clock
+        color: "white"
+        Timer
+        {
+          interval: 100; running: true; repeat: true;
+          onTriggered: clock.timeChanged()
+        }
+        function timeChanged()
+        {
+          var date = new Date;
+          clock.text = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+        }
+        font.pixelSize: 20
       }
-      function timeChanged()
-      {
-        var date = new Date;
-        clock.text = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
-      }
-      font.pixelSize: 20
     }
   }
   Rectangle
   {
-    anchors.top: parent.top
-    anchors.left:sideBar.right
-    anchors.right: parent.right
-    anchors.bottom: parent.bottom
     color: "white"
     Text
     {
