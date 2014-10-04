@@ -38,7 +38,7 @@ Row
   property int __bulletNumberCache: 1
 
   property int indentationSize: style.text.font.pixelSize * fontScale
-  property int childrenAvailableWidth: width - (bullet.width - indentation.width)
+  property int childrenAvailableWidth: width - (bullet.width + indentation.width)
 
   onChildrenChanged:
   {
