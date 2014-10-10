@@ -28,7 +28,7 @@ SlideLayout
   Item
   {
     id: itemHolder
-    property SlideAnimation animation: SlideAnimation { parentItem: root }
+    property SlideAnimation animation: SlideAnimation { parentItem: itemHolder }
     x: root.margin
     y: slide.style_instance.headerSize + root.margin
     width: root.width - 2 * root.margin - marginRight
@@ -38,5 +38,6 @@ SlideLayout
   onContentChanged: {
     content.parent = itemHolder
     content.anchors.fill = itemHolder
+    itemHolder.animation.updateLast()
   }
 }

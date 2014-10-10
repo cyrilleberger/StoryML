@@ -27,10 +27,12 @@ QtObject {
   property int __lastPrevious: 90071992
   property int __autoSetLast: 90071992
   property int __userSetLast: 90071992
+  property bool __completed: false // Seems like Component.status is undefined
   property Item parentItem
 
   Component.onCompleted:
   {
+    __completed = true
     updateLast();
     parentItem.childrenChanged.connect(function() { if(root) { root.updateLast() } })
   }
@@ -38,6 +40,7 @@ QtObject {
   onLastChanged:
   {
     if(last != __autoSetLast) __userSetLast = last
+    if(!__completed && !parentItem) return;
     if(parentItem.parent && parentItem.parent.animation)
     {
       parentItem.parent.animation.updateLast();
@@ -64,7 +67,6 @@ QtObject {
     for(var child_index in parentItem.children)
     {
       var child = parentItem.children[child_index]
-
       if(child.animation)
       {
         if(child.animation.last != 90071992)
