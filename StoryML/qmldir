@@ -1,0 +1,14 @@
+Presentation 1.0 Presentation.qml
+Slice 1.0 Slice.qml
+SliceLayout 1.0 SliceLayout.qml
+SliceStyle 1.0 SliceStyle.qml
+ContentBox 1.0 ContentBox.qml
+ContentLine 1.0 ContentLine.qml
+TextLine 1.0 TextLine.qml
+TextStyle 1.0 TextStyle.qml
+TextLineStyle 1.0 TextLineStyle.qml
+SliceAnimation 1.0 SliceAnimation.qml
+ImagesLine 1.0 ImagesLine.qml
+Utils 1.0 Utils.js
+SectionSlice 1.0 SectionSlice.qml
+SubsectionSlice 1.0 SubsectionSlice.qml
