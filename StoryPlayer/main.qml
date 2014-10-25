@@ -47,14 +47,12 @@ ApplicationWindow
 
   Component.onCompleted:
   {
-    /*
-    var arg = Qt.application.arguments[Qt.application.arguments.length - 2]
-    if(Utils.endsWith(arg, ".qml") || Utils.endsWith(arg, ".slidesml"))
+    if(Utils.endsWith(cmd_filename.toString(), ".qml") || Utils.endsWith(cmd_filename.toString(), ".storyml"))
     {
-      presentation = Qt.createComponent(arg)
-    } else {*/
+      presentation = Qt.createComponent(cmd_filename)
+    } else {
       openFileDialog.open()
-//    }
+    }
 
   }
 }
