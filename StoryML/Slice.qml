@@ -18,11 +18,12 @@
 
 import QtQuick 2.0
 import StoryML 1.0
+import StoryML.Components 1.0
 
-Item
+StoryElement
 {
   id: root
-  readonly property bool isSliceItem: true
+  readonly property bool isSlice: true
   property Component layout: parent.defaultLayout
   property Component  style:  parent.defaultStyle
   property int sliceNumber

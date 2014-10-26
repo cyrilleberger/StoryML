@@ -1,9 +1,9 @@
 /* Copyright (c) 2014, Cyrille Berger <cberger@cberger.net>
  * All rights reserved.
- *
+ * 
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted.
- *
+ * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -19,8 +19,7 @@
 import StoryML 1.0
 import StoryML.Layouts 1.0
 
-Slide {
-  layout: Title {}
-  style:  parent.defaultSubsectionStyle
-  readonly property bool isSubsection: true
+Group {
+  property string title
+  readonly property bool isSection: true
 }

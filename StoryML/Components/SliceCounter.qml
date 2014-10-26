@@ -20,13 +20,29 @@ import QtQuick 2.0
 import StoryML 1.0
 
 Text {
-  id: sliceCounter
+  id: root
 
   property Slice slice
   property Presentation __presentation: slice ? slice.parent : null;
   property bool showTotal: true
+  property bool __shouldShowTotal: showTotal && __presentation
+
+  function __getText(slice, presentation)
+  {
+    if(slice)
+    {
+      if(__shouldShowTotal)
+      {
+        return slice.sliceNumber + " / " + __presentation.presentationMode_instance.slices.length
+      } else {
+        return slice.sliceNumber
+      }
+    } else {
+      return "undefined"
+    }
+  }
 
   color: slice.style_instance.footer.color
   font: slice.style_instance.footer.font
-  text: showTotal ? slice.sliceNumber + " / " + __presentation.slices.length : slice.sliceNumber
+  text: __getText(root.slice, root.__presentation)
 }

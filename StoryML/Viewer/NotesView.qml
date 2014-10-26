@@ -51,8 +51,8 @@ SplitView
         onItemChanged:
         {
           item.videosEnabled             = false
-          item.currentSliceIndexBinding  = Qt.binding(function() { return presentation_instance ? presentation_instance.currentSliceIndex : 0 } )
-          item.animationFrameBinding     = Qt.binding(function() { return presentation_instance ? presentation_instance.animationFrame : 0 } )
+//     TODO     item.currentSliceIndexBinding  = Qt.binding(function() { return presentation_instance ? presentation_instance.currentSliceIndex : 0 } )
+//     TODO     item.animationFrameBinding     = Qt.binding(function() { return presentation_instance ? presentation_instance.animationFrame : 0 } )
         }
       }
       Text
@@ -70,7 +70,7 @@ SplitView
         {
           item.animationsEnabled = false
           item.videosEnabled     = false
-          item.currentSliceIndexBinding = Qt.binding(function() { return presentation_instance ? presentation_instance.currentSliceIndex + 1 : 0 } )
+//    TODO      item.currentSliceIndexBinding = Qt.binding(function() { return presentation_instance ? presentation_instance.currentSliceIndex + 1 : 0 } )
         }
       }
     }
@@ -105,7 +105,7 @@ SplitView
     Text
     {
       anchors.fill: parent
-      text: presentation_instance ? presentation_instance.currentSlice.notes : ""
+      // TODO text: presentation_instance ? presentation_instance.currentSlice.notes : ""
       font.pixelSize: 30
     }
   }
