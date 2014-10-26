@@ -144,20 +144,27 @@ StoryTeller {
     }
   }
 
-  Keys.onSpacePressed: next()
-  Keys.onRightPressed: next()
-  Keys.onLeftPressed: previous()
-  Keys.onReturnPressed: { root.currentSliceIndex = __inputSliceIndex - 1; __inputSliceIndex = 0 }
-  Keys.onPressed: {
-    if(event.key == Qt.Key_Q && event.modifiers == Qt.ControlModifier)
+  function onKeyPressed(event)
+  {
+    if(event.key === Qt.Key_Q && event.modifiers === Qt.ControlModifier)
     {
       Qt.quit()
     } else if(event.key >= Qt.Key_0 && event.key <= Qt.Key_9)
     {
       __inputSliceIndex = 10 * __inputSliceIndex + (event.key - Qt.Key_0)
-    } else if(event.key == Qt.Key_Backspace)
+    } else if(event.key === Qt.Key_Backspace)
     {
       __inputSliceIndex /= 10
+    } else if(event.key === Qt.Key_Return)
+    {
+      root.currentSliceIndex = __inputSliceIndex - 1
+      __inputSliceIndex = 0
+    } else if(event.key === Qt.Key_Space || event.key === Qt.Key_Right)
+    {
+      next();
+    } else if(event.key === Qt.Key_Left)
+    {
+      previous();
     }
   }
   Rectangle {
@@ -182,17 +189,13 @@ StoryTeller {
       text: __inputSliceIndex
     }
   }
-
-  MouseArea {
-      id: mouseArea
-      anchors.fill: parent
-      acceptedButtons: Qt.LeftButton | Qt.RightButton
-      onClicked: {
-          if (mouse.button == Qt.RightButton)
-              previous()
-          else
-              next()
-      }
-      onPressAndHold: previous();
+  function onMouseClicked(mouse)
+  {
+    if (mouse.button === Qt.RightButton)
+    {
+      previous()
+    } else {
+      next()
+    }
   }
 }

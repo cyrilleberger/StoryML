@@ -41,4 +41,20 @@ Group
     sourceComponent: root.presentationMode
     property alias __story: root
   }
+
+  Keys.onPressed:
+  {
+    storyTeller.onKeyPressed(event)
+  }
+
+  MouseArea
+  {
+    id: mouseArea
+    anchors.fill: parent
+    acceptedButtons: Qt.LeftButton | Qt.RightButton
+    onClicked: {
+      storyTeller.onMouseClicked(mouse)
+    }
+  }
+
 }

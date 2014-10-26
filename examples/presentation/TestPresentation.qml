@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import StoryML 1.0
+import StoryML.Components 1.0
 import StoryML.Styles 1.0
 
 Presentation {
