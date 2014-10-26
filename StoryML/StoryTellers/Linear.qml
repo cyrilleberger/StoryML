@@ -168,12 +168,14 @@ StoryTeller {
     }
   }
   Rectangle {
+    parent: story
     z: -10000
     color: "black"
     anchors.fill: parent
   }
 
   Rectangle {
+    parent: story
     x: 2
     y: 2
     width: sliceInput.contentWidth + 2
