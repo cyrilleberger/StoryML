@@ -6,5 +6,4 @@ Item
 
   property Item story // TODO: Item should be Slice, but this is recursive and crash...
 
-
 }

@@ -49,7 +49,7 @@ StoryTeller {
 
   function __groupSlides(slices, group, subs)
   {
-    for(var i = 0; i < group.elements; ++i)
+    for(var i = 0; i < group.elements.length; ++i)
     {
       var element = group.elements[i]
       if(element.isSection)
@@ -65,7 +65,7 @@ StoryTeller {
 
   }
 
-  onStoryChanged:
+  function __updateSlices()
   {
     var slices = [];
     var sections = [];
@@ -80,6 +80,15 @@ StoryTeller {
       root.slices[root.currentSliceIndex].animation.frame = 0
       root.slices[root.currentSliceIndex].opacity = 1;
     }
+  }
+
+  onStoryChanged:
+  {
+    if(root.story.elements)
+    {
+      __updateSlices()
+    }
+    root.story.onElementsChanged.connect(root.__updateSlices)
   }
   onAnimationFrameBindingChanged:
   {

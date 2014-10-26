@@ -9,6 +9,8 @@ StoryElement
   height: 600
   property real sliceScale: Math.min(width / 800, height / 600)
 
+  property variant elements: []
+
   Component.onCompleted:
   {
     var slices = [];
@@ -19,7 +21,7 @@ StoryElement
       var r = root.children[i];
       if (r.isStoryElement)
       {
-        elements.push(r);
+        slices.push(r);
         r.sliceNumber = slices.length
         r.scale = Qt.binding(function() { return sliceScale} )
         r.x = Qt.binding(function() { return 0.5 * (width - sliceScale * 800) })

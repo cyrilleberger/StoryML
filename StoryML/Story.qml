@@ -23,6 +23,4 @@ Group
     sourceComponent: root.presentationMode
     property alias __story: root
   }
-
-  property variant elements: []
 }
