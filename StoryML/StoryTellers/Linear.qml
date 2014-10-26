@@ -19,7 +19,7 @@
 import QtQuick 2.0
 import StoryML 1.0
 
-PresentationMode {
+StoryTeller {
   id: root
 
 

@@ -3,7 +3,7 @@
         <file>qmldir</file>
         <file>Group.qml</file>
         <file>Presentation.qml</file>
-        <file>PresentationMode.qml</file>
+        <file>StoryTeller.qml</file>
         <file>Section.qml</file>
         <file>Slice.qml</file>
         <file>SliceAnimation.qml</file>
@@ -36,8 +36,8 @@
         <file>Layouts/TitleTwoColumns.qml</file>
         <file>Layouts/CenteredText.qml</file>
         <file>Layouts/Blank.qml</file>
-        <file>PresentationModes/qmldir</file>
-        <file>PresentationModes/Linear.qml</file>
+        <file>StoryTellers/qmldir</file>
+        <file>StoryTellers/Linear.qml</file>
         <file>Styles/qmldir</file>
         <file>Styles/Simple.qml</file>
         <file>Viewer/qmldir</file>

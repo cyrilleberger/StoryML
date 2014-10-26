@@ -33,7 +33,7 @@ Text {
     {
       if(__shouldShowTotal)
       {
-        return slice.sliceNumber + " / " + __presentation.presentationMode_instance.slices.length
+        return slice.sliceNumber + " / " + __presentation.storyTeller.slices.length
       } else {
         return slice.sliceNumber
       }

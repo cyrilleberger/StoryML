@@ -1,11 +1,11 @@
+Group 1.0 Group.qml
 Presentation 1.0 Presentation.qml
-PresentationMode 1.0 PresentationMode.qml
+Section 1.0 Section.qml
 Slice 1.0 Slice.qml
 SliceLayout 1.0 SliceLayout.qml
 SliceStyle 1.0 SliceStyle.qml
 SliceAnimation 1.0 SliceAnimation.qml
-SectionSlice 1.0 SectionSlice.qml
+StoryTeller 1.0 StoryTeller.qml
 Story 1.0 Story.qml
-SubsectionSlice 1.0 SubsectionSlice.qml
 TextStyle 1.0 TextStyle.qml
 Utils 1.0 Utils.js
