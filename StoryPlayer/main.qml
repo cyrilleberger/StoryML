@@ -13,6 +13,7 @@ ApplicationWindow
   width: 800
   height: 600
   property Component presentation
+  visible: true
 
   FileDialog
   {

@@ -14,6 +14,7 @@ ApplicationWindow
   width: 800
   height: 600
   property url presentationUrl: temporaryFile.fileName
+  visible: true
 
   function __createPrintWindow()
   {

@@ -50,9 +50,9 @@ SplitView
         height: 600 * (width / 800)
         onItemChanged:
         {
-          item.videosEnabled             = false
-//     TODO     item.currentSliceIndexBinding  = Qt.binding(function() { return presentation_instance ? presentation_instance.currentSliceIndex : 0 } )
-//     TODO     item.animationFrameBinding     = Qt.binding(function() { return presentation_instance ? presentation_instance.animationFrame : 0 } )
+          item.videosEnabled                          = false
+          item.storyTeller.currentSliceIndexBinding   = Qt.binding(function() { return presentation_instance ? presentation_instance.storyTeller.currentSliceIndex : 0 } )
+          item.storyTeller.animationFrameBinding      = Qt.binding(function() { return presentation_instance ? presentation_instance.storyTeller.animationFrame : 0 } )
         }
       }
       Text
@@ -70,7 +70,7 @@ SplitView
         {
           item.animationsEnabled = false
           item.videosEnabled     = false
-//    TODO      item.currentSliceIndexBinding = Qt.binding(function() { return presentation_instance ? presentation_instance.currentSliceIndex + 1 : 0 } )
+          item.storyTeller.currentSliceIndexBinding = Qt.binding(function() { return presentation_instance ? presentation_instance.storyTeller.currentSliceIndex + 1 : 0 } )
         }
       }
     }
@@ -105,7 +105,7 @@ SplitView
     Text
     {
       anchors.fill: parent
-      // TODO text: presentation_instance ? presentation_instance.currentSlice.notes : ""
+      text: presentation_instance ? presentation_instance.storyTeller.currentSlice.notes : ""
       font.pixelSize: 30
     }
   }
