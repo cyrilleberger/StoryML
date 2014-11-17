@@ -21,6 +21,7 @@ import StoryML 1.0
 
 StoryElement
 {
+  id: root
   readonly property bool isGroup: true
 
   width: 800
@@ -32,15 +33,12 @@ StoryElement
   Component.onCompleted:
   {
     var slices = [];
-    var sections = [];
-
     for(var i = 0; i < root.children.length; ++i)
     {
       var r = root.children[i];
       if (r.isStoryElement)
       {
         slices.push(r);
-        r.sliceNumber = slices.length
         r.scale = Qt.binding(function() { return sliceScale} )
         r.x = Qt.binding(function() { return 0.5 * (width - sliceScale * 800) })
         r.y = Qt.binding(function() { return 0.5 * (height - sliceScale * 600) })

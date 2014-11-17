@@ -24,8 +24,8 @@ StoryElement
 {
   id: root
   readonly property bool isSlice: true
-  property Component layout: parent.defaultLayout
-  property Component  style:  parent.defaultStyle
+  property Component layout: defaultLayout
+  property Component  style: defaultStyle
   property int sliceNumber
   property string notes
 

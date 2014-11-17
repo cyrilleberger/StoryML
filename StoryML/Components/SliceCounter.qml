@@ -23,9 +23,24 @@ Text {
   id: root
 
   property Slice slice
-  property Presentation __presentation: slice ? slice.parent : null;
+  property Presentation __presentation: __findPresentation(slice)
   property bool showTotal: true
   property bool __shouldShowTotal: showTotal && __presentation
+
+  function __findPresentation(slice)
+  {
+    if(slice.parent)
+    {
+      if(slice.parent.isStory)
+      {
+        return slice.parent
+      } else {
+        return null;
+      }
+    } else {
+      return __findPresentation(slice)
+    }
+  }
 
   function __getText(slice, presentation)
   {

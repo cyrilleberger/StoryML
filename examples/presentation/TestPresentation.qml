@@ -44,4 +44,20 @@ Presentation {
     title: "Numbered"
     content: [ "#hello", "##bonjour", "##guten tag", "#buenos dias", "##hej", "###salut", "###bon dia", "##prozit"]
   }
+  Section
+  {
+    title: "Test section"
+    Slice
+    {
+      title: "In section slide"
+    }
+    Section
+    {
+      title: "sub section"
+      Slice
+      {
+        title: "In subsection slide"
+      }
+    }
+  }
 }

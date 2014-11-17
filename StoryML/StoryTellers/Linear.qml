@@ -58,8 +58,12 @@ StoryTeller {
       } else if(element.isGroup)
       {
         __groupSlides(slices, element, subs)
-      } else {
+      } else if(element.isSlice)
+      {
+        element.sliceNumber = slices.length + 1
         slices.push(element)
+      } else {
+        console.log("Linear.qml: unhandled ", element, " in __groupSlides")
       }
     }
 
