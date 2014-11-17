@@ -5,7 +5,7 @@ import QtQuick.Dialogs 1.1
 import QtQuick.Window 2.0
 import StoryML 1.0
 import StoryML.Viewer 1.0
-import org.slidesml.textedit 1.0
+import org.storyml.textedit 1.0
 
 ApplicationWindow
 {
@@ -122,7 +122,7 @@ ApplicationWindow
   FileDialog
   {
     id: openFileDialog
-    nameFilters: [ "StoryML Presentation (*.slidesml *.qml)" ]
+    nameFilters: [ "StoryML Presentation (*.storyml *.qml)" ]
     onAccepted:
       {
         presentationFileIO.readFile(fileUrl)
@@ -134,7 +134,7 @@ ApplicationWindow
   {
     id: saveFileDialog
     selectExisting: false
-    nameFilters: [ "StoryML Presentation (*.slidesml *.qml)" ]
+    nameFilters: [ "StoryML Presentation (*.storyml *.qml)" ]
     onAccepted:
       {
         presentationFileIO.content = editor.text
@@ -248,7 +248,7 @@ ApplicationWindow
         __uptodate = true
         temporaryFile.counter += 1
         temporaryFile.writeContent(editor.text)
-        editorItem.__preview_items[0].source = temporaryFile.fileName
+        editorItem.__preview_items[0].source = "file:///" + temporaryFile.fileName
         editorItem.__preview_items[0].z = -1
       }
     }
@@ -274,8 +274,8 @@ ApplicationWindow
             if(status == Loader.Ready)
             {
               errorText.visible = false
-              preview_1.item.currentSlideIndex = Qt.binding(function () { return currentIndexSpinBox.value })
-              editorItem.__currentIndexMaxValue = preview_1.item.slides.length
+              preview_1.item.storyTeller.currentSliceIndex = Qt.binding(function () { return currentIndexSpinBox.value })
+              editorItem.__currentIndexMaxValue = preview_1.item.storyTeller.slices.length
               preview_1.z = 1
               preview_2.z = 0
               editorItem.__preview_items = [ preview_2, preview_1 ]
@@ -297,8 +297,8 @@ ApplicationWindow
             if(status == Loader.Ready)
             {
               errorText.visible = false
-              preview_2.item.currentSlideIndex = Qt.binding(function () { return currentIndexSpinBox.value })
-              editorItem.__currentIndexMaxValue = preview_2.item.slides.length
+              preview_2.item.storyTeller.currentSliceIndex = Qt.binding(function () { return currentIndexSpinBox.value })
+              editorItem.__currentIndexMaxValue = preview_2.item.storyTeller.slices.length
               preview_2.z = 1
               preview_1.z = 0
               editorItem.__preview_items = [ preview_1, preview_2 ]
@@ -386,7 +386,7 @@ ApplicationWindow
 import StoryML 1.0
 
 Presentation {
-  Slide
+  Slice
   {
   }
 }
@@ -426,10 +426,11 @@ Presentation {
   }
   Component.onCompleted:
   {
-    var arg = Qt.application.arguments[Qt.application.arguments.length - 2]
-    if(Utils.endsWith(arg, ".qml") || Utils.endsWith(arg, ".slidesml"))
+    if(Utils.endsWith(cmd_filename.toString(), ".qml") || Utils.endsWith(cmd_filename.toString(), ".storyml"))
     {
-      presentation = Qt.createComponent(arg)
+      presentationFileIO.readFile(cmd_filename)
+      editor.text   = presentationFileIO.content
+      root.modified = false
     }
   }
   MessageDialog
