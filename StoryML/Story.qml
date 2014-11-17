@@ -28,6 +28,7 @@ Group
 
   property Component defaultLayout: Qt.createComponent("Layouts/TitleContent.qml")
   property Component defaultStyle: Qt.createComponent("Styles/Simple.qml")
+  property Component defaultSectionStyle: defaultStyle
 
   property StoryTeller storyTeller
   property bool animationsEnabled: true

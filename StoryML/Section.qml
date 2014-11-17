@@ -20,6 +20,13 @@ import StoryML 1.0
 import StoryML.Layouts 1.0
 
 Group {
+  id: root
   property string title
   readonly property bool isSection: true
+  Slice
+  {
+    title: root.title
+    layout: Title {}
+    style: root.defaultSectionStyle
+  }
 }
