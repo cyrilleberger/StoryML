@@ -1,0 +1,4 @@
+module org.storyml.executecommand
+plugin ExecuteCommand
+
+ExecuteCommandArea 1.0 ExecuteCommandArea.qml
