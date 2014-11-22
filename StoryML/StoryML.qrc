@@ -44,5 +44,9 @@
         <file>Viewer/NotesView.qml</file>
         <file>Viewer/PresentationWindow.qml</file>
         <file>Viewer/PrintWindow.qml</file>
+        <file>Components/Diagram/Connector.qml</file>
+        <file>Components/Diagram/ConnectionPoint.qml</file>
+        <file>Components/Diagram/qmldir</file>
+        <file>Components/Diagram/Shape.qml</file>
     </qresource>
 </RCC>

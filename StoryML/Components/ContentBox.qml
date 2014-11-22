@@ -77,7 +77,7 @@ Item
       root.__largestGoodFontScale = __fontScale
     } else {
       root.__smallestBadFontScale = __fontScale
-    }    
+    }
     __fontScale = 0.5 * (root.__largestGoodFontScale + root.__smallestBadFontScale)
     check_fontScale.restart()
   }
