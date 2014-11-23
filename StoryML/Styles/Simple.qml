@@ -24,6 +24,7 @@ SliceStyle
 {
   property alias backgroundColor: backgroundRectangle.color
   property alias showTotalCount: sliceCounter.showTotal
+  property alias showSliceCounter: sliceCounter.visible
   Rectangle
   {
     id: backgroundRectangle

@@ -19,10 +19,12 @@
 import QtQuick 2.0
 
 Item {
+  property Item inherits
   property alias font: forfont.font
-  property color color: "black"
+  property color color: inherits ? inherits.color : "black"
   Text {
     id: forfont
     visible: false
   }
+  onInheritsChanged: if(inherits) forfont.font = Qt.binding(function () { return inherits.font })
 }

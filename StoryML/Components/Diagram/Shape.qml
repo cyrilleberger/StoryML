@@ -12,8 +12,9 @@ Item
   property alias text: scalableText.text
   property alias fontScale: scalableText.fontScale
   property bool showConnectionPoints: false
-  property SliceAnimation animation: SliceAnimation { parentItem: root }
+  property SliceAnimation animation: SliceAnimation { parentItem: root; }
   property list<ConnectionPoint> connectionPoints
+  opacity: root.animation.inFrame ? 1 : 0.0
   onConnectionPointsChanged: {
     for(var i = 0; i < connectionPoints.length; ++i)
     {
@@ -43,10 +44,17 @@ Item
     anchors.fill: root
     visible:false
     border.width: 1
+    color: root.parent.style_instance.backgroundColor
+    border.color: root.parent.style_instance.text.color
   }
-  ScalableText {
+  AutoscalableText {
     id: scalableText
-    anchors.centerIn: root
+    anchors.fill: root
+    anchors.margins: 5
+    color: root.parent.style_instance.text.color
+    baseFont: root.parent.style_instance.text.font
+    horizontalAlignment: Text.AlignHCenter
+    verticalAlignment:   Text.AlignVCenter
   }
   states: [
     State {

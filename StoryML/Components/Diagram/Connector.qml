@@ -12,6 +12,7 @@ Canvas
   property ConnectionPoint connectionPoint2
   property real arrowSize: 10
   property SliceAnimation animation: SliceAnimation { parentItem: root }
+  opacity: root.animation.inFrame ? 1 : 0.0
 
   property string marker1: "arrow"
   property string marker2: "arrow"

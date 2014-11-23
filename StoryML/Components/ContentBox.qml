@@ -213,7 +213,7 @@ Item
       if(object.indentation === 0)
       {
         object.style = Qt.binding(function() { return root.style.level0; })
-      } else if(object.indentation == 1)
+      } else if(object.indentation === 1)
       {
         object.style = Qt.binding(function() { return root.style.level1; })
       } else
