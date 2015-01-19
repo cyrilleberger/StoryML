@@ -33,6 +33,6 @@ Item
   property real hiddenOpacity: 0
 
   property TextLineStyle level0: TextLineStyle { text: TextStyle { font.pointSize: 30; inherits: root.text } hiddenOpacity: root.hiddenOpacity }
-  property TextLineStyle level1: TextLineStyle { text: TextStyle { font.pointSize: 25; inherits: root.text } hiddenOpacity: root.hiddenOpacity; bulletSize: 0.35; bulletColor: "white"; bulletBorderColor: "black" }
-  property TextLineStyle level2: TextLineStyle { text: TextStyle { font.pointSize: 20; inherits: root.text } hiddenOpacity: root.hiddenOpacity; bulletSize: 0.3;  bulletRadius: 0.5; bulletColor: "white"; bulletBorderColor: "black"; bulletBorderWidth: 0}
+  property TextLineStyle level1: TextLineStyle { text: TextStyle { inherits: root.text; font.pointSize: 22; } hiddenOpacity: root.hiddenOpacity; bulletSize: 0.35; bulletColor: "white"; bulletBorderColor: "black" }
+  property TextLineStyle level2: TextLineStyle { text: TextStyle { font.pointSize: 18; inherits: root.text } hiddenOpacity: root.hiddenOpacity; bulletSize: 0.3;  bulletRadius: 0.5; bulletColor: "white"; bulletBorderColor: "black"; bulletBorderWidth: 0}
 }

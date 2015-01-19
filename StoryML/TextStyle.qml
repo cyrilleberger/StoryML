@@ -19,12 +19,28 @@
 import QtQuick 2.0
 
 Item {
+  id: root
   property Item inherits
   property alias font: forfont.font
   property color color: inherits ? inherits.color : "black"
   Text {
     id: forfont
     visible: false
+    font.bold: root.inherits ? root.inherits.font.bold : forfontdefault.font.bold
+    font.capitalization: root.inherits ? root.inherits.font.capitalization : forfontdefault.font.capitalization
+    font.family: root.inherits ? root.inherits.font.family : forfontdefault.font.family
+    font.italic: root.inherits ? root.inherits.font.italic : forfontdefault.font.italic
+    font.letterSpacing: root.inherits ? root.inherits.font.letterSpacing : forfontdefault.font.letterSpacing
+    font.overline: root.inherits ? root.inherits.font.overline : forfontdefault.font.overline
+    font.pointSize: root.inherits ? root.inherits.font.pointSize : forfontdefault.font.pointSize
+    font.strikeout: root.inherits ? root.inherits.font.strikeout : forfontdefault.font.strikeout
+    font.underline: root.inherits ? root.inherits.font.underline : forfontdefault.font.underline
+    font.weight: root.inherits ? root.inherits.font.weight : forfontdefault.font.weight
+    font.wordSpacing: root.inherits ? root.inherits.font.wordSpacing : forfontdefault.font.wordSpacing
   }
-  onInheritsChanged: if(inherits) forfont.font = Qt.binding(function () { return inherits.font })
+  Text
+  {
+    id: forfontdefault
+    visible: false
+  }
 }
