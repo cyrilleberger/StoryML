@@ -12,7 +12,7 @@ Canvas
   property ConnectionPoint connectionPoint2
   property real arrowSize: 10
   property SliceAnimation animation: SliceAnimation { parentItem: root }
-  opacity: root.animation.inFrame ? 1 : 0.0
+  opacity: root.animation.inFrame ? 1 : root.parent.style_instance.hiddenOpacity
 
   property string marker1: "arrow"
   property string marker2: "arrow"
@@ -70,10 +70,10 @@ Canvas
   }
 
   onPaint: {
-    var x_1 = root.__margin
-    var y_1 = root.__margin
-    var x_2 = width - root.__margin
-    var y_2 = height - root.__margin
+    var x_1 = connectionPoint1.absoluteX - x
+    var y_1 = connectionPoint1.absoluteY - y
+    var x_2 = connectionPoint2.absoluteX - x
+    var y_2 = connectionPoint2.absoluteY - y
 
     var ctx = getContext('2d');
     ctx.save()
@@ -87,8 +87,8 @@ Canvas
     ctx.stroke()
     ctx.restore()
 
-    __drawMarker(root.marker1, ctx, x_1, y_1, x_2, y_2)
-    __drawMarker(root.marker2, ctx, x_2, y_2, x_1, y_1)
+    __drawMarker(root.marker2, ctx, x_1, y_1, x_2, y_2)
+    __drawMarker(root.marker1, ctx, x_2, y_2, x_1, y_1)
   }
 }
 
