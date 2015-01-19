@@ -8,8 +8,9 @@ Canvas
   id: root
   property real thickness: 1
   property color color: "black"
-  property ConnectionPoint connectionPoint1
-  property ConnectionPoint connectionPoint2
+  property ConnectionPoint connectionPoint1: connectionPoints[0]
+  property ConnectionPoint connectionPoint2: connectionPoints[1]
+  property list<ConnectionPoint> connectionPoints
   property real arrowSize: 10
   property SliceAnimation animation: SliceAnimation { parentItem: root }
   opacity: root.animation.inFrame ? 1 : root.parent.style_instance.hiddenOpacity
