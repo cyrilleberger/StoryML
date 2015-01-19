@@ -24,7 +24,7 @@ Presentation {
       height: 40
       text: "World !"
       shape: "circle"
-      color: "#aaaaaa"
+      backgroundColor: "#aaaaaa"
     }
     Connector {
       connectionPoint1: hello.connectionPoints[4]
