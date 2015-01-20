@@ -34,7 +34,8 @@ Window {
     interval: 1000
     onTriggered: {
       printer.printWindow()
-      if(presentationCurrent.item.currentSliceIndex === presentationCurrent.item.slices.length - 1)
+    console.log(presentationCurrent.item)
+      if(presentationCurrent.item.storyTeller.currentSliceIndex === presentationCurrent.item.storyTeller.slices.length - 1)
       {
         root.visible = false
         printTimer.stop()
@@ -42,7 +43,7 @@ Window {
         root.printFinished()
       } else {
         printer.newPage()
-        ++presentationCurrent.item.currentSliceIndex;
+        ++presentationCurrent.item.storyTeller.currentSliceIndex;
       }
     }
   }

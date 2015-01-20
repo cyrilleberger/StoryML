@@ -13,8 +13,12 @@ ApplicationWindow
   title: "StoryML Edit - " + __display_filename(presentationFileIO.url) + (modified ? "*" : "")
   width: 800
   height: 600
-  property url presentationUrl: temporaryFile.fileName
   visible: true
+
+  function __presentationUrl()
+  {
+    return "file:///" + temporaryFile.fileName
+  }
 
   function __createPrintWindow()
   {
@@ -98,7 +102,7 @@ ApplicationWindow
           enabled: editorItem.validPresentation
           onClicked:
           {
-            var presentation                = Qt.createComponent(temporaryFile.fileName)
+            var presentation                = Qt.createComponent(root.__presentationUrl())
             notesView.presentation          = presentation
             presentationWindow.presentation = presentation
             notesWindow.visible             = true
@@ -216,7 +220,7 @@ ApplicationWindow
         text: "Print"
         onClicked:
         {
-          root.__printWindow.presentation             = Qt.createComponent(temporaryFile.fileName)
+          root.__printWindow.presentation             = Qt.createComponent(root.__presentationUrl())
           root.__printWindow.printer.filename         = filename.text
           root.__printWindow.printer.miniPage.columns = columns.value
           root.__printWindow.printer.miniPage.rows    = rows.value
@@ -248,7 +252,7 @@ ApplicationWindow
         __uptodate = true
         temporaryFile.counter += 1
         temporaryFile.writeContent(editor.text)
-        editorItem.__preview_items[0].source = "file:///" + temporaryFile.fileName
+        editorItem.__preview_items[0].source = root.__presentationUrl()
         editorItem.__preview_items[0].z = -1
       }
     }
