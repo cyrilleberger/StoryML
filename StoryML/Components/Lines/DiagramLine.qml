@@ -23,5 +23,9 @@ import StoryML.Components 1.0
 ContentLine
 {
   id: root
-  property variant style_instance: root.style
+  Item {
+    id: holder
+    property variant style_instance: root.style
+  }
+  default property alias content: holder.children
 }
