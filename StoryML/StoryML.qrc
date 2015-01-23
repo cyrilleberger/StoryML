@@ -48,5 +48,7 @@
         <file>Components/Diagram/ConnectionPoint.qml</file>
         <file>Components/Diagram/qmldir</file>
         <file>Components/Diagram/Shape.qml</file>
+        <file>Components/Lines/DiagramLine.qml</file>
+        <file>Components/Lines/qmldir</file>
     </qresource>
 </RCC>
