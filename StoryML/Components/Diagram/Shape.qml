@@ -15,6 +15,7 @@ Item
   property alias text: scalableText.text
   property alias fontScale: scalableText.fontScale
   property alias font: scalableText.baseFont
+  property alias radius: rectangle.radius
   property bool showConnectionPoints: false
   property SliceAnimation animation: SliceAnimation { parentItem: root; }
   property list<ConnectionPoint> connectionPoints
