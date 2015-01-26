@@ -8,9 +8,9 @@ Canvas
   id: root
   property real thickness: 1
   property color color: "black"
-  property ConnectionPoint connectionPoint1: connectionPoints[0]
-  property ConnectionPoint connectionPoint2: connectionPoints[1]
-  property list<ConnectionPoint> connectionPoints
+  property ConnectionPoint connectionPoint1: __getConnectionPoint(connectionPoints, 0)
+  property ConnectionPoint connectionPoint2: __getConnectionPoint(connectionPoints, 1)
+  property variant connectionPoints
   property real arrowSize: 10
   property SliceAnimation animation: SliceAnimation { parentItem: root }
   opacity: root.animation.inFrame ? 1 : root.parent.style_instance.hiddenOpacity
@@ -22,6 +22,18 @@ Canvas
   onConnectionPoint2Changed: __updateGeometry()
 
   property real __margin: Math.max(thickness, arrowSize)
+
+  function __getConnectionPoint(arr, idx)
+  {
+    if(arr.length === 2)
+    {
+      return arr[idx]
+    } else if(arr.length === 4) {
+      return arr[2*idx].connectionPoints[arr[2*idx + 1]]
+    } else {
+      return null
+    }
+  }
 
   function __updateGeometry()
   {
