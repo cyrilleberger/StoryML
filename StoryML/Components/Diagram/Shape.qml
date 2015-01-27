@@ -13,6 +13,7 @@ Item
   property alias backgroundColor: rectangle.color
   property alias border: rectangle.border
   property alias text: scalableText.text
+  property alias horizontalAlignment: scalableText.horizontalAlignment
   property alias fontScale: scalableText.fontScale
   property alias font: scalableText.baseFont
   property alias radius: rectangle.radius
