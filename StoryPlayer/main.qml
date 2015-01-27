@@ -31,11 +31,11 @@ ApplicationWindow
     id: presentationWindow
     visible: root.presentation
     presentation: root.presentation
-    onPresentationClosed:
-    {
-      notesWindow.visible = false
-      presentationWindow.visible = false
-    }
+ //   onPresentationClosed:
+ //   {
+ //     notesWindow.visible = false
+ //     presentationWindow.visible = false
+ //   }
   }
   NotesView
   {

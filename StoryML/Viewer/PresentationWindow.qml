@@ -34,13 +34,13 @@ Window
     focus: true
     Keys.onPressed:
     {
-      if((event.modifiers == (Qt.ControlModifier | Qt.ShiftModifier)) && event.key == Qt.Key_F)
+      if((event.modifiers === (Qt.ControlModifier | Qt.ShiftModifier)) && event.key == Qt.Key_F)
       {
         if(root.visibility == Window.FullScreen)
           root.visibility = Window.Windowed
         else
           root.visibility = Window.FullScreen
-      } else if(event.key == Qt.Key_Escape)
+      } else if(event.key === Qt.Key_Escape)
       {
         presentationClosed()
       }
