@@ -25,6 +25,7 @@ SliceLayout
   id: root
   property int margin: 30
   property int marginBottom: 0
+  property int marginTop: 0
 
   AutoscalableText {
     id: titleText
@@ -45,9 +46,9 @@ SliceLayout
   ContentBox
   {
     x: root.margin
-    y: slice.style_instance.headerSize + root.margin
+    y: slice.style_instance.headerSize + root.margin + root.marginTop
     width: __column_width
-    height: root.height - 3 * root.margin - slice.style_instance.footerSize - root.marginBottom - slice.style_instance.headerSize
+    height: root.height - 3 * root.margin - slice.style_instance.footerSize - root.marginBottom - root.marginTop - slice.style_instance.headerSize
 
     content: slice.content[0]
     style: slice.style_instance
@@ -55,9 +56,9 @@ SliceLayout
   ContentBox
   {
     x: 2 * root.margin + __column_width
-    y: slice.style_instance.headerSize + root.margin
+    y: slice.style_instance.headerSize + root.margin + root.marginTop
     width: __column_width
-    height: root.height - 3 * root.margin - slice.style_instance.footerSize - root.marginBottom - slice.style_instance.headerSize
+    height: root.height - 3 * root.margin - slice.style_instance.footerSize - root.marginBottom - root.marginTop - slice.style_instance.headerSize
 
     content: slice.content[1]
     style: slice.style_instance

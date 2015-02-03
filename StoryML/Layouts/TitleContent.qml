@@ -26,6 +26,7 @@ SliceLayout
   property int margin: 30
   property int marginBottom: 0
   property int marginRight: 0
+  property int marginLeft: 0
   readyToTell: contentBox.readyToTell
   AutoscalableText {
     id: titleText
@@ -44,9 +45,9 @@ SliceLayout
   ContentBox
   {
     id: contentBox
-    x: root.margin
+    x: root.margin + marginLeft
     y: slice.style_instance.headerSize + root.margin
-    width: root.width - 2 * root.margin - marginRight
+    width: root.width - 2 * root.margin - marginRight - marginLeft
     height: root.height - 3 * root.margin - slice.style_instance.footerSize - root.marginBottom - slice.style_instance.headerSize
 
     content: slice.content
