@@ -46,7 +46,19 @@ Item
       } else if(element.isSlice)
       {
         root.__slicesCount = root.__slicesCount + 1
-        element.onReadyToTellChanged.connect(function() { if(element.readyToTell) { root.__slicesReady += 1 } else { root.__slicesReady -= 1; } })
+        element.onReadyToTellChanged.connect(
+              function(elt)
+              {
+                return function()
+                {
+                  if(elt.readyToTell)
+                  {
+                    root.__slicesReady += 1
+                  } else {
+                    root.__slicesReady -= 1;
+                  }
+                }
+              }(element))
         if(element.readyToTell) root.__slicesReady += 1
       } else {
         console.log("StoryTeller.qml: unhandled ", element, " in __countSlides")
