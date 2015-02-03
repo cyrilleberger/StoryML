@@ -65,7 +65,7 @@ Presentation
   }
   Section {
     title: "StoryML Components"
-    Section {
+    Slice {
       title: "Text"
       content: [
         "*Content box",
@@ -74,7 +74,7 @@ Presentation
     }
     Section {
       title: "Multimedia"
-      Slide {
+      Slice {
         title: "Multimedia"
         content: [
           "*Support for images",

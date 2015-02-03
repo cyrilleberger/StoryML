@@ -33,6 +33,7 @@ Group
   property StoryTeller storyTeller
   property bool animationsEnabled: true
   property bool videosEnabled: true
+  property bool readyToTell: root.storyTeller.readyToTell
 
   focus: true
 

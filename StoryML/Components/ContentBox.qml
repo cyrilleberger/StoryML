@@ -33,6 +33,7 @@ Item
   property real __smallestBadFontScale: 1
   property bool __updatingFontScale: false
   property real __childrenHeight: 0
+  property bool ready: false
 
   function __resetUpdateFontScale()
   {
@@ -66,6 +67,8 @@ Item
       if(__childrenHeight > height)
       {
         __updateFontScale()
+      } else {
+        root.ready = true
       }
     }
   }

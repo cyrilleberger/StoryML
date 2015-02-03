@@ -245,9 +245,42 @@ ApplicationWindow
     property bool validPresentation: __preview_items[1].item
     property int __errorLineNumber: -1
     property bool __uptodate: true
+
+    property bool preview1Ready: preview_1.status == Loader.Ready && preview_1.item && preview_1.item.readyToTell
+    property bool preview2Ready: preview_2.status == Loader.Ready && preview_2.item && preview_2.item.readyToTell
+
+    onPreview1ReadyChanged: {
+      if(preview1Ready)
+      {
+        errorText.visible = false
+        preview_1.item.storyTeller.currentSliceIndex = Qt.binding(function () { return currentIndexSpinBox.value })
+        editorItem.__currentIndexMaxValue = preview_1.item.storyTeller.slices.length
+        preview_1.z = 1
+        preview_2.z = 0
+        editorItem.__preview_items = [ preview_2, preview_1 ]
+        editorItem.__updateIfNeeded()
+      }
+    }
+
+    onPreview2ReadyChanged:
+    {
+      if(preview2Ready)
+      {
+        errorText.visible = false
+        preview_2.item.storyTeller.currentSliceIndex = Qt.binding(function () { return currentIndexSpinBox.value })
+        editorItem.__currentIndexMaxValue = preview_2.item.storyTeller.slices.length
+        preview_2.z = 1
+        preview_1.z = 0
+        editorItem.__preview_items = [ preview_1, preview_2 ]
+        editorItem.__updateIfNeeded()
+      }
+    }
+
     function __updateIfNeeded()
     {
-      if(!__uptodate && preview_1.status != Loader.Loading && preview_2.status != Loader.Loading)
+      if(!__uptodate
+          && preview_1.status != Loader.Loading && (!preview_1.item || preview_1.item.readyToTell)
+          && preview_2.status != Loader.Loading && (!preview_2.item || preview_2.item.readyToTell))
       {
         __uptodate = true
         temporaryFile.counter += 1
@@ -275,16 +308,7 @@ ApplicationWindow
           anchors.fill: parent
           onStatusChanged:
           {
-            if(status == Loader.Ready)
-            {
-              errorText.visible = false
-              preview_1.item.storyTeller.currentSliceIndex = Qt.binding(function () { return currentIndexSpinBox.value })
-              editorItem.__currentIndexMaxValue = preview_1.item.storyTeller.slices.length
-              preview_1.z = 1
-              preview_2.z = 0
-              editorItem.__preview_items = [ preview_2, preview_1 ]
-              editorItem.__updateIfNeeded()
-            } else if(status == Loader.Error)
+            if(status == Loader.Error)
             {
               errorText.showComponentError(preview_1.sourceComponent, preview_1.source)
             }
@@ -298,16 +322,7 @@ ApplicationWindow
           asynchronous: true
           onStatusChanged:
           {
-            if(status == Loader.Ready)
-            {
-              errorText.visible = false
-              preview_2.item.storyTeller.currentSliceIndex = Qt.binding(function () { return currentIndexSpinBox.value })
-              editorItem.__currentIndexMaxValue = preview_2.item.storyTeller.slices.length
-              preview_2.z = 1
-              preview_1.z = 0
-              editorItem.__preview_items = [ preview_1, preview_2 ]
-              editorItem.__updateIfNeeded()
-            } else if(status == Loader.Error)
+            if(status == Loader.Error)
             {
               errorText.showComponentError(preview_2.sourceComponent, preview_2.source)
             }

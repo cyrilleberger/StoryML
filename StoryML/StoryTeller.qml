@@ -30,4 +30,42 @@ Item
   function onKeyPressed(event)
   {
   }
+
+  property int __slicesCount: 0
+  property int __slicesReady: 0
+  property bool readyToTell: root.__slicesCount == root.__slicesReady
+
+  function __countSlides(group)
+  {
+    for(var i = 0; i < group.elements.length; ++i)
+    {
+      var element = group.elements[i]
+      if(element.isGroup)
+      {
+        __groupSlides(element)
+      } else if(element.isSlice)
+      {
+        root.__slicesCount = root.__slicesCount + 1
+        element.onReadyChanged.connect(function() { if(element.ready) { root.__slicesReady += 1 } else { root.__slicesReady -= 1; } })
+        if(element.ready) root.__slicesReady += 1
+      } else {
+        console.log("StoryTeller.qml: unhandled ", element, " in __countSlides")
+      }
+    }
+  }
+  function __updateCountSlides()
+  {
+    root.__slicesCount = 0
+    root.__slicesReady = 0
+    __countSlides(root.story)
+  }
+  onStoryChanged:
+  {
+    if(root.story.elements)
+    {
+      __updateCountSlides()
+    }
+    root.story.onElementsChanged.connect(root.__updateCountSlides)
+  }
+
 }

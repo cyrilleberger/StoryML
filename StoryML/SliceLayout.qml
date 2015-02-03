@@ -21,5 +21,6 @@ import QtQuick 2.0
 Item
 {
   id: root
+  property bool ready: true
   readonly property Item slice: __slice // TODO: Item should be Style, but this is recursive and crash...
 }
