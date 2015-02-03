@@ -32,7 +32,7 @@ StoryElement
   property SliceAnimation animation: SliceAnimation { frame: -1; parentItem: root}
   property SliceStyle  style_instance:  styleLoader.item
   property string title
-  ready: layoutLoader.status === Loader.Ready && layoutLoader.item && layoutLoader.item.ready
+  readyToTell: layoutLoader.status === Loader.Ready && layoutLoader.item && layoutLoader.item.readyToTell
 
   function object_to_list(_obj)
   {

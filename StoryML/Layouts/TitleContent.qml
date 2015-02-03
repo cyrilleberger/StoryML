@@ -26,7 +26,7 @@ SliceLayout
   property int margin: 30
   property int marginBottom: 0
   property int marginRight: 0
-  ready: contentBox.ready
+  readyToTell: contentBox.readyToTell
   AutoscalableText {
     id: titleText
     x: root.margin

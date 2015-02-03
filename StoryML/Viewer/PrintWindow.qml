@@ -33,8 +33,8 @@ Window {
     repeat: true
     interval: 1000
     onTriggered: {
+      if(!presentationCurrent.item.readyToTell) return;
       printer.printWindow()
-    console.log(presentationCurrent.item)
       if(presentationCurrent.item.storyTeller.currentSliceIndex === presentationCurrent.item.storyTeller.slices.length - 1)
       {
         root.visible = false
