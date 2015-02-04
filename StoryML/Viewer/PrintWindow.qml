@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Window 2.0
-import org.slidesml.print 1.0
+import org.storyml.print 1.0
 
 Window {
   id: root
@@ -24,7 +24,6 @@ Window {
     {
       item.videosEnabled             = false
       item.animationsEnabled = false
-//      item.currentSliceIndex
     }
   }
   Timer
