@@ -66,6 +66,10 @@ Item
     onTriggered: {
       if(__childrenHeight > height)
       {
+        if(__smallestBadFontScale > 0.9999)
+        {
+          root.__resetUpdateFontScale()
+        }
         __updateFontScale()
       } else {
         root.readyToTell = true
@@ -86,6 +90,10 @@ Item
   }
 
   onHeightChanged: {
+    root.__resetUpdateFontScale()
+    relayout.restart()
+  }
+  onWidthChanged: {
     root.__resetUpdateFontScale()
     relayout.restart()
   }

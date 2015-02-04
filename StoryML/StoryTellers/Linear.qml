@@ -49,6 +49,7 @@ StoryTeller {
 
   function __groupSlides(slices, group, subs)
   {
+    if(!group) return;
     for(var i = 0; i < group.elements.length; ++i)
     {
       var element = group.elements[i]
