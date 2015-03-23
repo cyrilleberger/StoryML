@@ -11,6 +11,7 @@ Window {
   {
     window: root
     orientation: Printer.Landscape
+    debugVerbose: false
   }
   signal printFinished()
 
