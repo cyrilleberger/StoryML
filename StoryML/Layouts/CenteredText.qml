@@ -17,8 +17,21 @@
  */
 
 import StoryML 1.0
+import QtQuick 2.0
 
 SliceLayout
 {
   id: root
+  Text {
+    id: text
+
+    anchors.centerIn: parent
+
+    color: slice.style_instance.text.color
+    font: slice.style_instance.text.font
+    text: slice.content
+
+    verticalAlignment: Text.AlignVCenter
+    horizontalAlignment: Text.AlignHCenter
+  }
 }
