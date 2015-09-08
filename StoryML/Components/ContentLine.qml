@@ -99,11 +99,11 @@ Row
     {
       visible: root.bulletType === root.numberBullet
       anchors.right: parent.right
-      y: 0.5 * (root.indentationSize - height)
-      color: root.style.bulletColor
+      y: 0
+      color: root.style.bulletTextColor
       baseFont: root.style.text.font
       text: root.__bulletNumberCache
-      fontScale: root.style.bulletSize * root.fontScale
+      fontScale: root.fontScale
     }
   }
 }

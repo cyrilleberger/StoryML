@@ -22,6 +22,7 @@ import StoryML 1.0
 Item {
   property TextStyle text: TextStyle {}
   property color bulletColor: "black"
+  property color bulletTextColor: bulletColor
   property color bulletBorderColor: "white"
   property real bulletBorderWidth: 1
   property real bulletRadius: 1
