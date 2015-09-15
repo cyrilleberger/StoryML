@@ -249,11 +249,25 @@ ApplicationWindow
     property bool preview1Ready: preview_1.status == Loader.Ready && preview_1.item && preview_1.item.readyToTell
     property bool preview2Ready: preview_2.status == Loader.Ready && preview_2.item && preview_2.item.readyToTell
 
+    property int currentSliceIndex: 0
+
+    onCurrentSliceIndexChanged: {
+      if(preview1Ready && preview_1.z == 1)
+      {
+        preview_1.item.storyTeller.currentSliceIndex = currentSliceIndex
+      }
+      if(preview2Ready && preview_2.z == 1)
+      {
+        preview_2.item.storyTeller.currentSliceIndex = currentSliceIndex
+      }
+      currentIndexSpinBox.value = currentSliceIndex
+    }
+
     onPreview1ReadyChanged: {
       if(preview1Ready)
       {
         errorText.visible = false
-        preview_1.item.storyTeller.currentSliceIndex = Qt.binding(function () { return currentIndexSpinBox.value })
+        preview_1.item.storyTeller.onCurrentSliceIndexChanged.connect(function () { editorItem.currentSliceIndex = preview_1.item.storyTeller.currentSliceIndex })
         editorItem.__currentIndexMaxValue = preview_1.item.storyTeller.slices.length
         preview_1.z = 1
         preview_2.z = 0
@@ -267,7 +281,7 @@ ApplicationWindow
       if(preview2Ready)
       {
         errorText.visible = false
-        preview_2.item.storyTeller.currentSliceIndex = Qt.binding(function () { return currentIndexSpinBox.value })
+        preview_2.item.storyTeller.onCurrentSliceIndexChanged.connect(function () { editorItem.currentSliceIndex = preview_2.item.storyTeller.currentSliceIndex })
         editorItem.__currentIndexMaxValue = preview_2.item.storyTeller.slices.length
         preview_2.z = 1
         preview_1.z = 0
@@ -340,10 +354,12 @@ ApplicationWindow
 
           property bool __disableValueChanged: false
           onValueChanged: {
+            console.log(value, editorItem.currentSliceIndex)
             if(__disableValueChanged) return;
             currentIndexSlider.__disableValueChanged = true;
             currentIndexSlider.value = value;
             currentIndexSlider.__disableValueChanged = false;
+            editorItem.currentSliceIndex = value
           }
         }
         Slider
@@ -357,6 +373,7 @@ ApplicationWindow
             currentIndexSpinBox.__disableValueChanged = true;
             currentIndexSpinBox.value = value;
             currentIndexSpinBox.__disableValueChanged = false;
+            editorItem.currentSliceIndex = value
           }
         }
       }
