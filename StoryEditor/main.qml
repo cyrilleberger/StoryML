@@ -268,6 +268,7 @@ ApplicationWindow
       {
         errorText.visible = false
         preview_1.item.storyTeller.onCurrentSliceIndexChanged.connect(function () { editorItem.currentSliceIndex = preview_1.item.storyTeller.currentSliceIndex })
+        preview_1.item.storyTeller.currentSliceIndex = editorItem.currentSliceIndex
         editorItem.__currentIndexMaxValue = preview_1.item.storyTeller.slices.length
         preview_1.z = 1
         preview_2.z = 0
@@ -282,6 +283,7 @@ ApplicationWindow
       {
         errorText.visible = false
         preview_2.item.storyTeller.onCurrentSliceIndexChanged.connect(function () { editorItem.currentSliceIndex = preview_2.item.storyTeller.currentSliceIndex })
+        preview_2.item.storyTeller.currentSliceIndex = editorItem.currentSliceIndex
         editorItem.__currentIndexMaxValue = preview_2.item.storyTeller.slices.length
         preview_2.z = 1
         preview_1.z = 0
@@ -354,7 +356,6 @@ ApplicationWindow
 
           property bool __disableValueChanged: false
           onValueChanged: {
-            console.log(value, editorItem.currentSliceIndex)
             if(__disableValueChanged) return;
             currentIndexSlider.__disableValueChanged = true;
             currentIndexSlider.value = value;
