@@ -24,11 +24,32 @@ ContentLine
 {
   id: root
   property int imageHeight: height
+  property variant imageHeights: []
   property alias imageSpacing: row.spacing
   property variant sources
+  function height_at(index)
+  {
+    if(index < imageHeights.length)
+    {
+      return imageHeights[index]
+    } else {
+      return imageHeight
+    }
+  }
+  function __max(h, hs)
+  {
+    var mh = h
+    for(var i = 0; i < hs.length; ++i)
+    {
+      mh = Math.max(mh, hs[i])
+    }
+    return mh
+  }
+
   Item
   {
-    height: imageHeight
+    id: container
+    height: __max(imageHeight, imageHeights)
     width: childrenAvailableWidth
     Row
     {
@@ -39,7 +60,8 @@ ContentLine
         model: root.sources
         delegate: Image
         {
-          height: root.imageHeight
+          y: 0.5 * (container.height - height)
+          height: height_at(index)
           fillMode: Image.PreserveAspectFit
           source: modelData
         }
