@@ -26,6 +26,7 @@ SliceLayout
   property int margin: 30
   property int marginBottom: 0
   property int marginTop: 0
+  property real leftColumnWidth: 0.5
 
   AutoscalableText {
     id: titleText
@@ -42,12 +43,12 @@ SliceLayout
     verticalAlignment: Text.AlignVCenter
     horizontalAlignment: Text.AlignHCenter
   }
-  property int __column_width: (root.width - 3 * root.margin) / 2
+  property int __total_column_width: (root.width - 3 * root.margin)
   ContentBox
   {
     x: root.margin
     y: slice.style_instance.headerSize + root.margin + root.marginTop
-    width: __column_width
+    width: __total_column_width * leftColumnWidth
     height: root.height - 3 * root.margin - slice.style_instance.footerSize - root.marginBottom - root.marginTop - slice.style_instance.headerSize
 
     content: slice.content[0]
@@ -55,9 +56,9 @@ SliceLayout
   }
   ContentBox
   {
-    x: 2 * root.margin + __column_width
+    x: 2 * root.margin + __total_column_width * leftColumnWidth
     y: slice.style_instance.headerSize + root.margin + root.marginTop
-    width: __column_width
+    width: __total_column_width * (1.0 - leftColumnWidth)
     height: root.height - 3 * root.margin - slice.style_instance.footerSize - root.marginBottom - root.marginTop - slice.style_instance.headerSize
 
     content: slice.content[1]
