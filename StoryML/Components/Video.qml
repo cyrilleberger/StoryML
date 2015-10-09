@@ -79,6 +79,7 @@ Item
       control.height = 20
       hideControl.restart()
     }
+    enabled: animation.inFrame
   }
 
   Rectangle
