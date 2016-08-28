@@ -32,7 +32,8 @@ Text {
   function updateFont()
   {
     font = baseFont
-    font.pixelSize = fontScale * baseFont.pixelSize
+    font.pointSize = fontScale * baseFont.pointSize
+//    font.pixelSize = fontScale * baseFont.pixelSize
   }
 
   onBaseFontChanged: updateFont()
