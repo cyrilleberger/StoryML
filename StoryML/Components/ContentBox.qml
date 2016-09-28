@@ -85,7 +85,11 @@ Item
     } else {
       root.__smallestBadFontScale = __fontScale
     }
-    if(__childrenHeight > height || __childrenHeight < 0.9 * height)
+    if(root.__largestGoodFontScale > 0.99 * root.__smallestBadFontScale)
+    {
+      check_fontScale.restart()
+      __fontScale = root.__largestGoodFontScale
+    } else if(__childrenHeight > height || __childrenHeight < 0.9 * height)
     {
       __fontScale = 0.5 * (root.__largestGoodFontScale + root.__smallestBadFontScale)
       check_fontScale.restart()
