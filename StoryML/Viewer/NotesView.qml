@@ -106,7 +106,8 @@ SplitView
     {
       anchors.fill: parent
       text: presentation_instance ? presentation_instance.storyTeller.currentSlice.notes : ""
-      font.pixelSize: 30
+      wrapMode: Text.WordWrap
+      font.pixelSize: 60
     }
   }
 }
