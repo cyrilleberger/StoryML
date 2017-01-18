@@ -50,5 +50,8 @@
         <file>Components/Diagram/Shape.qml</file>
         <file>Components/Lines/DiagramLine.qml</file>
         <file>Components/Lines/qmldir</file>
+        <file>Layouts/ItemOnly.qml</file>
+        <file>Components/Image.qml</file>
+        <file>Components/Text.qml</file>
     </qresource>
 </RCC>
