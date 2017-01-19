@@ -1,8 +1,10 @@
 TEMPLATE = app
 
-QT += qml quick widgets
+QT += qml quick widgets KSyntaxHighlighting
+CONFIG += C++11
 
-SOURCES += main.cpp
+SOURCES += main.cpp Extension.cpp
+HEADERS += Extension.h
 
 RESOURCES += StoryEditor.qrc ../StoryML/StoryML.qrc
 

@@ -419,6 +419,7 @@ ApplicationWindow
       height: parent.height
       anchors.left: sideBar.right
       anchors.right: parent.right
+      document.highlightingDefinition: "QML"
       text: "import QtQuick 2.0
 import StoryML 1.0
 

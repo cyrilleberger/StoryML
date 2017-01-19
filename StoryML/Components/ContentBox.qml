@@ -76,6 +76,14 @@ Item
       }
     }
   }
+  Timer
+  {
+      id: workaround
+      interval: 2000
+      onTriggered: {
+          root.readyToTell = true
+      }
+  }
 
   function __updateFontScale()
   {
@@ -122,8 +130,31 @@ Item
       var object
       if(typeof c == 'string')
       {
-        object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; TextLine {  }", root, "ContentBox's dynamic TextLine" )
         var start = 0;
+
+        var highlighting_definition = ""
+        if(c[start] === '[')
+        {
+          start += 1
+          while(c[start] !== ']' && start < c.length)
+          {
+            highlighting_definition += c[start]
+            start += 1;
+          }
+          start += 1
+        }
+        else if(c[start] === '\\' && c[start] === '[')
+        {
+          start += 1
+        }
+
+        if(highlighting_definition == "")
+        {
+          object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; TextLine {  }", root, "ContentBox's dynamic TextLine" )
+        } else {
+          object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; HighlightedTextLine {  }", root, "ContentBox's dynamic TextLine" )
+          object.highlightingDefinition = highlighting_definition
+        }
 
         if(c[start] === '<')
         {
@@ -169,7 +200,12 @@ Item
 
         while(start < c.length)
         {
-          if(c[start] === '#')
+          if(c[start] === '\\' && (c[start + 1] ==='#' || c[start+1] === '*' ))
+          {
+            start += 1;
+            break;
+          }
+          else if(c[start] === '#')
           {
             indentation += 1
             object.bulletType = 2
@@ -249,5 +285,6 @@ Item
     root.animation.last    = animationLast
     root.children          = items;
     root.__resetUpdateFontScale()
+//     workaround.start()
   }
 }

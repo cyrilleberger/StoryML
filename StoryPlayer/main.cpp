@@ -5,6 +5,8 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
+#include "Extension.h"
+
 int main(int argc, char *argv[])
 {
   QApplication app(argc, argv);
@@ -23,8 +25,11 @@ int main(int argc, char *argv[])
 
   QQmlApplicationEngine engine;
   engine.rootContext()->setContextProperty("cmd_filename", filename);
+  engine.rootContext()->setContextProperty("Extension", new Extension(&engine));
   engine.addImportPath("qrc:/qml");
   engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
   return app.exec();
 }
+
+#include "moc_Extension.cpp"

@@ -53,5 +53,7 @@
         <file>Layouts/ItemOnly.qml</file>
         <file>Components/Image.qml</file>
         <file>Components/Text.qml</file>
+        <file>Components/HighlightedTextLine.qml</file>
+        <file>Components/HighlightedText.qml</file>
     </qresource>
 </RCC>

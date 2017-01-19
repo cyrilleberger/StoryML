@@ -1,9 +1,9 @@
-/* Copyright (c) 2014, Cyrille Berger <cberger@cberger.net>
+/* Copyright (c) 2017, Cyrille Berger <cberger@cberger.net>
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -16,25 +16,22 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE
  */
 
+import StoryML 1.0
 import QtQuick 2.0
+import StoryML.Components 1.0
 
-Text {
+ContentLine
+{
   id: root
-  property font baseFont: __createBaseFont()
-  property real fontScale: 1
-  function __createBaseFont()
+  property alias text: text_.text
+  property alias highlightingDefinition: text_.highlightingDefinition
+  HighlightedText
   {
-    root.baseFont = root.font // Hack to force a deep copy of root.font in root.baseFont and avoid binding loops when updateFont is called
-    return root.baseFont
+    id: text_
+    textColor: parent.style.text.color
+    baseFont: parent.style.text.font
+    fontScale: root.fontScale
+    wrapMode: TextEdit.WordWrap
+    width: childrenAvailableWidth
   }
-
-  function updateFont()
-  {
-    font = baseFont
-    font.pointSize = fontScale * baseFont.pointSize
-//    font.pixelSize = fontScale * baseFont.pixelSize
-  }
-
-  onBaseFontChanged: updateFont()
-  onFontScaleChanged: updateFont()
 }
