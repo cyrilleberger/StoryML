@@ -55,5 +55,6 @@
         <file>Components/Text.qml</file>
         <file>Components/HighlightedTextLine.qml</file>
         <file>Components/HighlightedText.qml</file>
+        <file>Layouts/TitleTwoItems.qml</file>
     </qresource>
 </RCC>
