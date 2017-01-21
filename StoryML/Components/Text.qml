@@ -22,6 +22,19 @@ import StoryML 1.0
 Text
 {
   id: root
-  property SliceAnimation animation: SliceAnimation { frame: -1; parentItem: root }
+  property SliceAnimation animation: SliceAnimation { parentItem: root }
+  opacity: animation.inFrame ? 1 : __parent_slice ? __parent_slice.style_instance.hiddenOpacity : 0
+  property Slice __parent_slice: __find_parent_slice(parent)
+  function __find_parent_slice(p)
+  {
+    if(p)
+    {
+      if(p.style_instance) // Not really a perfect check that p is a slice
+      {
+        return p
+      }
+      return __find_parent_slice(p.parent)
+    }
+    return null
+  }
 }
-
