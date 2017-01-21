@@ -63,9 +63,5 @@ SliceLayout
 
     content: slice.content[1]
     style: slice.style_instance
-    Rectangle {
-      color: "red"
-      anchors.fill: parent
-    }
   }
 }
