@@ -35,8 +35,23 @@ QtObject {
     __completed = true
     updateLast();
     parentItem.childrenChanged.connect(function() { if(root) { root.updateLast() } })
+    parentItem.parentChanged.connect(function()
+    {
+      var p = parentItem.parent;
+      if(p && p.animation)
+      {
+        p.animation.updateLast();
+      }
+    })
   }
-
+  onFirstChanged:
+  {
+    var p = parentItem.parent;
+    if(p && p.animation)
+    {
+      p.animation.updateLast();
+    }
+  }
   onLastChanged:
   {
     if(last != __autoSetLast) __userSetLast = last
@@ -85,7 +100,15 @@ QtObject {
           new_last = Math.max(new_last, child.animation.last)
         }
       }
-      new_last = Math.max(new_last, child.animation.first)
+      if(new_last === 90071992)
+      {
+        if(child.animation.first !== 0)
+        {
+          new_last = child.animation.first
+        }
+      } else {
+        new_last = Math.max(new_last, child.animation.first)
+      }
     } else {
       for(var child_index in child.children)
       {
