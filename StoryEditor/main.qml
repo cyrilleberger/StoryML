@@ -419,6 +419,8 @@ ApplicationWindow
       height: parent.height
       anchors.left: sideBar.right
       anchors.right: parent.right
+      options.font.pointSize: 20
+      options.font.family: "monospace"
       document.highlightingDefinition: "QML"
       text: "import QtQuick 2.0
 import StoryML 1.0

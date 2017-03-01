@@ -2,6 +2,8 @@ AutoscalableText 1.0 AutoscalableText.qml
 ContentBox 1.0 ContentBox.qml
 ContentLine 1.0 ContentLine.qml
 Figure 1.0 Figure.qml
+Formula 1.0 Formula.qml
+FormulaLine 1.0 FormulaLine.qml
 Image 1.0 Image.qml
 ImagesLine 1.0 ImagesLine.qml
 HighlightedText 1.0 HighlightedText.qml

@@ -14,6 +14,7 @@ Canvas
   property real arrowSize: 10
   property SliceAnimation animation: SliceAnimation { parentItem: root }
   opacity: root.animation.inFrame ? 1 : root.parent.style_instance.hiddenOpacity
+  property alias text: text_box.text
 
   property string marker1: "arrow"
   property string marker2: "arrow"
@@ -102,6 +103,12 @@ Canvas
 
     __drawMarker(root.marker2, ctx, x_1, y_1, x_2, y_2)
     __drawMarker(root.marker1, ctx, x_2, y_2, x_1, y_1)
+  }
+  Text
+  {
+    id: text_box
+    anchors.horizontalCenter: root.horizontalCenter
+    anchors.bottom: root.top
   }
 }
 

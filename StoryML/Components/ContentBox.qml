@@ -128,6 +128,7 @@ Item
     {
       var c = _content[i]
       var object
+      var isFormula = false
       if(typeof c == 'string')
       {
         var start = 0;
@@ -151,6 +152,25 @@ Item
         if(highlighting_definition == "")
         {
           object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; TextLine {  }", root, "ContentBox's dynamic TextLine" )
+        } else if(highlighting_definition.substr(0, 7) == "Formula") {
+          var opts = highlighting_definition.split(",")
+          object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; FormulaLine {  }", root, "ContentBox's dynamic TextLine" )
+          isFormula = true
+          for(var j = 1; j < opts.length; ++j)
+          {
+            var kv = opts[j].split("=")
+              console.log(kv[0], kv[1])
+            switch(kv[0])
+            {
+              case "h":
+              case "height":
+                object.formulaHeight = kv[1]
+                break;
+              default:
+                console.log("Unkwown key " + kv[0])
+                  break;
+            }
+          }
         } else {
           object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; HighlightedTextLine {  }", root, "ContentBox's dynamic TextLine" )
           object.highlightingDefinition = highlighting_definition
@@ -224,7 +244,16 @@ Item
         }
 
         object.indentation = (start == start_after_animation) ? 0 : (indentation - 1)
-        if(start < c.length)
+        if(isFormula)
+        {
+          if(start < c.length)
+          {
+            object.formulas = [c.substring(start, c.length)];
+          } else {
+            object.formulas = [""]
+          }
+        }
+        else if(start < c.length)
         {
           object.text = c.substring(start, c.length);
         } else {

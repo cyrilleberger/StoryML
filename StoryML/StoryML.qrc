@@ -56,5 +56,7 @@
         <file>Components/HighlightedTextLine.qml</file>
         <file>Components/HighlightedText.qml</file>
         <file>Layouts/TitleTwoItems.qml</file>
+        <file>Components/Formula.qml</file>
+        <file>Components/FormulaLine.qml</file>
     </qresource>
 </RCC>

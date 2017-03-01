@@ -21,7 +21,7 @@ import QtQuick 2.0
 QtObject {
   id: root
   readonly property bool inFrame: (frame >= first && frame <= last)
-  property int frame: 0
+  property int frame: -1
   property int first: 0
   property int last: 90071992
   property int __lastPrevious: 90071992
@@ -37,10 +37,13 @@ QtObject {
     parentItem.childrenChanged.connect(function() { if(root) { root.updateLast() } })
     parentItem.parentChanged.connect(function()
     {
-      var p = parentItem.parent;
-      if(p && p.animation)
+      if(root)
       {
-        p.animation.updateLast();
+        var p = parentItem.parent;
+        if(p && p.animation)
+        {
+          p.animation.updateLast();
+        }
       }
     })
   }

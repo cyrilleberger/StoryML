@@ -1,5 +1,8 @@
 #include "Extension.h"
 
+#include <QDebug>
+#include <QProcess>
+
 #include <Definition>
 #include <SyntaxHighlighter>
 #include <Theme>
@@ -24,3 +27,61 @@ void Extension::setSyntaxHighlighting(QQuickTextDocument* textDocument, const QS
     qWarning() << "No syntax definition for " << _highlightingName;
   }
 }
+
+QString Extension::formulaFile(const QString& _formula, const QColor& _color, bool _centered)
+{
+  QString color_text = QString("%1,%2,%3").arg(_color.redF()).arg(_color.greenF()).arg(_color.blueF());
+  QString key = _formula + color_text + QString::number(_centered);
+  qDebug() << "key " << key;
+  if(m_formulas.contains(key))
+  {
+    return "file://" + m_formulas.value(key)->path() + "/formula.png";
+  }
+
+  QTemporaryDir* dir = new QTemporaryDir;
+
+  QString formulaFileName = dir->path() + "/formula.tex";
+
+  QFile formulaFile(formulaFileName);
+  formulaFile.open(QIODevice::WriteOnly | QIODevice::Text);
+
+  formulaFile.write("\\documentclass[border=2pt]{standalone}\n"
+                    "\\usepackage[utf8]{inputenc}\n"
+                    "\\usepackage{amsmath}\n"
+                    "\\usepackage{varwidth}\n"
+                    "\\usepackage{color}\n"
+                    "\\usepackage{fullpage}\n"
+                    "\\usepackage{amssymb}\n"
+                    "\\begin{document}\n"
+                    "\\begin{varwidth}{\\linewidth}\n");
+
+  if(_centered)
+  {
+    formulaFile.write("\\begin{center}\n");
+  }
+  formulaFile.write("{\\color[rgb]{" + color_text.toUtf8() + "} $" + _formula.toUtf8() + " $ }\n");
+  if(_centered)
+  {
+    formulaFile.write("\\end{center}\n");
+  }
+  formulaFile.write("\\end{varwidth}\n"
+                    "\\end{document}\n");
+
+  formulaFile.close();
+
+  QProcess process;
+  process.setWorkingDirectory(dir->path());
+  qDebug() << "pdflatex starting...";
+  process.start("pdflatex", QStringList() << "--interaction" << "nonstopmode" << "--jobname" << "formula" << "\\input{" + formulaFileName + "}");
+  process.waitForFinished();
+  qDebug() << "pdflatex finished...";
+
+  qDebug() << "convert starting...";
+  process.start("convert", QStringList() << "-trim" << "-density" << "600" << "formula.pdf" << "-quality" << "90" << "formula.png");
+  process.waitForFinished();
+  qDebug() << "convert finished...";
+  m_formulas[key] = dir;
+
+  return "file://" + dir->path() + "/formula.png";
+}
+

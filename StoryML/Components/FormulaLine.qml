@@ -1,9 +1,9 @@
-/* Copyright (c) 2014, Cyrille Berger <cberger@cberger.net>
+/* Copyright (c) 2017, Cyrille Berger <cberger@cberger.net>
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -17,56 +17,19 @@
  */
 
 import StoryML 1.0
-import QtQuick 2.0 as QQ
+import QtQuick 2.0
 import StoryML.Components 1.0
 
 ContentLine
 {
   id: root
-  property int imageHeight: height
-  property variant imageHeights: []
-  property alias imageSpacing: row.spacing
-  property variant sources
-  function height_at(index)
+  property variant formulas
+  property int formulaHeight: 40
+  Formula
   {
-    if(index < imageHeights.length)
-    {
-      return imageHeights[index]
-    } else {
-      return imageHeight
-    }
-  }
-  function __max(h, hs)
-  {
-    var mh = h
-    for(var i = 0; i < hs.length; ++i)
-    {
-      mh = Math.max(mh, hs[i])
-    }
-    return mh
-  }
-
-  QQ.Item
-  {
-    id: container
-    height: __max(imageHeight, imageHeights)
+    id: text_
+    formula: root.formulas[0]
     width: childrenAvailableWidth
-    QQ.Row
-    {
-      anchors.centerIn: parent
-      id: row
-      QQ.Repeater
-      {
-        model: root.sources
-        delegate: QQ.Image
-        {
-          y: 0.5 * (container.height - height)
-          height: height_at(index)
-          fillMode: QQ.Image.PreserveAspectFit
-          source: modelData
-        }
-      }
-    }
+    height: root.formulaHeight * root.fontScale
   }
-
 }

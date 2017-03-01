@@ -83,7 +83,8 @@ StoryTeller {
     {
       root.currentSliceIndex = 0;
       root.slices[root.currentSliceIndex].animation.frame = 0
-      root.slices[root.currentSliceIndex].opacity = 1;
+        root.slices[root.currentSliceIndex].opacity = 1;
+        root.slices[root.currentSliceIndex].z = 1;
     }
   }
 
@@ -114,9 +115,11 @@ StoryTeller {
 
     if(root.currentSliceIndex != root.__previousSliceIndex)
     {
+      root.__previousSlice.z = 0
       root.__previousSlice.opacity = 0;
       root.__previousSlice.animation.frame = -1
       root.currentSlice = root.slices[root.currentSliceIndex]
+      root.currentSlice.z = 1
       root.currentSlice.opacity = 1
       if(animationsEnabled)
       {

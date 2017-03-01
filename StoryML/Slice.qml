@@ -34,17 +34,27 @@ StoryElement
   property string title
   readyToTell: layoutLoader.status === Loader.Ready && layoutLoader.item && layoutLoader.item.readyToTell
 
-  function object_to_list(_obj)
+  function object_to_list(_cls, _cis)
   {
-    var list = []
-    for(var k in _obj)
+    var obj = _cls
+    if(_cis.length > 0)
     {
-      list.push(_obj[k])
+      obj = _cis
+      if(_cls.length > 0)
+      {
+        console.log("Cannot set both content items and lines.")
+      }
+    }
+    var list = []
+    for(var k in obj)
+    {
+      list.push(obj[k])
     }
     return list
   }
 
-  property variant content: object_to_list(contentLines)
+  property variant content: object_to_list(contentLines, contentItems)
+  property list<Item> contentItems
   property list<ContentLine> contentLines
 
   width:  800

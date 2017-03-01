@@ -30,7 +30,8 @@ TextArea
     font.pointSize = fontScale * baseFont.pointSize
 //    font.pixelSize = fontScale * baseFont.pixelSize
   }
-
+  selectByMouse: false
+  selectByKeyboard: false
   onBaseFontChanged: updateFont()
   onFontScaleChanged: updateFont()
 

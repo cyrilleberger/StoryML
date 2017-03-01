@@ -25,7 +25,7 @@ import StoryML 1.0
 Item
 {
   id: root
-  property SliceAnimation animation: SliceAnimation { frame: -1; parentItem: root }
+  property SliceAnimation animation: SliceAnimation {  parentItem: root }
   property alias source:      player.source
   property alias sourceRect:  videoOutput.sourceRect
   property alias muted:       player.muted
