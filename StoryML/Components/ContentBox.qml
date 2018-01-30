@@ -151,10 +151,10 @@ Item
 
         if(highlighting_definition == "")
         {
-          object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; TextLine {  }", root, "ContentBox's dynamic TextLine" )
+          object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; import StoryML.Components.Lines 1.0; TextLine {  }", root, "ContentBox's dynamic TextLine" )
         } else if(highlighting_definition.substr(0, 7) == "Formula") {
           var opts = highlighting_definition.split(",")
-          object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; FormulaLine {  }", root, "ContentBox's dynamic TextLine" )
+          object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; import StoryML.Components.Lines 1.0; FormulaLine {  }", root, "ContentBox's dynamic TextLine" )
           isFormula = true
           for(var j = 1; j < opts.length; ++j)
           {
@@ -172,7 +172,7 @@ Item
             }
           }
         } else {
-          object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; HighlightedTextLine {  }", root, "ContentBox's dynamic TextLine" )
+          object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; import StoryML.Components.Lines 1.0; HighlightedTextLine {  }", root, "ContentBox's dynamic TextLine" )
           object.highlightingDefinition = highlighting_definition
         }
 

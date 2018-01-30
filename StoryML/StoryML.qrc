@@ -16,26 +16,28 @@
         <file>Components/qmldir</file>
         <file>Components/AutoscalableText.qml</file>
         <file>Components/ContentBox.qml</file>
-        <file>Components/ContentLine.qml</file>
         <file>Components/Figure.qml</file>
-        <file>Components/ImagesLine.qml</file>
+        <file>Components/Formula.qml</file>
+        <file>Components/HighlightedText.qml</file>
+        <file>Components/Image.qml</file>
         <file>Components/Line.qml</file>
         <file>Components/ScalableText.qml</file>
         <file>Components/SliceCounter.qml</file>
         <file>Components/Table.qml</file>
         <file>Components/TableCell.qml</file>
         <file>Components/TableCellStyle.qml</file>
-        <file>Components/TextLine.qml</file>
-        <file>Components/TextLineStyle.qml</file>
+        <file>Components/Text.qml</file>
         <file>Components/Video.qml</file>
         <file>Layouts/qmldir</file>
+        <file>Layouts/Blank.qml</file>
+        <file>Layouts/CenteredText.qml</file>
+        <file>Layouts/ItemOnly.qml</file>
         <file>Layouts/Title.qml</file>
         <file>Layouts/TitleContent.qml</file>
         <file>Layouts/TitleItem.qml</file>
         <file>Layouts/TitleOnly.qml</file>
         <file>Layouts/TitleTwoColumns.qml</file>
-        <file>Layouts/CenteredText.qml</file>
-        <file>Layouts/Blank.qml</file>
+        <file>Layouts/TitleTwoItems.qml</file>
         <file>StoryTellers/qmldir</file>
         <file>StoryTellers/Linear.qml</file>
         <file>Styles/qmldir</file>
@@ -50,13 +52,13 @@
         <file>Components/Diagram/Shape.qml</file>
         <file>Components/Lines/DiagramLine.qml</file>
         <file>Components/Lines/qmldir</file>
-        <file>Layouts/ItemOnly.qml</file>
-        <file>Components/Image.qml</file>
-        <file>Components/Text.qml</file>
-        <file>Components/HighlightedTextLine.qml</file>
-        <file>Components/HighlightedText.qml</file>
-        <file>Layouts/TitleTwoItems.qml</file>
-        <file>Components/Formula.qml</file>
-        <file>Components/FormulaLine.qml</file>
+        <file>Components/Lines/ContentLine.qml</file>
+        <file>Components/Lines/ImagesLine.qml</file>
+        <file>Components/Lines/TextLine.qml</file>
+        <file>Components/Lines/TextLineStyle.qml</file>
+        <file>Components/Lines/HighlightedTextLine.qml</file>
+        <file>Components/Lines/FormulaLine.qml</file>
+        <file>Components/Lines/ItemsLine.qml</file>
+        <file>Components/Lines/VideosLine.qml</file>
     </qresource>
 </RCC>

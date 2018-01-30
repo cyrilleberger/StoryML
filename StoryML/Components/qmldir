@@ -1,13 +1,9 @@
 AutoscalableText 1.0 AutoscalableText.qml
 ContentBox 1.0 ContentBox.qml
-ContentLine 1.0 ContentLine.qml
 Figure 1.0 Figure.qml
 Formula 1.0 Formula.qml
-FormulaLine 1.0 FormulaLine.qml
 Image 1.0 Image.qml
-ImagesLine 1.0 ImagesLine.qml
 HighlightedText 1.0 HighlightedText.qml
-HighlightedTextLine 1.0 HighlightedTextLine.qml
 Line 1.0 Line.qml
 ScalableText 1.0 ScalableText.qml
 SliceCounter 1.0 SliceCounter.qml
@@ -15,6 +11,4 @@ Table 1.0 Table.qml
 TableCell 1.0 TableCell.qml
 TableCellStyle 1.0 TableCellStyle.qml
 Text 1.0 Text.qml
-TextLine 1.0 TextLine.qml
-TextLineStyle 1.0 TextLineStyle.qml
 Video 1.0 Video.qml

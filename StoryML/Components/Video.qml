@@ -62,8 +62,6 @@ Item
       controlPositionSlider.enable_seeking = true
     }
   }
-  width: sourceRect.width
-  height: sourceRect.height
   VideoOutput
   {
     id: videoOutput
@@ -164,19 +162,38 @@ Item
       control.height = 0
     }
   }
+  function __updateSize(width_fix, height_fix)
+  {
+    __updating_size = true
+    if(!width_fix && !height_fix)
+    {
+      width = sourceRect.width
+      height = sourceRect.height
+    } else if(height_fix && !width_fix)
+    {
+      width = sourceRect.width * height / sourceRect.height
+    } else if(width_fix && !height_fix)
+    {
+      height = sourceRect.height * width / sourceRect.width
+    }
+    __updating_size = false
+  }
 
   onWidthChanged:
   {
-    if(width != sourceRect.width)
-    {
-      height = Qt.binding(function() { return videoOutput.sourceRect.height * width / videoOutput.sourceRect.width } )
-    }
+    if(__updating_size) return;
+    __set_width = width
+    __updateSize(true, false)
   }
-/*  onHeightChanged:
+  onHeightChanged:
   {
-    if(height != sourceRect.height)
-    {
-      width = Qt.binding(function() { return videoOutput.contentRect.width } )
-    }
-  }*/
+    if(__updating_size) return;
+    __set_height = height
+    __updateSize(false, true)
+  }
+  onSourceRectChanged: __updateSize(__set_width > 0, __set_height > 0)
+  property real __set_width: 0
+  property real __set_height: 0
+  property bool __updating_size: false
+
 }

@@ -1,9 +1,9 @@
 /* Copyright (c) 2014, Cyrille Berger <cberger@cberger.net>
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -17,23 +17,24 @@
  */
 
 import StoryML 1.0
-import QtQuick 2.0 as QQ
+import QtQuick 2.0
 import StoryML.Components 1.0
 
 ContentLine
 {
   id: root
-  property int imageHeight: height
-  property variant imageHeights: []
-  property alias imageSpacing: row.spacing
-  property variant sources
+  property int itemHeight: height
+  property variant itemHeights: []
+  property alias itemSpacing: row.spacing
+  property variant model
+  property Component component
   function height_at(index)
   {
-    if(index < imageHeights.length)
+    if(index < itemHeights.length)
     {
-      return imageHeights[index]
+      return itemHeights[index]
     } else {
-      return imageHeight
+      return itemHeight
     }
   }
   function __max(h, hs)
@@ -46,24 +47,24 @@ ContentLine
     return mh
   }
 
-  QQ.Item
+  Item
   {
     id: container
-    height: __max(imageHeight, imageHeights)
+    height: __max(itemHeight, itemHeights)
     width: childrenAvailableWidth
-    QQ.Row
+    Row
     {
       anchors.centerIn: parent
       id: row
-      QQ.Repeater
+      Repeater
       {
-        model: root.sources
-        delegate: QQ.Image
+        model: root.model
+        delegate: Loader
         {
           y: 0.5 * (container.height - height)
           height: height_at(index)
-          fillMode: QQ.Image.PreserveAspectFit
-          source: modelData
+          sourceComponent: root.component
+          property variant itemData: modelData
         }
       }
     }

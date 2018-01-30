@@ -107,8 +107,17 @@ Canvas
   Text
   {
     id: text_box
-    anchors.horizontalCenter: root.horizontalCenter
-    anchors.bottom: root.top
+    transform: [
+      Translate {
+        x: (root.width - text_box.width) * 0.5
+        y: root.height * 0.5 - text_box.height
+      },
+      Rotation {
+        origin.x: root.width * 0.5
+        origin.y: root.height * 0.5
+        angle: 180 * Math.atan2(connectionPoint2.absoluteY - connectionPoint1.absoluteY, connectionPoint2.absoluteX - connectionPoint1.absoluteX) / Math.PI
+      }
+    ]
   }
 }
 

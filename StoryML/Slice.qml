@@ -19,6 +19,7 @@
 import QtQuick 2.0
 import StoryML 1.0
 import StoryML.Components 1.0
+import StoryML.Components.Lines 1.0
 
 StoryElement
 {
