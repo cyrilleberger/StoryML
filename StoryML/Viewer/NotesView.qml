@@ -104,8 +104,18 @@ SplitView
     color: "white"
     Text
     {
+      function __get_notes(notes, frame)
+      {
+        if(Array.isArray(notes))
+        {
+          return notes[Math.min(frame, notes.length - 1)]
+        } else {
+          return notes
+        }
+      }
+
       anchors.fill: parent
-      text: presentation_instance ? presentation_instance.storyTeller.currentSlice.notes : ""
+      text: presentation_instance ? __get_notes(presentation_instance.storyTeller.currentSlice.notes, presentation_instance.storyTeller.animationFrame)  : ""
       wrapMode: Text.WordWrap
       font.pixelSize: 60
     }

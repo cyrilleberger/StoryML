@@ -28,7 +28,7 @@ StoryElement
   property Component layout: defaultLayout
   property Component  style: defaultStyle
   property int sliceNumber
-  property string notes
+  property variant notes
 
   property SliceAnimation animation: SliceAnimation { frame: -1; parentItem: root}
   property SliceStyle  style_instance:  styleLoader.item
