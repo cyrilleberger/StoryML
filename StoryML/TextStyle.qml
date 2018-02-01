@@ -26,17 +26,52 @@ Item {
   Text {
     id: forfont
     visible: false
-    font.bold: root.inherits ? root.inherits.font.bold : forfontdefault.font.bold
-    font.capitalization: root.inherits ? root.inherits.font.capitalization : forfontdefault.font.capitalization
-    font.family: root.inherits ? root.inherits.font.family : forfontdefault.font.family
-    font.italic: root.inherits ? root.inherits.font.italic : forfontdefault.font.italic
-    font.letterSpacing: root.inherits ? root.inherits.font.letterSpacing : forfontdefault.font.letterSpacing
-    font.overline: root.inherits ? root.inherits.font.overline : forfontdefault.font.overline
-    font.pointSize: root.inherits ? root.inherits.font.pointSize : forfontdefault.font.pointSize
-    font.strikeout: root.inherits ? root.inherits.font.strikeout : forfontdefault.font.strikeout
-    font.underline: root.inherits ? root.inherits.font.underline : forfontdefault.font.underline
-    font.weight: root.inherits ? root.inherits.font.weight : forfontdefault.font.weight
-    font.wordSpacing: root.inherits ? root.inherits.font.wordSpacing : forfontdefault.font.wordSpacing
+  }
+  onInheritsChanged:
+  {
+    if(root.inherits)
+    {
+      if(font.bold === forfontdefault.font.bold)
+      {
+        font.bold = Qt.binding(function() { return root.inherits.font.bold })
+      }
+      if(font.family === forfontdefault.font.family)
+      {
+        font.family = Qt.binding(function() { return root.inherits.font.family })
+      }
+      if(font.italic === forfontdefault.font.italic)
+      {
+        font.italic = Qt.binding(function() { return root.inherits.font.italic })
+      }
+      if(font.letterSpacing === forfontdefault.font.letterSpacing)
+      {
+        font.letterSpacing = Qt.binding(function() { return root.inherits.font.letterSpacing })
+      }
+      if(font.overline === forfontdefault.font.overline)
+      {
+        font.overline = Qt.binding(function() { return root.inherits.font.overline })
+      }
+      if(font.pointSize === forfontdefault.font.pointSize)
+      {
+        font.pointSize = Qt.binding(function() { return root.inherits.font.pointSize })
+      }
+      if(font.strikeout === forfontdefault.font.strikeout)
+      {
+        font.strikeout = Qt.binding(function() { return root.inherits.font.strikeout })
+      }
+      if(font.underline === forfontdefault.font.underline)
+      {
+        font.underline = Qt.binding(function() { return root.inherits.font.underline })
+      }
+      if(font.weight === forfontdefault.font.weight)
+      {
+        font.weight = Qt.binding(function() { return root.inherits.font.weight })
+      }
+      if(font.wordSpacing === forfontdefault.font.wordSpacing)
+      {
+        font.wordSpacing = Qt.binding(function() { return root.inherits.font.wordSpacing })
+      }
+    }
   }
   Text
   {

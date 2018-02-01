@@ -36,5 +36,6 @@ ScalableText
   }
   onTextChanged: updateFontSize()
   onWidthChanged: updateFontSize()
+  onContentWidthChanged: updateFontSize()
   onFontChanged: updateFontSize()
 }
