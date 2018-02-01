@@ -10,7 +10,7 @@ import org.storyml.textedit 1.0
 ApplicationWindow
 {
   id: root
-  title: "StoryML Edit - " + __display_filename(presentationFileIO.url) + (modified ? "*" : "")
+  title: "StoryML - " + __display_filename(presentationFileIO.url) + (modified ? "*" : "")
   width: 800
   height: 600
   visible: true

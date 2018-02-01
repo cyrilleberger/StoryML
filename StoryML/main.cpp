@@ -1,6 +1,5 @@
 #include <QApplication>
 #include <QCommandLineParser>
-#include <QDebug>
 
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -10,11 +9,11 @@
 int main(int argc, char *argv[])
 {
   QApplication app(argc, argv);
-  QCoreApplication::setApplicationName("StoryPlayer");
+  QCoreApplication::setApplicationName("StoryEditor");
   QCoreApplication::setApplicationVersion("1.0");
 
   QCommandLineParser parser;
-  parser.setApplicationDescription("Application for playing StoryML files.");
+  parser.setApplicationDescription("Application for editing and playing StoryML files.");
   parser.addHelpOption();
   parser.addVersionOption();
   parser.addPositionalArgument("file", QCoreApplication::translate("main", "The file to open."));
@@ -27,9 +26,7 @@ int main(int argc, char *argv[])
   engine.rootContext()->setContextProperty("cmd_filename", filename);
   engine.rootContext()->setContextProperty("Extension", new Extension(&engine));
   engine.addImportPath("qrc:/qml");
-  engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+  engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
   return app.exec();
 }
-
-#include "moc_Extension.cpp"
