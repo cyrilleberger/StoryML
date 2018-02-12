@@ -29,7 +29,7 @@ Text
   {
     if(p)
     {
-      if(p.style_instance) // Not really a perfect check that p is a slice
+      if(p.isSlice)
       {
         return p
       }
