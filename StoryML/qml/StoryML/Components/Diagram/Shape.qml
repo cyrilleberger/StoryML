@@ -13,6 +13,7 @@ Item
   property alias backgroundColor: rectangle.color
   property alias border: rectangle.border
   property alias text: scalableText.text
+  property var animatedTexts: [""]
   property alias horizontalAlignment: scalableText.horizontalAlignment
   property alias fontScale: scalableText.fontScale
   property alias font: scalableText.baseFont
@@ -73,6 +74,7 @@ Item
     id: scalableText
     anchors.fill: root
     anchors.margins: 5
+    text: root.animatedTexts[Math.min(Math.max(0, root.animation.frame), root.animatedTexts.length) ]
     color: __getValue(root.style, 2, root.parent.style_instance.text.color)
     baseFont: root.parent.style_instance.text.font
     horizontalAlignment: Text.AlignHCenter
