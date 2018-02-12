@@ -250,6 +250,7 @@ ApplicationWindow
     property bool preview2Ready: preview_2.status == Loader.Ready && preview_2.item && preview_2.item.readyToTell
 
     property int currentSliceIndex: 0
+    property StoryTeller currentStoryTeller
 
     onCurrentSliceIndexChanged: {
       if(preview1Ready && preview_1.z == 1)
@@ -273,6 +274,7 @@ ApplicationWindow
         preview_1.z = 1
         preview_2.z = 0
         editorItem.__preview_items = [ preview_2, preview_1 ]
+        editorItem.currentStoryTeller = preview_1.item.storyTeller
         editorItem.__updateIfNeeded()
       }
     }
@@ -288,6 +290,7 @@ ApplicationWindow
         preview_2.z = 1
         preview_1.z = 0
         editorItem.__preview_items = [ preview_1, preview_2 ]
+        editorItem.currentStoryTeller = preview_2.item.storyTeller
         editorItem.__updateIfNeeded()
       }
     }
@@ -347,6 +350,7 @@ ApplicationWindow
       }
       Row
       {
+        id: slideSelector
         anchors.top: preview.bottom
         width: sideBar.width
         SpinBox
@@ -376,6 +380,31 @@ ApplicationWindow
             currentIndexSpinBox.__disableValueChanged = false;
             editorItem.currentSliceIndex = value
           }
+        }
+      }
+      Rectangle
+      {
+        width: sideBar.width
+        anchors.top: slideSelector.bottom
+        anchors.bottom: errorRectangle.top
+        anchors.bottomMargin: 3
+        color: "white"
+        Text
+        {
+          function __get_notes(notes, frame)
+          {
+            if(Array.isArray(notes))
+            {
+              return notes[Math.min(frame, notes.length - 1)]
+            } else {
+              return notes
+            }
+          }
+
+          anchors.fill: parent
+          text: editorItem.currentStoryTeller ? __get_notes(editorItem.currentStoryTeller.currentSlice.notes, editorItem.currentStoryTeller.animationFrame)  : ""
+          wrapMode: Text.WordWrap
+          font.pixelSize: 10
         }
       }
 
