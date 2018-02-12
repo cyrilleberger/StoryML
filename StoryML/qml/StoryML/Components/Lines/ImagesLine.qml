@@ -8,6 +8,7 @@ ItemsLine {
   property alias imageHeights: root.itemHeights
   property alias imageSpacing: root.itemSpacing
   property alias sources: root.model
+  property var u: Qt.resolvedUrl
 
   component: QQ.Image
   {
