@@ -35,10 +35,10 @@ Text {
       {
         return slice.parent
       } else {
-        return null;
+        return __findPresentation(slice.parent);
       }
     } else {
-      return __findPresentation(slice)
+      return null
     }
   }
 
