@@ -105,8 +105,8 @@ ApplicationWindow
             var presentation                = Qt.createComponent(root.__presentationUrl())
             notesView.presentation          = presentation
             presentationWindow.presentation = presentation
-            notesWindow.visible             = true
-            presentationWindow.visible      = true
+            notesWindow.showMaximized()
+            presentationWindow.showFullScreen()
           }
         }
         ToolButton
