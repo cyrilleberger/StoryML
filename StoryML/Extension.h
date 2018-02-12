@@ -6,6 +6,7 @@
 #include <QQuickTextDocument>
 #include <Repository>
 #include <QTemporaryDir>
+#include <QMimeDatabase>
 
 class Extension : public QObject
 {
@@ -15,9 +16,11 @@ public:
   ~Extension();
   Q_INVOKABLE void setSyntaxHighlighting(QQuickTextDocument* textDocument, const QString& _highlightingName);
   Q_INVOKABLE QString formulaFile(const QString& _formula, const QColor& _color, bool _centered);
+  Q_INVOKABLE QString mimeTypeForUrl(const QUrl& _url);
 private:
   KSyntaxHighlighting::Repository m_repository;
   QHash<QString, QTemporaryDir*> m_formulas;
+  QMimeDatabase m_mimeDatabase;
 };
 
 #endif

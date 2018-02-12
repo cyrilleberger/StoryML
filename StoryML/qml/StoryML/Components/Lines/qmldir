@@ -1,6 +1,7 @@
 ContentLine 1.0 ContentLine.qml
 DiagramLine 1.0 DiagramLine.qml
 ImagesLine 1.0 ImagesLine.qml
+MediasLine 1.0 MediasLine.qml
 FormulaLine 1.0 FormulaLine.qml
 HighlightedTextLine 1.0 HighlightedTextLine.qml
 TextLine 1.0 TextLine.qml

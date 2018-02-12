@@ -16,3 +16,6 @@ include(../deployment.pri)
 
 OTHER_FILES += qml/main.qml
 OTHER_FILES += qml/StoryML/* qml/StoryML/Components/* qml/StoryML/Components/Diagram/* qml/StoryML/Components/Lines/* qml/StoryML/Layouts/* qml/StoryML/StoryTellers/* qml/StoryML/Styles/* qml/StoryML/Viewer/*
+
+DISTFILES += \
+    qml/StoryML/Components/Lines/MediasLine.qml

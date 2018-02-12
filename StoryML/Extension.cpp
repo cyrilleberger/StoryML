@@ -85,3 +85,7 @@ QString Extension::formulaFile(const QString& _formula, const QColor& _color, bo
   return "file://" + dir->path() + "/formula.png";
 }
 
+QString Extension::mimeTypeForUrl(const QUrl& _url)
+{
+  return m_mimeDatabase.mimeTypeForUrl(_url).name();
+}

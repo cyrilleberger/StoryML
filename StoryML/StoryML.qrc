@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-      <file>qml/main.qml</file>
+        <file>qml/main.qml</file>
         <file>qml/StoryML/qmldir</file>
         <file>qml/StoryML/Group.qml</file>
         <file>qml/StoryML/Presentation.qml</file>
@@ -61,5 +61,6 @@
         <file>qml/StoryML/Components/Lines/FormulaLine.qml</file>
         <file>qml/StoryML/Components/Lines/ItemsLine.qml</file>
         <file>qml/StoryML/Components/Lines/VideosLine.qml</file>
+        <file>qml/StoryML/Components/Lines/MediasLine.qml</file>
     </qresource>
 </RCC>
