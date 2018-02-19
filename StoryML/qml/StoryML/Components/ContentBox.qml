@@ -144,7 +144,7 @@ Item
           }
           start += 1
         }
-        else if(c[start] === '\\' && c[start] === '[')
+        else if(c[start] === '\\' && c[start+1] === '[')
         {
           start += 1
         }
