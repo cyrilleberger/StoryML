@@ -1,5 +1,6 @@
 import QtQuick 2.0
-import QtQuick.Controls 1.0
+import QtQuick.Controls 1.0 as QC1
+import QtQuick.Controls 2.4
 import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.1
 import QtQuick.Window 2.0
@@ -58,17 +59,16 @@ ApplicationWindow
     return pathArray[pathArray.length - 1]
   }
 
-  Action {
-      id: saveAction
-      text: "&Save"
-      shortcut: "Ctrl+S"
-      iconName: "document-save"
-      onTriggered: root.save()
-
-      tooltip: "Save the presentation"
+  Action
+  {
+    id: saveAction
+    text: "&Save"
+    shortcut: "Ctrl+S"
+    icon.name: "document-save"
+    onTriggered: root.save()
   }
 
-  toolBar:
+  header:
     ToolBar
     {
       RowLayout
@@ -76,7 +76,7 @@ ApplicationWindow
         ToolButton
         {
           text: "Open"
-          iconName: "document-open"
+          icon.name: "document-open"
           onClicked:
           {
             openFileDialog.open()
@@ -89,7 +89,7 @@ ApplicationWindow
         ToolButton
         {
           text: "Save as"
-          iconName: "document-save-as"
+          icon.name: "document-save-as"
           onClicked:
           {
             saveFileDialog.open()
@@ -98,8 +98,7 @@ ApplicationWindow
         ToolButton
         {
           text: "Start presentation"
-          iconName: "media-playback-start"
-          enabled: editorItem.validPresentation
+          icon.name: "media-playback-start"
           onClicked:
           {
             var presentation                = Qt.createComponent(root.__presentationUrl())
@@ -112,8 +111,7 @@ ApplicationWindow
         ToolButton
         {
           text: "Export to PDF"
-          iconName: "application-pdf"
-          enabled: editorItem.validPresentation
+          icon.name: "application-pdf"
           visible: root.__printWindow
           onClicked:
           {
@@ -184,8 +182,8 @@ ApplicationWindow
       {
         id: rows
         value: 2
-        minimumValue: 1
-        maximumValue: 10
+        from: 1
+        to: 10
       }
       Label {
         text: "Columns:"
@@ -194,8 +192,8 @@ ApplicationWindow
       {
         id: columns
         value: 2
-        minimumValue: 1
-        maximumValue: 10
+        from: 1
+        to: 10
       }
       Label {
         text: "Margin:"
@@ -204,8 +202,8 @@ ApplicationWindow
       {
         id: margin
         value: 20
-        minimumValue: 0
-        maximumValue: 100
+        from: 0
+        to: 100
       }
       CheckBox
       {
@@ -236,6 +234,11 @@ ApplicationWindow
     }
   }
 
+  QC1.SplitView
+  {
+    id: editorItem
+  }
+/*
   SplitView
   {
     id: editorItem
@@ -513,5 +516,5 @@ Presentation {
   onClosing:
   {
     if(root.modified) shouldSaveFile.open()
-  }
+  }*/
 }

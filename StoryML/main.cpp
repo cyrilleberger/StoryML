@@ -4,6 +4,8 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
+#include <QQuickStyle>
+
 #include "Extension.h"
 
 int main(int argc, char *argv[])
@@ -12,6 +14,8 @@ int main(int argc, char *argv[])
   QCoreApplication::setApplicationName("StoryEditor");
   QCoreApplication::setApplicationVersion("1.0");
 
+  QQuickStyle::setStyle("org.kde.desktop");
+  
   QCommandLineParser parser;
   parser.setApplicationDescription("Application for editing and playing StoryML files.");
   parser.addHelpOption();

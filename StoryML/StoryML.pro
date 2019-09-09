@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets KSyntaxHighlighting
+QT += qml quick widgets KSyntaxHighlighting quickcontrols2
 CONFIG += C++11
 
 SOURCES += main.cpp Extension.cpp
