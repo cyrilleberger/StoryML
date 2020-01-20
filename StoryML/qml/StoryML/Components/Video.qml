@@ -26,7 +26,7 @@ Item
 {
   id: root
   property SliceAnimation animation: SliceAnimation {  parentItem: root }
-  property alias source:      player.source
+  property url source
   property alias sourceRect:  videoOutput.sourceRect
   property alias muted:       player.muted
   Component.onCompleted: {
@@ -55,6 +55,17 @@ Item
     id: player
     autoPlay: false
     loops: MediaPlayer.Infinite
+    source: fix_url(root.source)
+    function fix_url(ur)
+    {
+      var urs = ur.toString()
+      if(!urs.startsWith("file:///") && urs.startsWith("file://"))
+      {
+        urs = "file:///" + urs.substr(7)
+      }
+      return urs;
+    }
+
     onPositionChanged:
     {
       controlPositionSlider.enable_seeking = false
