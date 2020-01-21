@@ -1,9 +1,8 @@
-import QtQuick 2.0
-import QtQuick.Controls 1.0
+import QtQuick 2.9
 import QtQuick.Controls.Styles 1.4
 import StoryML 1.0
 
-TextArea
+TextEdit
 {
   id: root
   property string highlightingDefinition
@@ -14,9 +13,9 @@ TextArea
   }
   readOnly: true
   height: contentHeight
-  verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
   property font baseFont: __createBaseFont()
   property real fontScale: 1
+  property alias textColor: root.color
 
   function __createBaseFont()
   {
@@ -27,16 +26,13 @@ TextArea
   function updateFont()
   {
     font = baseFont
+    font.family = "Monospace"
     font.pointSize = fontScale * baseFont.pointSize
 //    font.pixelSize = fontScale * baseFont.pixelSize
   }
+  renderType: Text.QtRendering
   selectByMouse: false
   selectByKeyboard: false
   onBaseFontChanged: updateFont()
   onFontScaleChanged: updateFont()
-
-  style: TextAreaStyle {
-    frame: Item {
-    }
-  }
 }
