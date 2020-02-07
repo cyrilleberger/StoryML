@@ -9,13 +9,10 @@ HEADERS += Extension.h
 RESOURCES += StoryML.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH = qml
+#QML_IMPORT_PATH = qml
 
-# Default rules for deployment.
-include(../deployment.pri)
+#OTHER_FILES += qml/main.qml
+#OTHER_FILES += qml/StoryML/* qml/StoryML/Components/* qml/StoryML/Components/Diagram/* qml/StoryML/Components/Lines/* qml/StoryML/Layouts/* qml/StoryML/StoryTellers/* qml/StoryML/Styles/* qml/StoryML/Viewer/*
 
-OTHER_FILES += qml/main.qml
-OTHER_FILES += qml/StoryML/* qml/StoryML/Components/* qml/StoryML/Components/Diagram/* qml/StoryML/Components/Lines/* qml/StoryML/Layouts/* qml/StoryML/StoryTellers/* qml/StoryML/Styles/* qml/StoryML/Viewer/*
-
-DISTFILES += \
-    qml/StoryML/Components/Lines/MediasLine.qml
+target.path = "$${target.path}/bin"
+INSTALLS += target
