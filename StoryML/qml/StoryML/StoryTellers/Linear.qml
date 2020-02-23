@@ -167,10 +167,10 @@ StoryTeller {
     {
       root.currentSliceIndex = __inputSliceIndex - 1
       __inputSliceIndex = 0
-    } else if(event.key === Qt.Key_Space || event.key === Qt.Key_Right)
+    } else if(event.key === Qt.Key_Space || event.key === Qt.Key_Right || event.key == Qt.Key_PageDown)
     {
       next();
-    } else if(event.key === Qt.Key_Left)
+    } else if(event.key === Qt.Key_Left || event.key == Qt.Key_PageUp)
     {
       previous();
     }
