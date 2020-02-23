@@ -16,6 +16,7 @@ TextEdit
   property font baseFont: __createBaseFont()
   property real fontScale: 1
   property alias textColor: root.color
+  wrapMode: TextEdit.WordWrap
 
   function __createBaseFont()
   {
