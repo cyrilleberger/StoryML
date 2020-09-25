@@ -4,6 +4,7 @@ ImagesLine 1.0 ImagesLine.qml
 MediasLine 1.0 MediasLine.qml
 FormulaLine 1.0 FormulaLine.qml
 HighlightedTextLine 1.0 HighlightedTextLine.qml
+ItemsLine 1.0 ItemsLine.qml
 TextLine 1.0 TextLine.qml
 TextLineStyle 1.0 TextLineStyle.qml
 VideosLine 1.0 VideosLine.qml

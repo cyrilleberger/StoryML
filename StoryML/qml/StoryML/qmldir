@@ -7,5 +7,6 @@ SliceStyle 1.0 SliceStyle.qml
 SliceAnimation 1.0 SliceAnimation.qml
 StoryTeller 1.0 StoryTeller.qml
 Story 1.0 Story.qml
+StoryElement 1.0 StoryElement.qml
 TextStyle 1.0 TextStyle.qml
 Utils 1.0 Utils.js
