@@ -311,7 +311,7 @@ Item
           object = c
           object.parent = root
         } else {
-          object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; " + c.type + " { }", root, "ContentBox's dynamic item" )
+          object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; import StoryML.Components.Lines 1.0; " + c.type + " { }", root, "ContentBox's dynamic item" )
           for(var k in c)
           {
             if(k != 'type')
@@ -329,7 +329,7 @@ Item
 
         }
       } else {
-        object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; TextLine {  }", root, "ContentBox's dynamic TextLine" )
+        object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; import StoryML.Components.Lines 1.0; TextLine {  }", root, "ContentBox's dynamic TextLine" )
         object.text = "ContentBox.qml: unsupported " + c
       }
 

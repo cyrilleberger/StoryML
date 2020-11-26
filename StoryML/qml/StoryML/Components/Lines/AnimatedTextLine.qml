@@ -10,7 +10,6 @@ TextLine
   text: __select_text(__texts, animation.frame - animation.first)
   function __select_text(_texts, _index)
   {
-    console.log(root.animation.first, root.animation.last, __texts.length)
     if(_texts.length == 0) return ""
     if(_index < 0) _index = 0
     if(_index >= __texts.length) _index = __texts.length - 1
