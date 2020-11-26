@@ -23,6 +23,6 @@ TextLine
     } else {
       __texts = texts
     }
-    animation.last = __texts.length
+    animation.last = __texts.length - 1
   }
 }
