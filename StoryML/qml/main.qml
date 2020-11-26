@@ -347,6 +347,14 @@ ApplicationWindow
             }
           }
         }
+        Text
+        {
+          id: updatingLabel
+          visible: preview_1.status == Loader.Loading || preview_2.status == Loader.Loading
+          text: "Updating..."
+          anchors.centerIn: parent
+          z: 100
+        }
       }
       Row
       {
