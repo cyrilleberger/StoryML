@@ -51,6 +51,7 @@
         <file>qml/StoryML/Components/Diagram/ConnectionPoint.qml</file>
         <file>qml/StoryML/Components/Diagram/qmldir</file>
         <file>qml/StoryML/Components/Diagram/Shape.qml</file>
+        <file>qml/StoryML/Components/Lines/AnimatedTextLine.qml</file>
         <file>qml/StoryML/Components/Lines/DiagramLine.qml</file>
         <file>qml/StoryML/Components/Lines/qmldir</file>
         <file>qml/StoryML/Components/Lines/ContentLine.qml</file>

@@ -144,6 +144,7 @@ Item
       var c = _content[i]
       var object
       var isFormula = false
+      var isAnimatedText = false
       if(typeof c == 'string')
       {
         var start = 0;
@@ -183,7 +184,26 @@ Item
                 break;
               default:
                 console.log("Unkwown key " + kv[0])
-                  break;
+                break;
+            }
+          }
+        } else if(highlighting_definition.substr(0, 8) == "Animated") {
+          var opts = highlighting_definition.split(",")
+          object = Qt.createQmlObject("import StoryML 1.0; import QtQuick 2.0; import StoryML.Components.Lines 1.0; AnimatedTextLine {  }", root, "ContentBox's dynamic TextLine" )
+          isAnimatedText = true
+          for(var j = 1; j < opts.length; ++j)
+          {
+            var kv = opts[j].split("=")
+              console.log(kv[0], kv[1])
+            switch(kv[0])
+            {
+              case "s":
+              case "seperator":
+                object.seperator = kv[1]
+                break;
+              default:
+                console.log("Unkwown key " + kv[0])
+                break;
             }
           }
         } else {
@@ -266,6 +286,15 @@ Item
             object.formulas = [c.substring(start, c.length)];
           } else {
             object.formulas = [""]
+          }
+        }
+        else if(isAnimatedText)
+        {
+          if(start < c.length)
+          {
+            object.texts = c.substring(start, c.length);
+          } else {
+            object.texts = [""]
           }
         }
         else if(start < c.length)
