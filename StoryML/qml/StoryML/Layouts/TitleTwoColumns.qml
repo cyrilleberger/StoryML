@@ -27,6 +27,8 @@ SliceLayout
   property int marginBottom: 0
   property int marginTop: 0
   property real leftColumnWidth: 0.5
+  property alias leftFontScale: left.fontScale
+  property alias rightFontScale: right.fontScale
 
   AutoscalableText {
     id: titleText
@@ -46,6 +48,7 @@ SliceLayout
   property int __total_column_width: (root.width - 3 * root.margin)
   ContentBox
   {
+    id: left
     x: root.margin
     y: slice.style_instance.headerSize + root.margin + root.marginTop
     width: __total_column_width * leftColumnWidth
@@ -56,6 +59,7 @@ SliceLayout
   }
   ContentBox
   {
+    id: right
     x: 2 * root.margin + __total_column_width * leftColumnWidth
     y: slice.style_instance.headerSize + root.margin + root.marginTop
     width: __total_column_width * (1.0 - leftColumnWidth)

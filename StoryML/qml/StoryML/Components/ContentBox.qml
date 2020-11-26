@@ -35,11 +35,21 @@ Item
   property real __childrenHeight: 0
   property bool readyToTell: false
 
+  property var fontScale: null
+  onFontScaleChanged: root.__resetUpdateFontScale()
+
   function __resetUpdateFontScale()
   {
-    __fontScale             = 1
-    __smallestBadFontScale  = 1
-    __largestGoodFontScale  = 0
+    if(root.fontScale != null)
+    {
+      __fontScale = fontScale
+      __smallestBadFontScale  = fontScale
+      __largestGoodFontScale  = fontScale
+    } else {
+      __fontScale             = 1
+      __smallestBadFontScale  = 1
+      __largestGoodFontScale  = 0
+    }
   }
 
   Timer
@@ -87,20 +97,25 @@ Item
 
   function __updateFontScale()
   {
-    if(__childrenHeight < height)
+    if(root.fontScale != null)
     {
-      root.__largestGoodFontScale = __fontScale
+      __fontScale = fontScale
     } else {
-      root.__smallestBadFontScale = __fontScale
-    }
-    if(root.__largestGoodFontScale > 0.99 * root.__smallestBadFontScale)
-    {
-      check_fontScale.restart()
-      __fontScale = root.__largestGoodFontScale
-    } else if(__childrenHeight > height || __childrenHeight < 0.9 * height)
-    {
-      __fontScale = 0.5 * (root.__largestGoodFontScale + root.__smallestBadFontScale)
-      check_fontScale.restart()
+      if(__childrenHeight < height)
+      {
+        root.__largestGoodFontScale = __fontScale
+      } else {
+        root.__smallestBadFontScale = __fontScale
+      }
+      if(root.__largestGoodFontScale > 0.99 * root.__smallestBadFontScale)
+      {
+        check_fontScale.restart()
+        __fontScale = root.__largestGoodFontScale
+      } else if(__childrenHeight > height || __childrenHeight < 0.9 * height)
+      {
+        __fontScale = 0.5 * (root.__largestGoodFontScale + root.__smallestBadFontScale)
+        check_fontScale.restart()
+      }
     }
   }
 

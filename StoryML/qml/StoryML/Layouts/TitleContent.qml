@@ -28,6 +28,7 @@ SliceLayout
   property int marginRight: 0
   property int marginLeft: 0
   readyToTell: contentBox.readyToTell
+  property alias fontScale: contentBox.fontScale
   AutoscalableText {
     id: titleText
     x: root.margin
