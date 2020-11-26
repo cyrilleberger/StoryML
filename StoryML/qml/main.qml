@@ -452,6 +452,12 @@ ApplicationWindow
         }
       }
     }
+    Timer
+    {
+      id: delayedUpdate
+      interval: 1000
+      onTriggered: editorItem.__updateIfNeeded()
+    }
     TextEditorArea
     {
       id: editor
@@ -474,7 +480,7 @@ Presentation {
       {
         root.modified         = true
         editorItem.__uptodate = false
-        editorItem.__updateIfNeeded()
+        delayedUpdate.restart()
       }
     }
   }
