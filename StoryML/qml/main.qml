@@ -442,8 +442,10 @@ ApplicationWindow
           }
           function showComponentError(component, url)
           {
-            var eS            = component.errorString().replace(new RegExp(url, "gm"), "Line")
+            var urs = String(url).replace("file:////", "file://")
+            var eS            = component.errorString().replace(urs, "Line")
             editorItem.__errorLineNumber = eS.match(/^Line:(.*?) /)[1]; // TODO array
+
             errorText.text    = eS.replace(/Line:/g, "")
             errorText.visible = true
           }
