@@ -450,6 +450,12 @@ ApplicationWindow
             errorText.visible = true
           }
         }
+        MouseArea
+        {
+          enabled: errorText.text.length > 0
+          anchors.fill: parent
+          onClicked: editor.moveToLine(editorItem.__errorLineNumber - 1)
+        }
       }
     }
     Timer
