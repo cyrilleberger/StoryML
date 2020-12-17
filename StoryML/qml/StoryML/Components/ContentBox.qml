@@ -19,7 +19,7 @@
 import QtQuick 2.0
 import StoryML 1.0
 
-Item
+Column
 {
   id: root
   property variant content
@@ -40,6 +40,7 @@ Item
 
   function __resetUpdateFontScale()
   {
+    console.log("reset")
     if(root.fontScale != null)
     {
       __fontScale = fontScale
@@ -54,35 +55,27 @@ Item
 
   Timer
   {
-    id: relayout
-    interval: 200
-    onTriggered: {
-      var y = 0
-
-      for(var i = 0; i < root.children.length; ++i)
-      {
-        var c = root.children[i]
-        c.y = y
-        y += c.height
-      }
-      __childrenHeight = y
-      root.__updateFontScale()
-    }
-  }
-  Timer
-  {
     id: check_fontScale
     interval: 400
     onTriggered: {
-      if(__childrenHeight > height)
+      if(root.children.length > 0)
       {
-        if(__smallestBadFontScale > 0.9999)
+        var last_child = root.children[root.children.length - 1]
+        __childrenHeight = last_child.y + last_child.height
+        if(__childrenHeight > height
+          || ((height - __childrenHeight) > (__childrenHeight / root.children.length) && __largestGoodFontScale < 0.95 ) )
         {
-          root.__resetUpdateFontScale()
+          __updateFontScale()
+          if(__childrenHeight > height && __smallestBadFontScale > 0.9999)
+          {
+            root.__resetUpdateFontScale()
+            __updateFontScale()
+          }
+        } else {
+          root.readyToTell = true
         }
-        __updateFontScale()
       } else {
-        root.readyToTell = true
+        __childrenHeight = 0
       }
     }
   }
@@ -101,6 +94,7 @@ Item
     {
       __fontScale = fontScale
     } else {
+      console.log(__childrenHeight < height, __fontScale, root.__smallestBadFontScale, root.__largestGoodFontScale)
       if(__childrenHeight < height)
       {
         root.__largestGoodFontScale = __fontScale
@@ -109,23 +103,26 @@ Item
       }
       if(root.__largestGoodFontScale > 0.99 * root.__smallestBadFontScale)
       {
+        console.log("a")
         check_fontScale.restart()
         __fontScale = root.__largestGoodFontScale
       } else if(__childrenHeight > height || __childrenHeight < 0.9 * height)
       {
+        console.log("b")
         __fontScale = 0.5 * (root.__largestGoodFontScale + root.__smallestBadFontScale)
         check_fontScale.restart()
       }
+      console.log(__childrenHeight, height, __fontScale, root.__largestGoodFontScale, root.__smallestBadFontScale)
     }
   }
 
   onHeightChanged: {
     root.__resetUpdateFontScale()
-    relayout.restart()
+    check_fontScale.restart()
   }
   onWidthChanged: {
     root.__resetUpdateFontScale()
-    relayout.restart()
+    check_fontScale.restart()
   }
 
   onContentChanged:
@@ -336,7 +333,7 @@ Item
       object.width = Qt.binding(function() { return root.width; })
       object.fontScale = Qt.binding(function() { return root.__fontScale; })
       object.animation.frame = Qt.binding(function() { return root.animation.frame; })
-      object.onHeightChanged.connect(function() { relayout.restart() })
+      object.onHeightChanged.connect(function() { check_fontScale.restart() })
       if(object.indentation === 0)
       {
         object.style = Qt.binding(function() { return root.style.level0; })

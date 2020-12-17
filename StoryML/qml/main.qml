@@ -275,7 +275,7 @@ ApplicationWindow
         preview_2.z = 0
         editorItem.__preview_items = [ preview_2, preview_1 ]
         editorItem.currentStoryTeller = preview_1.item.storyTeller
-        editorItem.__updateIfNeeded()
+//         editorItem.__updateIfNeeded()
       }
     }
 
@@ -291,7 +291,7 @@ ApplicationWindow
         preview_1.z = 0
         editorItem.__preview_items = [ preview_1, preview_2 ]
         editorItem.currentStoryTeller = preview_2.item.storyTeller
-        editorItem.__updateIfNeeded()
+//         editorItem.__updateIfNeeded()
       }
     }
 
@@ -354,6 +354,15 @@ ApplicationWindow
           text: "Updating..."
           anchors.centerIn: parent
           z: 100
+        }
+        Button
+        {
+          id: needUpdate
+          visible: preview_1.status != Loader.Loading && preview_2.status != Loader.Loading && !editorItem.__uptodate
+          text: "Update!"
+          onClicked: editorItem.__updateIfNeeded()
+          anchors.centerIn: parent
+          z: 150
         }
       }
       Row
@@ -458,12 +467,6 @@ ApplicationWindow
         }
       }
     }
-    Timer
-    {
-      id: delayedUpdate
-      interval: 1000
-      onTriggered: editorItem.__updateIfNeeded()
-    }
     TextEditorArea
     {
       id: editor
@@ -486,7 +489,6 @@ Presentation {
       {
         root.modified         = true
         editorItem.__uptodate = false
-        delayedUpdate.restart()
       }
     }
   }

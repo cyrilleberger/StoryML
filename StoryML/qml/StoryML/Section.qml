@@ -23,8 +23,10 @@ Group {
   id: root
   property string title
   readonly property bool isSection: true
+  property alias notes: title_slice.notes
   Slice
   {
+    id: title_slice
     title: root.title
     layout: Title {}
     style: root.defaultSectionStyle
