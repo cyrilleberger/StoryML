@@ -5,7 +5,8 @@ import QtQuick.Dialogs 1.1
 import QtQuick.Window 2.0
 import StoryML 1.0
 import StoryML.Viewer 1.0
-import org.storyml.textedit 1.0
+import TextEditML 2.0
+import TextEditML.Controls 1.0
 
 ApplicationWindow
 {
