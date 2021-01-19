@@ -115,10 +115,12 @@ StoryTeller {
 
     if(root.currentSliceIndex != root.__previousSliceIndex)
     {
-      root.__previousSlice.z = 0
+      root.__previousSlice.z = -1
+      root.__previousSlice.enabled = false
       root.__previousSlice.opacity = 0;
       root.__previousSlice.animation.frame = -1
       root.currentSlice = root.slices[root.currentSliceIndex]
+      root.currentSlice.enabled = true
       root.currentSlice.z = 1
       root.currentSlice.opacity = 1
       if(animationsEnabled)

@@ -61,6 +61,8 @@ StoryElement
   width:  800
   height: 600
   opacity: 0
+  enabled: false
+  z: -1
 
   Loader {
     id: styleLoader
