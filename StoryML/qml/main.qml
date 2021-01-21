@@ -302,12 +302,16 @@ ApplicationWindow
           && preview_1.status != Loader.Loading && (!preview_1.item || preview_1.item.readyToTell)
           && preview_2.status != Loader.Loading && (!preview_2.item || preview_2.item.readyToTell))
       {
-        __uptodate = true
-        temporaryFile.counter += 1
-        temporaryFile.writeContent(editor.text)
-        editorItem.__preview_items[0].source = root.__presentationUrl()
-        editorItem.__preview_items[0].z = -1
+        __forceUpdate()
       }
+    }
+    function __forceUpdate()
+    {
+      __uptodate = true
+      temporaryFile.counter += 1
+      temporaryFile.writeContent(editor.text)
+      editorItem.__preview_items[0].source = root.__presentationUrl()
+      editorItem.__preview_items[0].z = -1
     }
 
     Item
@@ -361,7 +365,7 @@ ApplicationWindow
           id: needUpdate
           visible: preview_1.status != Loader.Loading && preview_2.status != Loader.Loading && !editorItem.__uptodate
           text: "Update!"
-          onClicked: editorItem.__updateIfNeeded()
+          onClicked: editorItem.__forceUpdate()
           anchors.centerIn: parent
           z: 150
         }
