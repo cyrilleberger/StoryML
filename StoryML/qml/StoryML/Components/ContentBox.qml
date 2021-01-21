@@ -245,7 +245,8 @@ Column
         var indentation = 0
         var start_after_animation = start
 
-        while(c[start] === ' ' && start < c.length)
+        var indentation_char = (c[start] == '_') ? '_' : ' '
+        while((c[start] === indentation_char) && start < c.length)
         {
           indentation += 1
           start += 1;
