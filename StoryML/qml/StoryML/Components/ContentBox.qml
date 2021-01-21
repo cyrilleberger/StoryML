@@ -40,7 +40,6 @@ Column
 
   function __resetUpdateFontScale()
   {
-    console.log("reset")
     if(root.fontScale != null)
     {
       __fontScale = fontScale
@@ -95,7 +94,6 @@ Column
     {
       __fontScale = fontScale
     } else {
-      console.log(__childrenHeight < height, __fontScale, root.__smallestBadFontScale, root.__largestGoodFontScale)
       if(__childrenHeight < height)
       {
         root.__largestGoodFontScale = __fontScale
@@ -104,16 +102,13 @@ Column
       }
       if(root.__largestGoodFontScale > 0.99 * root.__smallestBadFontScale)
       {
-        console.log("a")
         check_fontScale.restart()
         __fontScale = root.__largestGoodFontScale
       } else if(__childrenHeight > height || __childrenHeight < 0.9 * height)
       {
-        console.log("b")
         __fontScale = 0.5 * (root.__largestGoodFontScale + root.__smallestBadFontScale)
         check_fontScale.restart()
       }
-      console.log(__childrenHeight, height, __fontScale, root.__largestGoodFontScale, root.__smallestBadFontScale)
     }
   }
 
@@ -173,7 +168,6 @@ Column
           for(var j = 1; j < opts.length; ++j)
           {
             var kv = opts[j].split("=")
-              console.log(kv[0], kv[1])
             switch(kv[0])
             {
               case "h":
@@ -192,7 +186,6 @@ Column
           for(var j = 1; j < opts.length; ++j)
           {
             var kv = opts[j].split("=")
-              console.log(kv[0], kv[1])
             switch(kv[0])
             {
               case "s":
