@@ -75,6 +75,7 @@ Column
           root.readyToTell = true
         }
       } else {
+        root.readyToTell = true
         __childrenHeight = 0
       }
     }
