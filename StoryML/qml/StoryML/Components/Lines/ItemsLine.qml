@@ -28,6 +28,7 @@ ContentLine
   property alias itemSpacing: row.spacing
   property variant model
   property Component component
+  signal itemCreated(var item)
   function height_at(index)
   {
     if(index < itemHeights.length)
@@ -65,6 +66,7 @@ ContentLine
           height: height_at(index)
           sourceComponent: root.component
           property variant itemData: modelData
+          onLoaded: root.itemCreated(item)
         }
       }
     }
