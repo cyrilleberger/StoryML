@@ -3,9 +3,9 @@
 #include <QDebug>
 #include <QProcess>
 
-#include <Definition>
-#include <SyntaxHighlighter>
-#include <Theme>
+#include <KSyntaxHighlighting/Definition>
+#include <KSyntaxHighlighting/SyntaxHighlighter>
+#include <KSyntaxHighlighting/Theme>
 
 Extension::Extension(QObject* _parent) : QObject(_parent)
 {

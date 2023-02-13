@@ -4,7 +4,7 @@
 #include <QObject>
 
 #include <QQuickTextDocument>
-#include <Repository>
+#include <KSyntaxHighlighting/Repository>
 #include <QTemporaryDir>
 #include <QMimeDatabase>
 
