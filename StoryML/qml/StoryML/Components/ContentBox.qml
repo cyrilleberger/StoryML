@@ -106,8 +106,13 @@ Column
         __fontScale = root.__largestGoodFontScale
       } else if(__childrenHeight > height || __childrenHeight < 0.9 * height)
       {
-        __fontScale = 0.5 * (root.__largestGoodFontScale + root.__smallestBadFontScale)
-        check_fontScale.restart()
+        var nf = 0.5 * (root.__largestGoodFontScale + root.__smallestBadFontScale)
+        console.log(nf, __fontScale)
+        if(Math.abs(nf - __fontScale) > 0.0001)
+        {
+          __fontScale = nf
+          check_fontScale.restart()
+        }
       }
     }
   }

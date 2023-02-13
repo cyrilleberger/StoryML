@@ -30,8 +30,12 @@ Text {
 
   function updateFont()
   {
+    if(fontScale * baseFont.pointSize < 1)
+    {
+      console.log("Requesting a very small font for text:", root.text)
+    }
     font = baseFont
-    font.pointSize = fontScale * baseFont.pointSize
+    font.pointSize = Math.max(1, fontScale * baseFont.pointSize)
 //    font.pixelSize = fontScale * baseFont.pixelSize
   }
 
