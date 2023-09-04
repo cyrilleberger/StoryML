@@ -5,8 +5,9 @@ import QtQuick.Dialogs 1.1
 import QtQuick.Window 2.0
 import StoryML 1.0
 import StoryML.Viewer 1.0
-import TextEditML 2.0
-import TextEditML.Controls 1.0
+import Cyqlops.IO 1.0
+import Cyqlops.TextEdit 1.0
+import Cyqlops.TextEdit.Controls 1.0
 
 ApplicationWindow
 {
@@ -28,7 +29,7 @@ ApplicationWindow
       pw = Qt.createQmlObject("import StoryML.Viewer 1.0; PrintWindow {}", root)
     } catch(except)
     {
-
+      console.log("When creating print window: " + except)
     }
     return pw;
   }
@@ -146,7 +147,7 @@ ApplicationWindow
         presentationFileIO.writeFile(fileUrl)
       }
   }
-  FileIO
+  File
   {
     id: presentationFileIO
   }

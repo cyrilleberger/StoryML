@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Window 2.0
-import org.storyml.print 1.0
+import Cyqlops.Print 1.0
 
 Window {
   id: root
