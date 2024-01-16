@@ -53,6 +53,7 @@ Item
   MediaPlayer
   {
     id: player
+    autoLoad: false
     autoPlay: false
     loops: MediaPlayer.Infinite
     source: fix_url(root.source)
